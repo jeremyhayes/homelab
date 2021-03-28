@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  mb8600-exporter:
+    build: ./motorola-mb8600-prometheus-exporter
+    restart: always
+    environment:
+      - MODEM_BASE_URL=${MODEM_ADDRESS}
+      - MODEM_USERNAME=${MODEM_USERNAME}
+      - MODEM_PASSWORD=${MODEM_PASSWORD}
+      - MODEM_IGNORE_SSL=true
+    networks:
+      - pi-cluster
+    labels:
+      - traefik.enable=false
+
+  unifi-poller:
+    image: golift/unifi-poller:latest
+    restart: always
+    environment:
+      - UP_UNIFI_DEFAULT_URL=${UNIFI_ADDRESS}
+      - UP_UNIFI_DEFAULT_USER=${UNIFI_USERNAME}
+      - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASSWORD}
+      - UP_INFLUXDB_DISABLE=true
+      - UP_UNIFI_DEFAULT_SAVE_DPI=true
+    networks:
+      - pi-cluster
+    labels:
+      - traefik.enable=false
+
+networks:
+  pi-cluster:
+    external: true
