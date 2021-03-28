@@ -1,0 +1,43 @@
+global:
+  # every 15s by default
+  scrape_interval: 15s
+
+# scrape jobs use docker-compose service names as hostname
+scrape_configs:
+  # monitor prometheus itself
+  - job_name: prometheus
+    static_configs:
+      - targets: [ 'prometheus:9090' ]
+
+  # monitor grafana
+  - job_name: grafana
+    static_configs:
+      - targets: [ 'grafana:3000' ]
+
+  # monitor cable modem
+  - job_name: motorola-mb8600
+    scrape_interval: 1m
+    scrape_timeout: 30s
+    static_configs:
+      - targets: [ 'mb8600-exporter:3000' ]
+
+  # unifi controller
+  - job_name: unifi-controller
+    static_configs:
+      - targets: [ 'unifi-poller:9130' ]
+
+  # docker
+  - job_name: docker
+    static_configs:
+      - targets: [ '172.17.0.1:9323' ]
+
+  # node_exporter
+  - job_name: node
+    static_configs:
+      - targets: [ '172.17.0.1:9100' ]
+
+  # cadvisor
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ 'cadvisor:8080' ]
