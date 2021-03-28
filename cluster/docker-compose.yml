@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    command:
+      - '--path.rootfs=/host'
+    pid: host
+    restart: always
+    volumes:
+      - '/:/host:ro,rslave'
+    cap_add:
+      - SYS_TIME
+    # node_exporter must be on host network because reasons
+    # can't join cluster network, so prometheus will need to scrape host:9100
+    network_mode: host
+    labels:
+      - traefik.enable=fasel
+
+  cadvisor:
+    # image: gcr.io/cadvisor/cadvisor:latest
+    # official image doesn't support arm
+    image: budry/cadvisor-arm:latest
+    restart: always
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - pi-cluster
+    labels:
+      - traefik.enable=false
+
+networks:
+  pi-cluster:
+    external: true
