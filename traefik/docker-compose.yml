@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+
+  traefik:
+    image: traefik:v2.4.8
+    restart: always
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - --log.level=DEBUG
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    networks:
+      - pi-cluster
+
+  whoami:
+    image: traefik/whoami:v1.6.1
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`whoami.lab.omglolwtfbbq.com`)
+      - traefik.http.routers.whoami.entrypoints=web
+    networks:
+      - pi-cluster
+
+networks:
+  pi-cluster:
+    external: true
