@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # load .env
-export $(grep -v '^#' .env | xargs -d '\n')
+SCRIPT=$(readlink -f "$0")
+SCRIPT_PATH=$(dirname "$SCRIPT")
+export $(grep -v '^#' "$SCRIPT_PATH/.env" | xargs -d '\n')
 
 # run image to reboot modem
 IMAGE='motorola-mb8600-reboot:latest'
