@@ -18,7 +18,7 @@ services:
     image: prom/prometheus:v2.25.0
     restart: always
     volumes:
-      - ./prometheus-data:/prometheus
+      - /mnt/hdd/prometheus-data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - pi-cluster
