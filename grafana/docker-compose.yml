@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+
+  grafana:
+    image: grafana/grafana:7.4.3
+    restart: always
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+    networks:
+      - pi-cluster
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
+      - traefik.http.routers.grafana.entrypoints=web
+
+networks:
+  pi-cluster:
+    external: true
+    
