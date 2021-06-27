@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+
+  mb8600-exporter:
+    build: ./motorola-mb8600-prometheus-exporter
+    restart: always
+    environment:
+      - MODEM_BASE_URL=${MODEM_ADDRESS}
+      - MODEM_USERNAME=${MODEM_USERNAME}
+      - MODEM_PASSWORD=${MODEM_PASSWORD}
+      - MODEM_IGNORE_SSL=true
+    networks:
+      - pi-cluster
+    labels:
+      - traefik.enable=false
+
+networks:
+  pi-cluster:
+    external: true
