@@ -2,9 +2,38 @@
 
 Homelab services running on a Raspberry Pi.
 
-## Network
+## Setup
 
-Services are organized into individual subfolders/groups based on function, helping to reduce the size of each compose file. To allow all services to communicate, and to allow Traefik to monitor them, add all services to a single docker network created outside the scope of any group.
+### Prerequisites
+Clone the repository, including submodules:
+```
+$ git clone git@github.com:jeremyhayes/pi-docker-cluster.git --recurse-submodules
+```
+
+Copy and update any `env.template` files as needed.
+
+### Install Docker and Compose
+TODO
+
+### Network
+
+To allow all services to communicate, and to allow Traefik to monitor them, add all services to a single docker network created outside the scope of any group.
+
+Create the network:
+```
+$ ./create-network.sh
+```
+
+### Services
+
+Each service lives in a folder with a `docker-compose.yml` and any supporting configuration.
+
+Start each service:
+```
+$ cd <service-dir>
+$ sudo docker-compose up -d
+```
+
 
 ## DNS
 
