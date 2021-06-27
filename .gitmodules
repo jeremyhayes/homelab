@@ -1,6 +1,6 @@
-[submodule "networking/motorola-mb8600-prometheus-exporter"]
-	path = networking/motorola-mb8600-prometheus-exporter
+[submodule "motorola-mb8600/motorola-mb8600-prometheus-exporter"]
+	path = motorola-mb8600/motorola-mb8600-prometheus-exporter
 	url = git@github.com:jeremyhayes/motorola-mb8600-prometheus-exporter.git
-[submodule "networking/motorola-mb8600-reboot"]
-	path = networking/motorola-mb8600-reboot
+[submodule "motorola-mb8600/motorola-mb8600-reboot"]
+	path = motorola-mb8600/motorola-mb8600-reboot
 	url = git@github.com:jeremyhayes/motorola-mb8600-reboot.git
