@@ -16,7 +16,7 @@ services:
     # can't join cluster network, so prometheus will need to scrape host:9100
     network_mode: host
     labels:
-      - traefik.enable=fasel
+      - traefik.enable=false
 
   cadvisor:
     # image: gcr.io/cadvisor/cadvisor:latest
