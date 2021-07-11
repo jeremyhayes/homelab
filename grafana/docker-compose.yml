@@ -6,13 +6,21 @@ services:
     image: grafana/grafana:7.5.10
     restart: unless-stopped
     volumes:
-      - ./grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
     networks:
       - pi-cluster
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
       - traefik.http.routers.grafana.entrypoints=web
+
+volumes:
+  grafana-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.42.11
+      device: ":/apps/grafana"
 
 networks:
   pi-cluster:
