@@ -5,21 +5,42 @@ Homelab services running on a Raspberry Pi.
 ## Setup
 
 ### Prerequisites
-Clone the repository, including submodules:
+0. Setup Pi
 ```
-$ git clone git@github.com:jeremyhayes/pi-docker-cluster.git --recurse-submodules
+# change password
+$ passwd
+
+# set hostname
+$ raspi-config
+
+# set static ip
+# nano /etc/dhcpcd.conf
 ```
 
-Copy and update any `env.template` files as needed.
+1. Install Docker
+```
+$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh ./get-docker.sh
+$ sudo usermod -aG docker pi
+```
 
-### Install Docker and Compose
-TODO
+2. Clone the repository, including submodules:
+```
+$ git clone git@github.com:jeremyhayes/pi-cluster.git --recurse-submodules
+```
 
-### Network
+3. Copy and update any `env.template` files as needed.
+```
+$ find . -name .env.template
+# for each... 
+$ cd <service-dir>
+$ cp .env.template .env
+$ nano .env
+```
 
+4. Create shared network
 To allow all services to communicate, and to allow Traefik to monitor them, add all services to a single docker network created outside the scope of any group.
 
-Create the network:
 ```
 $ ./create-network.sh
 ```
