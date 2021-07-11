@@ -21,7 +21,7 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=192.168.42.11
-      device: ":/apps/prometheus"
+      device: ":/mnt/hdd/share/apps/prometheus"
 
 networks:
   pi-cluster:

@@ -20,7 +20,7 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=192.168.42.11
-      device: ":/apps/grafana"
+      device: ":/mnt/hdd/share/apps/grafana"
 
 networks:
   pi-cluster:
