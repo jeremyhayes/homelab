@@ -4,7 +4,7 @@ services:
 
   mb8600-exporter:
     build: ./motorola-mb8600-prometheus-exporter
-    restart: always
+    restart: unless-stopped
     environment:
       - MODEM_BASE_URL=${MODEM_ADDRESS}
       - MODEM_USERNAME=${MODEM_USERNAME}

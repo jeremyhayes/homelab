@@ -6,7 +6,7 @@ services:
     # image: gcr.io/cadvisor/cadvisor:latest
     # official image doesn't support arm
     image: budry/cadvisor-arm:latest
-    restart: always
+    restart: unless-stopped
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw

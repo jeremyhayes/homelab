@@ -7,7 +7,7 @@ services:
     command:
       - '--path.rootfs=/host'
     pid: host
-    restart: always
+    restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
     cap_add:
