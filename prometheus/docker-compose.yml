@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   prometheus:
-    image: prom/prometheus:v2.25.0
+    image: prom/prometheus:v2.28.1
     restart: always
     volumes:
       - /mnt/hdd/prometheus-data:/prometheus
