@@ -4,7 +4,7 @@ services:
 
   whoami:
     image: traefik/whoami:v1.6.1
-    restart: always
+    restart: unless-stopped
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`whoami.lab.omglolwtfbbq.com`)
