@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker network create pi-cluster
+docker network create -d overlay pi-cluster
 
