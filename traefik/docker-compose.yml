@@ -18,9 +18,3 @@ services:
       - --entrypoints.web.address=:80
       - --metrics=true
       - --metrics.prometheus=true
-    networks:
-      - pi-cluster
-
-networks:
-  pi-cluster:
-    external: true

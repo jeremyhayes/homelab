@@ -8,8 +8,6 @@ services:
     volumes:
       - prometheus-data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      - pi-cluster
     labels:
       - traefik.enable=true
       - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
@@ -22,8 +20,3 @@ volumes:
       type: nfs
       o: addr=192.168.42.11
       device: ":/mnt/hdd/share/apps/prometheus"
-
-networks:
-  pi-cluster:
-    external: true
-    

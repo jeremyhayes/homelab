@@ -7,8 +7,6 @@ services:
     restart: unless-stopped
     volumes:
       - grafana-data:/var/lib/grafana
-    networks:
-      - pi-cluster
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
@@ -21,8 +19,3 @@ volumes:
       type: nfs
       o: addr=192.168.42.11
       device: ":/mnt/hdd/share/apps/grafana"
-
-networks:
-  pi-cluster:
-    external: true
-    

@@ -11,11 +11,5 @@ services:
       - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASSWORD}
       - UP_INFLUXDB_DISABLE=true
       - UP_UNIFI_DEFAULT_SAVE_DPI=true
-    networks:
-      - pi-cluster
     labels:
       - traefik.enable=false
-
-networks:
-  pi-cluster:
-    external: true

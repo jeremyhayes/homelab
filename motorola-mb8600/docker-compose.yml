@@ -10,11 +10,5 @@ services:
       - MODEM_USERNAME=${MODEM_USERNAME}
       - MODEM_PASSWORD=${MODEM_PASSWORD}
       - MODEM_IGNORE_SSL=true
-    networks:
-      - pi-cluster
     labels:
       - traefik.enable=false
-
-networks:
-  pi-cluster:
-    external: true

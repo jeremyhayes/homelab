@@ -12,11 +12,5 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-    networks:
-      - pi-cluster
     labels:
       - traefik.enable=false
-
-networks:
-  pi-cluster:
-    external: true

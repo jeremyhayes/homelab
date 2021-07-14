@@ -17,7 +17,3 @@ services:
     network_mode: host
     labels:
       - traefik.enable=false
-
-networks:
-  pi-cluster:
-    external: true
