@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  pihole:
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - WEBPASSWORD=${PIHOLE_PASSWORD}
+    volumes:
+      - pihole-data:/etc/pihole
+      - pihole-dnsmasq:/etc/dnsmasq.d
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    #cap_add:
+    #  - NET_ADMIN
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pihole.rule=Host(`pihole.lab.omglolwtfbbq.com`)
+      - traefik.http.routers.pihole.entrypoints=web
+      - traefik.http.services.pihole.loadbalancer.server.port=80
+
+volumes:
+  pihole-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.42.11
+      device: ":/mnt/hdd/share/apps/pihole/pihole"
+  pihole-dnsmasq:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.42.11
+      device: ":/mnt/hdd/share/apps/pihole/dnsmasq"
