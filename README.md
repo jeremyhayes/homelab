@@ -2,10 +2,8 @@
 
 Homelab services running on a Raspberry Pi.
 
-## Setup
-
-### Prerequisites
-0. Setup Pi
+## Prerequisites
+0. Setup Raspberry Pi
 ```
 # change password
 $ passwd
@@ -14,7 +12,7 @@ $ passwd
 $ raspi-config
 
 # set static ip
-# nano /etc/dhcpcd.conf
+$ nano /etc/dhcpcd.conf
 ```
 
 1. Install Docker
@@ -24,12 +22,53 @@ $ sudo sh ./get-docker.sh
 $ sudo usermod -aG docker pi
 ```
 
-2. Clone the repository, including submodules:
+2. Configure NFS share on primary/manager node
+
+    a. Setup persistent mount for external hard drive
+    > https://www.raspberrypi.org/documentation/configuration/external-storage.md
+
+    b. Install NFS server
+    ```
+    $ apt install nfs-kernel-server
+    ```
+
+    c. Export NFS share directory via `/etc/exports`
+    ```
+    /mnt/hdd/share  192.168.42.0/24(rw,sync,no_subtree_check,no_root_squash)
+    ```
+
+3. Configure git client
+```
+$ apt install git
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+> NOTE: Copy generated public key to github config
+
+
+## Docker Swarm
+
+1. Initialize swarm from manager node
+```
+$ docker swarm init
+```
+
+2. Add each node to swarm
+```
+$ docker swarm join \
+    --token SWMTKN-xxxxxxxxxxxxxxx \
+    192.168.42.11:2377
+```
+> NOTE: This command is echoed when initializing the swarm on the manager node.
+
+
+## Services
+
+1. Clone the repository, including submodules:
 ```
 $ git clone git@github.com:jeremyhayes/pi-cluster.git --recurse-submodules
 ```
 
-3. Copy and update any `env.template` files as needed.
+2. Copy and update any `env.template` files as needed:
 ```
 $ find . -name .env.template
 # for each... 
@@ -38,22 +77,13 @@ $ cp .env.template .env
 $ nano .env
 ```
 
-4. Create shared network
-To allow all services to communicate, and to allow Traefik to monitor them, add all services to a single docker network created outside the scope of any group.
-
-```
-$ ./create-network.sh
-```
-
-### Services
-
+3. Deploy each service to a shared stack:
 Each service lives in a folder with a `docker-compose.yml` and any supporting configuration.
-
-Start each service:
 ```
 $ cd <service-dir>
-$ sudo docker-compose up -d
+$ docker stack deploy -c docker-compose.yml <stack-name>
 ```
+> NOTE: The first deploy will create an overlay network `<stack-name>_default`.
 
 
 ## DNS
