@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  swarm-cronjob:
+    image: crazymax/swarm-cronjob
+    environment:
+      - TZ=America/New_York
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  test:
+    image: busybox
+    command: date
+    deploy:
+      mode: replicated
+      replicas: 0
+      labels:
+        - "swarm.cronjob.enable=true"
+        - "swarm.cronjob.schedule=* * * * *"
+        - "swarm.cronjob.skip-running=false"
+      restart_policy:
+        condition: none
