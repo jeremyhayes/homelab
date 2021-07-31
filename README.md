@@ -85,6 +85,12 @@ $ docker stack deploy -c docker-compose.yml <stack-name>
 ```
 > NOTE: The first deploy will create an overlay network `<stack-name>_default`.
 
+> IMPORTANT
+> For services with externalized configuration (like credentials), `docker stack` does not resolve template placeholders from `.env` files. Instead, pipe the file through `docker-compose` as a preprocessor:
+> ```
+> docker stack deploy -c <(docker-compose config) stack-name-here
+> ```
+
 
 ## DNS
 
