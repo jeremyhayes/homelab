@@ -4,7 +4,6 @@ services:
 
   grafana:
     image: grafana/grafana:8.0.6
-    restart: unless-stopped
     volumes:
       - grafana-data:/var/lib/grafana
     labels:

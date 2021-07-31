@@ -4,7 +4,6 @@ services:
 
   foo-service:
     image: foo
-    restart: unless-stopped
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`foo.lab.omglolwtfbbq.com`)

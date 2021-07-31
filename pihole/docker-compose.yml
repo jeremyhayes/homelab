@@ -4,7 +4,6 @@ services:
 
   pihole:
     image: pihole/pihole:v5.8.1
-    restart: unless-stopped
     environment:
       - TZ=America/New_York
       - WEBPASSWORD=${PIHOLE_PASSWORD}

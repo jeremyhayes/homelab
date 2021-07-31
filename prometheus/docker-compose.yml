@@ -4,7 +4,6 @@ services:
 
   prometheus:
     image: prom/prometheus:v2.28.1
-    restart: unless-stopped
     volumes:
       - prometheus-data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
