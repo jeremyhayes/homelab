@@ -6,7 +6,7 @@ services:
     image: quay.io/prometheus/node-exporter:latest
     command:
       - '--path.rootfs=/host'
-    pid: host
+    #pid: host
     restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
@@ -14,6 +14,8 @@ services:
       - SYS_TIME
     # node_exporter must be on host network because reasons
     # can't join cluster network, so prometheus will need to scrape host:9100
-    network_mode: host
+    #network_mode: host
     labels:
       - traefik.enable=false
+    deploy:
+      mode: global
