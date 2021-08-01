@@ -3,8 +3,7 @@ version: '3.8'
 services:
 
   mb8600-exporter:
-    image: local/motorola-mb8600-prometheus-exporter
-    build: ./motorola-mb8600-prometheus-exporter
+    image: ghcr.io/jeremyhayes/motorola-mb8600-prometheus-exporter:main-c5d2f5e
     environment:
       - MODEM_BASE_URL=${MODEM_ADDRESS}
       - MODEM_USERNAME=${MODEM_USERNAME}
@@ -12,8 +11,7 @@ services:
       - MODEM_IGNORE_SSL=true
 
   mb8600-restart:
-    image: local/motorola-mb8600-reboot
-    build: ./motorola-mb8600-reboot
+    image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:main-9d5bd5e
     command:
       - --url ${MODEM_ADDRESS}
       - --username ${MODEM_USERNAME}
