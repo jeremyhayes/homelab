@@ -6,6 +6,7 @@ services:
     image: grafana/grafana:8.0.6
     volumes:
       - grafana-data:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
