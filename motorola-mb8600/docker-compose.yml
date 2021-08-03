@@ -21,6 +21,8 @@ services:
       - ${MODEM_PASSWORD}
       - --ignore-ssl
     deploy:
+      restart_policy:
+        condition: none
       replicas: 0 # none by default; created when cron hits
       labels:
         - swarm.cronjob.enable=true
