@@ -13,9 +13,12 @@ services:
   mb8600-restart:
     image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.1.1
     command:
-      - --url ${MODEM_ADDRESS}
-      - --username ${MODEM_USERNAME}
-      - --password ${MODEM_PASSWORD}
+      - --url
+      - ${MODEM_ADDRESS}
+      - --username
+      - ${MODEM_USERNAME}
+      - --password
+      - ${MODEM_PASSWORD}
       - --ignore-ssl
     deploy:
       replicas: 0 # none by default; created when cron hits
