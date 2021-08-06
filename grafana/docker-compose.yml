@@ -5,13 +5,19 @@ services:
   grafana:
     image: grafana/grafana:8.0.6
     volumes:
-      - grafana-data:/var/lib/grafana
+      # TODO figure out why keep getting "stale NFS file handle"
+      # - grafana-data:/var/lib/grafana
+      - /mnt/hdd/share/apps/grafana:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
       - traefik.http.routers.grafana.entrypoints=web
-
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  
 volumes:
   grafana-data:
     driver: local

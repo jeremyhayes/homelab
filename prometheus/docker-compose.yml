@@ -5,13 +5,19 @@ services:
   prometheus:
     image: prom/prometheus:v2.28.1
     volumes:
-      - prometheus-data:/prometheus
+      # TODO figure out why keep getting "stale NFS file handle"
+      # - prometheus-data:/prometheus
+      - /mnt/hdd/share/apps/prometheus:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     labels:
       - traefik.enable=true
       - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
       - traefik.http.routers.prometheus.entrypoints=web
-
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    
 volumes:
   prometheus-data:
     driver: local
