@@ -17,7 +17,11 @@ services:
       placement:
         constraints:
           - node.role == manager
-    
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.prometheus.entrypoints=web
+
 volumes:
   prometheus-data:
     driver: local
