@@ -9,10 +9,6 @@ services:
       # - prometheus-data:/prometheus
       - /mnt/hdd/share/apps/prometheus:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
-      - traefik.http.routers.prometheus.entrypoints=web
     deploy:
       placement:
         constraints:
@@ -21,6 +17,7 @@ services:
         - traefik.enable=true
         - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
         - traefik.http.routers.prometheus.entrypoints=web
+        - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
 volumes:
   prometheus-data:
