@@ -53,12 +53,16 @@ $ docker swarm init
 ```
 
 2. Add each node to swarm
-```
-$ docker swarm join \
-    --token SWMTKN-xxxxxxxxxxxxxxx \
-    192.168.42.11:2377
-```
-> NOTE: This command is echoed when initializing the swarm on the manager node.
+
+  a. If needed, get the join token from the manager node
+  ```
+  $ docker swarm join-token worker
+  ```
+
+  b. Join the worker node to the cluster
+  ```
+  $ docker swarm join --token <join-token> <manager-ip:port>
+  ```
 
 
 ## Services
