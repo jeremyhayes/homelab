@@ -4,6 +4,7 @@ global:
 
 # scrape jobs use docker-compose service names as hostname
 scrape_configs:
+
   # monitor prometheus itself
   - job_name: prometheus
     static_configs:
@@ -31,18 +32,30 @@ scrape_configs:
     static_configs:
       - targets: [ 'unifi-poller:9130' ]
 
-  # docker
-  - job_name: docker
-    static_configs:
-      - targets: [ '172.17.0.1:9323' ]
-
   # node_exporter
   - job_name: node
-    static_configs:
-      - targets: [ 'node_exporter:9100' ]
+    dns_sd_configs:
+      - names:
+          - 'tasks.node_exporter'
+        type: 'A'
+        port: 9100
 
   # cadvisor
   - job_name: cadvisor
     scrape_interval: 5s
-    static_configs:
-      - targets: [ 'cadvisor:8080' ]
+    dns_sd_configs:
+      - names:
+          - 'tasks.cadvisor'
+        type: 'A'
+        port: 8080
+
+  # swarm
+  - job_name: docker
+    dockerswarm_sd_configs:
+      - host: tcp://172.17.0.1:2375
+        role: nodes
+    relabel_configs:
+      # scrape docker metrics on 9323
+      - source_labels: [ __meta_dockerswarm_node_address ]
+        target_label: __address__
+        replacement: $1:9323
