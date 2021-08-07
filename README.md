@@ -3,24 +3,54 @@
 Homelab services running on a Raspberry Pi.
 
 ## Prerequisites
+
 0. Setup Raspberry Pi
-```
-# change password
-$ passwd
 
-# set hostname
-$ raspi-config
+    a. `raspi-config`
+      - password
+      - hostname
+      - timezone
+      - culture
+    
+    b. Static IP
+      - `/etc/dhcpcd.conf`
 
-# set static ip
-$ nano /etc/dhcpcd.conf
-```
 
-1. Install Docker
-```
-$ curl -fsSL https://get.docker.com -o get-docker.sh
-$ sudo sh ./get-docker.sh
-$ sudo usermod -aG docker pi
-```
+1. Setup Docker
+
+    a. Install Docker
+      ```
+      $ curl -fsSL https://get.docker.com -o get-docker.sh
+      $ sudo sh ./get-docker.sh
+      $ sudo usermod -aG docker pi
+      ```
+
+    b. Expose Docker daemon and metrics
+
+      `/etc/docker/daemon.json`:
+      ```
+      {
+        "hosts": [
+          "tcp://0.0.0.0:2375"
+          "unix:///var/run/docker.sock"
+        ],
+        "metrics-addr": "0.0.0.0:9323",
+        "experimental": true
+      }
+      ```
+
+      `/etc/systemd/system/docker.service.d/override.conf`:
+      ```
+      [Service]
+      ExecStart=
+      ExecStart=/usr/bin/dockerd
+      ```
+
+    c. Restart daemon service
+      ```
+      $ systemctl daemon-reload
+      $ systemctl restart docker.service
+      ```
 
 2. Configure NFS share on primary/manager node
 
