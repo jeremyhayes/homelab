@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   prometheus:
-    image: prom/prometheus:v2.28.1
+    image: prom/prometheus:v2.29.1
     volumes:
       # TODO figure out why keep getting "stale NFS file handle"
       # - prometheus-data:/prometheus
