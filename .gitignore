@@ -1,4 +1,7 @@
 .env
+.secret.*
 *.log
 
 *-data/
+traefik/acme.json
+
