@@ -13,5 +13,6 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.visualizer.rule=Host(`visualizer.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.visualizer.entrypoints=web
+        - traefik.http.routers.visualizer.entrypoints=web-secure
+        - traefik.http.routers.visualizer.tls.certResolver=primary
         - traefik.http.services.visualizer.loadbalancer.server.port=8080
