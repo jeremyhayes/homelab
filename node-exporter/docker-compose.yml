@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
 
-  node_exporter:
+  node-exporter:
     image: quay.io/prometheus/node-exporter:v1.2.2
     command:
       - '--path.rootfs=/host'
