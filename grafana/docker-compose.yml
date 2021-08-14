@@ -18,7 +18,8 @@ services:
         - prometheus.swarm.port=3000
         - traefik.enable=true
         - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.grafana.entrypoints=web
+        - traefik.http.routers.grafana.entrypoints=web-secure
+        - traefik.http.routers.grafana.tls.certResolver=primary
         - traefik.http.services.grafana.loadbalancer.server.port=3000
   
 volumes:

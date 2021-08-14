@@ -18,7 +18,8 @@ services:
         - prometheus.swarm.port=9090
         - traefik.enable=true
         - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.prometheus.entrypoints=web
+        - traefik.http.routers.prometheus.entrypoints=web-secure
+        - traefik.http.routers.prometheus.tls.certResolver=primary
         - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
 volumes:
