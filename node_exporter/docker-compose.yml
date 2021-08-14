@@ -12,3 +12,6 @@ services:
       - SYS_TIME
     deploy:
       mode: global
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9100

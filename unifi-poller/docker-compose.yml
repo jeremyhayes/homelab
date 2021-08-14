@@ -10,3 +10,7 @@ services:
       - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASSWORD}
       - UP_INFLUXDB_DISABLE=true
       - UP_UNIFI_DEFAULT_SAVE_DPI=true
+    deploy:
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9130

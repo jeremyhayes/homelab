@@ -22,3 +22,6 @@ services:
       placement:
         constraints:
           - node.role == manager
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=8080

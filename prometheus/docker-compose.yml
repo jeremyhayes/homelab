@@ -14,6 +14,8 @@ services:
         constraints:
           - node.role == manager
       labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9090
         - traefik.enable=true
         - traefik.http.routers.prometheus.rule=Host(`prometheus.lab.omglolwtfbbq.com`)
         - traefik.http.routers.prometheus.entrypoints=web

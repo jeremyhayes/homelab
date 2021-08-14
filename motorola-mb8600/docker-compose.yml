@@ -25,5 +25,7 @@ services:
         condition: none
       replicas: 0 # none by default; created when cron hits
       labels:
+        # don't allow prometheus to scrape this; takes too long for global config
+        - prometheus.swarm.enable=false
         - swarm.cronjob.enable=true
         - swarm.cronjob.schedule=0 5 * * mon
