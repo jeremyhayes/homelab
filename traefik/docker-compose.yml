@@ -15,23 +15,9 @@ services:
       - namecheap-api-key
       - namecheap-api-user
     volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./acme.json:/acme.json
-    command:
-      - --log.level=DEBUG
-      - --api.insecure=true
-      - --providers.docker=true
-      - --providers.docker.swarmMode=true
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --entrypoints.web-secure.address=:443
-      - --metrics=true
-      - --metrics.prometheus=true
-      - --certificatesResolvers.primary.acme.email=dev@omglolwtfbbq.com
-      - --certificatesResolvers.primary.acme.storage=acme.json
-      - --certificatesResolvers.primary.acme.dnsChallenge=true
-      - --certificatesResolvers.primary.acme.dnsChallenge.provider=namecheap
-      - --certificatesResolvers.primary.acme.dnsChallenge.delayBeforeCheck=0
     deploy:
       placement:
         constraints:
