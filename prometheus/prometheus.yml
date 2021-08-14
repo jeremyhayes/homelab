@@ -49,7 +49,7 @@ scrape_configs:
         type: 'A'
         port: 8080
 
-  # swarm
+  # swarm nodes
   - job_name: docker
     dockerswarm_sd_configs:
       - host: tcp://172.17.0.1:2375
@@ -59,3 +59,30 @@ scrape_configs:
       - source_labels: [ __meta_dockerswarm_node_address ]
         target_label: __address__
         replacement: $1:9323
+
+  # swarm tasks
+  - job_name: tasks
+    dockerswarm_sd_configs:
+      - host: tcp://172.17.0.1:2375
+        role: tasks
+    relabel_configs:
+      # Only keep containers that should be running.
+      - source_labels: [ __meta_dockerswarm_task_desired_state ]
+        regex: running
+        action: keep
+      # capture the service itself as the "job" (override this single 'tasks' job)
+      - source_labels: [ __meta_dockerswarm_service_name ]
+        target_label: job
+        replacement: $1
+      # capture the hostname of the running node
+      - source_labels: [ __meta_dockerswarm_node_hostname ]
+        target_label: node
+        replacement: $1
+      # Only keep containers that have a `prometheus-job` label.
+      # - source_labels: [__meta_dockerswarm_service_label_prometheus_job]
+      #   regex: .+
+      #   action: keep
+      # Use the task labels that are prefixed by `prometheus-`.
+      - regex: __meta_dockerswarm_service_label_prometheus_(.+)
+        action: labelmap
+        replacement: $1
