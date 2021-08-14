@@ -21,11 +21,17 @@ scrape_configs:
   #     - targets: [ 'traefik:8080' ]
 
   # monitor cable modem
+  # configured separately to override interval/timeout
   - job_name: motorola-mb8600
     scrape_interval: 1m
     scrape_timeout: 30s
-    static_configs:
-      - targets: [ 'mb8600-exporter:3000' ]
+    # static_configs:
+    #   - targets: [ 'mb8600-exporter:3000' ]
+    dns_sd_configs:
+      - names:
+          - tasks.mb8600-exporter
+        type: A
+        port: 3000
 
   # # unifi controller
   # - job_name: unifi-controller
@@ -56,7 +62,8 @@ scrape_configs:
         role: nodes
     relabel_configs:
       # scrape docker metrics on 9323
-      - source_labels: [ __meta_dockerswarm_node_address ]
+      - source_labels:
+          - __meta_dockerswarm_node_address
         target_label: __address__
         replacement: $1:9323
 
@@ -66,27 +73,31 @@ scrape_configs:
       - host: tcp://172.17.0.1:2375
         role: tasks
     relabel_configs:
-      # Only keep containers that should be running.
-      - source_labels: [ __meta_dockerswarm_task_desired_state ]
+      # only keep containers that should be running
+      - source_labels:
+          - __meta_dockerswarm_task_desired_state
         regex: running
         action: keep
-      # exclude the mb8600 exporter since it takes much longer to scrape
-      - source_labels: [ __meta_dockerswarm_service_name ]
-        regex: mb8600-exporter
-        action: drop
+      # only scrape enabled services (opt-in)
+      - source_labels:
+          - __meta_dockerswarm_service_label_prometheus_swarm_enable
+        regex: true
+        action: keep
+      # update address to account for port differences
+      - source_labels:
+          - __meta_dockerswarm_service_name
+          - __meta_dockerswarm_service_label_prometheus_swarm_port
+        target_label: __address__
+        regex: (.+);(.+)
+        replacement: $1:$2
       # capture the service itself as the "job" (override this single 'tasks' job)
-      - source_labels: [ __meta_dockerswarm_service_name ]
+      - source_labels:
+          - __meta_dockerswarm_service_name
         target_label: job
+        regex: .+_(.+)
         replacement: $1
       # capture the hostname of the running node
-      - source_labels: [ __meta_dockerswarm_node_hostname ]
+      - source_labels:
+          - __meta_dockerswarm_node_hostname
         target_label: node
-        replacement: $1
-      # Only keep containers that have a `prometheus-job` label.
-      # - source_labels: [__meta_dockerswarm_service_label_prometheus_job]
-      #   regex: .+
-      #   action: keep
-      # Use the task labels that are prefixed by `prometheus-`.
-      - regex: __meta_dockerswarm_service_label_prometheus_(.+)
-        action: labelmap
         replacement: $1
