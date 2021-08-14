@@ -5,7 +5,7 @@ global:
 scrape_configs:
 
   # swarm nodes
-  - job_name: swarm-nodes
+  - job_name: docker
     dockerswarm_sd_configs:
       - host: tcp://172.17.0.1:2375
         role: nodes
@@ -58,7 +58,7 @@ scrape_configs:
 
   # monitor cable modem
   # configured separately to override interval/timeout
-  - job_name: swarm-tasks_mb8600-exporter
+  - job_name: mb8600
     scrape_interval: 1m
     scrape_timeout: 30s
     dockerswarm_sd_configs:
@@ -76,12 +76,11 @@ scrape_configs:
           - __meta_dockerswarm_service_name
         regex: lab_mb8600-exporter
         action: keep
-      # capture the service itself as the "job" (override this single 'tasks' job)
+      # update address to account for port differences
       - source_labels:
           - __meta_dockerswarm_service_name
-        target_label: job
-        regex: .+_(.+)
-        replacement: $1
+        target_label: __address__
+        replacement: $1:3000
       # capture the hostname of the running node
       - source_labels:
           - __meta_dockerswarm_node_hostname
