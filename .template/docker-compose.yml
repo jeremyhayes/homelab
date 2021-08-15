@@ -5,6 +5,11 @@ services:
   foo-service:
     image: foo
     labels:
+      - prometheus.swarm.enable=true
+      - prometheus.swarm.port=8089
       - traefik.enable=true
-      - traefik.http.routers.whoami.rule=Host(`foo.lab.omglolwtfbbq.com`)
-      - traefik.http.routers.whoami.entrypoints=web
+      - traefik.http.routers.foo.rule=Host(`foo.lab.omglolwtfbbq.com`)
+      - traefik.http.routers.foo.entrypoints=web-secure
+      - traefik.http.routers.foo.tls.certResolver=primary
+      - traefik.http.routers.foo.tls.domains[0].main=*.lab.omglolwtfbbq.com
+      - traefik.http.services.foo.loadbalancer.server.port=8089
