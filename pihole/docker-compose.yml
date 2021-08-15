@@ -33,7 +33,8 @@ services:
         - traefik.udp.routers.pihole-udp.entrypoints=dns-udp
         - traefik.udp.routers.pihole-udp.service=pihole-udp
         - traefik.udp.services.pihole-udp.loadbalancer.server.port=53
-#        - traefik.udp.services.pihole-udp.passHostHeader=true
+#        - traefik.udp.services.pihole-udp.loadbalancer.passhostheader=true
+#        - traefik.udp.services.pihole-udp.passhostheader=true
 
   pihole-exporter:
     image: ekofr/pihole-exporter:v0.0.11
