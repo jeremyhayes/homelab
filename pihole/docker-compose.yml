@@ -6,7 +6,9 @@ services:
     image: pihole/pihole:v5.8.1
     environment:
       - TZ=America/New_York
-      - WEBPASSWORD=${PIHOLE_PASSWORD}
+      - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
+    secrets:
+      - pihole-web-password
     volumes:
       - pihole-data:/etc/pihole
       - pihole-dnsmasq:/etc/dnsmasq.d
@@ -21,6 +23,10 @@ services:
       - traefik.http.routers.pihole.tls.certResolver=primary
       - traefik.http.routers.pihole.tls.domains[0].main=*.lab.omglolwtfbbq.com
       - traefik.http.services.pihole.loadbalancer.server.port=80
+
+secrets:
+  pihole-web-password:
+    file: ./.secret.pihole-web-password
 
 volumes:
   pihole-data:
