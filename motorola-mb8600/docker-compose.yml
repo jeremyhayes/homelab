@@ -9,6 +9,10 @@ services:
       - MODEM_USERNAME=${MODEM_USERNAME}
       - MODEM_PASSWORD=${MODEM_PASSWORD}
       - MODEM_IGNORE_SSL=true
+    deploy:
+      labels:
+        # don't allow prometheus to scrape this; takes too long for global config
+        - prometheus.swarm.enable=false
 
   mb8600-restart:
     image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.1.1
@@ -25,7 +29,5 @@ services:
         condition: none
       replicas: 0 # none by default; created when cron hits
       labels:
-        # don't allow prometheus to scrape this; takes too long for global config
-        - prometheus.swarm.enable=false
         - swarm.cronjob.enable=true
         - swarm.cronjob.schedule=0 5 * * mon
