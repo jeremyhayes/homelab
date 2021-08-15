@@ -35,6 +35,16 @@ services:
         - traefik.udp.services.pihole-udp.loadbalancer.server.port=53
 #        - traefik.udp.services.pihole-udp.passHostHeader=true
 
+  pihole-exporter:
+    image: ekofr/pihole-exporter:v0.0.11
+    environment:
+      - PIHOLE_HOSTNAME=pihole
+      - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
+    deploy:
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9617
+
 secrets:
   pihole-web-password:
     file: ./.secret.pihole-web-password
