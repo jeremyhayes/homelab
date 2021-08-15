@@ -16,8 +16,8 @@ services:
       - namecheap-api-user
     volumes:
       - ./traefik.yml:/etc/traefik/traefik.yml
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
       placement:
         constraints:
@@ -25,8 +25,6 @@ services:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080
-        - traefik.http.routers.api.tls.domains[0].main=lab.omglolwtfbbq.com
-        - traefik.http.routers.api.tls.domains[0].sans=*.lab.omglolwtfbbq.com
 
 secrets:
   namecheap-api-key:
