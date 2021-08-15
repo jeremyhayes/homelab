@@ -13,6 +13,10 @@ metrics:
   prometheus: {}
 
 entrypoints:
+  dns-tcp:
+    address: :53/tcp
+  dns-udp:
+    address: :53/udp
   web:
     address: :80
   web-secure:
