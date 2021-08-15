@@ -10,4 +10,5 @@ services:
         - traefik.http.routers.whoami.rule=Host(`whoami.lab.omglolwtfbbq.com`)
         - traefik.http.routers.whoami.entrypoints=web-secure
         - traefik.http.routers.whoami.tls.certResolver=primary
+        - traefik.http.routers.whoami.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.whoami.loadbalancer.server.port=80

@@ -20,6 +20,7 @@ services:
         - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
         - traefik.http.routers.grafana.entrypoints=web-secure
         - traefik.http.routers.grafana.tls.certResolver=primary
+        - traefik.http.routers.grafana.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.grafana.loadbalancer.server.port=3000
   
 volumes:

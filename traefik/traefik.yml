@@ -21,7 +21,7 @@ entrypoints:
 certificatesResolvers:
   primary:
     acme:
-      email: dev@omglolwtfbbq.com
+      email: dev@jeremyhayes.com
       storage: acme.json
       # uncomment to use Let's Encrypt staging server
       # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
