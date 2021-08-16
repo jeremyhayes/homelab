@@ -8,6 +8,9 @@ providers:
   docker:
     swarmMode: true
     exposedByDefault: false
+  file:
+    directory: /etc/traefik/config
+    watch: true
 
 metrics:
   prometheus: {}

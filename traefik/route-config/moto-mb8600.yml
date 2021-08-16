@@ -1,0 +1,20 @@
+http:
+  routers:
+    moto-mb8600:
+      entryPoints:
+        - web-secure
+      rule: Host(`modem.lab.omglolwtfbbq.com`)
+      service: moto-mb8600
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+  services:
+    moto-mb8600:
+      loadBalancer:
+        servers:
+          - url: https://192.168.100.1/
+        serversTransport: moto-mb8600-transport
+  serversTransports:
+    moto-mb8600-transport:
+      insecureSkipVerify: true

@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    unifi-udmpro:
+      entryPoints:
+        - web-secure
+      rule: Host(`gateway.lab.omglolwtfbbq.com`)
+      service: unifi-udmpro
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    unifi-udmpro:
+      loadBalancer:
+        servers:
+          - url: https://192.168.42.1/
+        serversTransport: unifi-udmpro-transport
+
+  serversTransports:
+    unifi-udmpro-transport:
+      insecureSkipVerify: true
