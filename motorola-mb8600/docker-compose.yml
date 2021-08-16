@@ -18,15 +18,16 @@ services:
         - prometheus.swarm.enable=false
 
   mb8600-restart:
-    image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.1.1
-    command:
-      - --url
-      - ${MODEM_ADDRESS}
-      - --username
-      - ${MODEM_USERNAME}
-      - --password
-      - ${MODEM_PASSWORD}
-      - --ignore-ssl
+    image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.2.1
+    environment:
+      - MODEM_BASE_URL=https://192.168.100.1
+      - MODEM_IGNORE_SSL=true
+      - MODEM_USERNAME_FILE=/run/secrets/modem-username
+      - MODEM_PASSWORD_FILE=/run/secrets/modem-password
+      # - MODEM_REBOOT_DRY_RUN=true
+    secrets:
+      - modem-username
+      - modem-password
     deploy:
       restart_policy:
         condition: none
