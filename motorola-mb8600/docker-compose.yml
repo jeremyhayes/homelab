@@ -3,12 +3,15 @@ version: '3.8'
 services:
 
   mb8600-exporter:
-    image: ghcr.io/jeremyhayes/motorola-mb8600-prometheus-exporter:v0.3.3
+    image: ghcr.io/jeremyhayes/motorola-mb8600-prometheus-exporter:v0.4.1
     environment:
-      - MODEM_BASE_URL=${MODEM_ADDRESS}
-      - MODEM_USERNAME=${MODEM_USERNAME}
-      - MODEM_PASSWORD=${MODEM_PASSWORD}
+      - MODEM_BASE_URL=https://192.168.100.1
       - MODEM_IGNORE_SSL=true
+      - MODEM_USERNAME_FILE=/run/secrets/modem-username
+      - MODEM_PASSWORD_FILE=/run/secrets/modem-password
+    secrets:
+      - modem-username
+      - modem-password
     deploy:
       labels:
         # don't allow prometheus to scrape this; takes too long for global config
@@ -31,3 +34,9 @@ services:
       labels:
         - swarm.cronjob.enable=true
         - swarm.cronjob.schedule=0 5 * * mon
+
+secrets:
+  modem-username:
+    file: ./.secret.modem-username
+  modem-password:
+    file: ./.secret.modem-password
