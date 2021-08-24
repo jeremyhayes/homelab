@@ -10,6 +10,9 @@ services:
       - source: prometheus-yml
         target: /etc/prometheus/prometheus.yml
     deploy:
+      placement:
+        constraints:
+          - node.role == manager
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9090
