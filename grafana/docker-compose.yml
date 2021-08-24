@@ -5,14 +5,11 @@ services:
   grafana:
     image: grafana/grafana:8.1.1
     volumes:
-      # TODO figure out why keep getting "stale NFS file handle"
-      # - grafana-data:/var/lib/grafana
-      - /mnt/hdd/share/apps/grafana:/var/lib/grafana
-      - ./grafana.ini:/etc/grafana/grafana.ini
+      - grafana-data:/var/lib/grafana
+    configs:
+      - source: grafana-ini
+        target: /etc/grafana/grafana.ini
     deploy:
-      placement:
-        constraints:
-          - node.role == manager
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=3000
@@ -22,11 +19,15 @@ services:
         - traefik.http.routers.grafana.tls.certResolver=primary
         - traefik.http.routers.grafana.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+configs:
+  grafana-ini:
+    file: ./grafana.ini
   
 volumes:
   grafana-data:
     driver: local
     driver_opts:
-      type: nfs
-      o: addr=192.168.42.11,nolock,soft,rw
+      type: nfs4
+      o: addr=192.168.42.11,rw
       device: ":/mnt/hdd/share/apps/grafana"
