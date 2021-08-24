@@ -17,10 +17,13 @@ services:
       - namecheap-api-key
       - namecheap-api-user
     volumes:
-      - ./traefik.yml:/etc/traefik/traefik.yml
-      - ./route-config:/etc/traefik/config
-      - ./acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./route-config:/etc/traefik/config
+    configs:
+      - source: traefik-yml
+        target: /etc/traefik/traefik.yml
+      - source: acme-json
+        target: /acme.json
     deploy:
       placement:
         constraints:
@@ -28,6 +31,12 @@ services:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080
+
+configs:
+  traefik-yml:
+    file: ./traefik.yml
+  acme-json:
+    file: ./acme.json
 
 secrets:
   namecheap-api-key:
