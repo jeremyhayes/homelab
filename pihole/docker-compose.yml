@@ -54,12 +54,12 @@ volumes:
   pihole-data:
     driver: local
     driver_opts:
-      type: nfs
-      o: addr=192.168.42.11,nolock,soft,rw
+      type: nfs4
+      o: addr=192.168.42.11,rw
       device: ":/mnt/hdd/share/apps/pihole/pihole"
   pihole-dnsmasq:
     driver: local
     driver_opts:
-      type: nfs
-      o: addr=192.168.42.11,nolock,soft,rw
+      type: nfs4
+      o: addr=192.168.42.11,rw
       device: ":/mnt/hdd/share/apps/pihole/dnsmasq"
