@@ -5,12 +5,18 @@ services:
   unifi-poller:
     image: golift/unifi-poller:2.1.3
     environment:
-      - UP_UNIFI_DEFAULT_URL=${UNIFI_ADDRESS}
-      - UP_UNIFI_DEFAULT_USER=${UNIFI_USERNAME}
-      - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASSWORD}
+      - UP_UNIFI_DEFAULT_URL=https://192.168.42.1:443
+      - UP_UNIFI_DEFAULT_USER=unifi-poller
+      - UP_UNIFI_DEFAULT_PASS=file:///run/secrets/unifi-password
       - UP_INFLUXDB_DISABLE=true
       - UP_UNIFI_DEFAULT_SAVE_DPI=true
+    secrets:
+      - unifi-password
     deploy:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9130
+
+secrets:
+  unifi-password:
+    file: ./.secret.unifi-password
