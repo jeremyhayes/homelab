@@ -4,7 +4,7 @@ http:
     unifi-udmpro:
       entryPoints:
         - web-secure
-      rule: Host(`gateway.lab.omglolwtfbbq.com`)
+      rule: Host(`unifi.lab.omglolwtfbbq.com`)
       service: unifi-udmpro
       tls:
         certResolver: primary
