@@ -62,7 +62,7 @@ scrape_configs:
     scrape_interval: 1m
     scrape_timeout: 30s
     dockerswarm_sd_configs:
-      - host: tcp://172.17.0.01:2375
+      - host: tcp://172.17.0.1:2375
         role: tasks
         port: 3000
     relabel_configs:
