@@ -5,6 +5,7 @@ services:
   pihole:
     image: pihole/pihole:2021.09
     environment:
+      - RATE_LIMIT=0/0
       - TZ=America/New_York
       - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
     secrets:
