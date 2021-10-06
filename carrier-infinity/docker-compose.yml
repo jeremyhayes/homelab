@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  proxy:
+    build:
+      context: .
+    ports:
+      - 18080:8080
+      - 18181:8181
+
+  infinitude:
+    image: nebulous/infinitude:latest
+    environment:
+      - APP_SECRET=powerful
+      - PASS_REQS=300
+      - MODE=Development
+    ports:
+      - 18080:3000
