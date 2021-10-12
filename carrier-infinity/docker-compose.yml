@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
 
-  proxy:
+  martian:
     build:
-      context: .
+      context: ./google-martian
     ports:
       - 18080:8080
       - 18181:8181
@@ -17,3 +17,9 @@ services:
       - MODE=Development
     ports:
       - 18080:3000
+
+  homegrown:
+    build:
+      context: ./homegrown
+    ports:
+      - 18080:8080
