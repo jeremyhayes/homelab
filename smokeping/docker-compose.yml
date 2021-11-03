@@ -4,8 +4,8 @@ services:
 
   smokeping:
     image: linuxserver/smokeping:2.7.3
-    volumes:
-      - smokeping-data:/data
+#    volumes:
+#      - smokeping-data:/data
     configs:
       - source: smokeping-targets
         target: /config/Targets
