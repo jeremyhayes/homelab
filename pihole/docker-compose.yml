@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   pihole:
-    image: pihole/pihole:2021.10
+    image: pihole/pihole:2021.11
     environment:
       - RATE_LIMIT=0/0
       - TZ=America/New_York
