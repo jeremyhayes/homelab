@@ -5,9 +5,10 @@ services:
   pihole:
     image: pihole/pihole:2021.10
     environment:
-      - RATE_LIMIT=0/0
       - TZ=America/New_York
       - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
+      # This must be set in /etc/pihole/pihole-FTL.conf once created.
+      # - RATE_LIMIT=0/0
     secrets:
       - pihole-web-password
     volumes:
