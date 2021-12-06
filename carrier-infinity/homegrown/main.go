@@ -11,9 +11,19 @@ import (
 
 func main() {
 	// setup handler for inbooud requests
-	http.HandleFunc("/", handle)
-        log.Print("starting up on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+//	http.HandleFunc("/", handle)
+//        log.Print("starting up on :8080")
+//	log.Fatal(http.ListenAndServe(":8080", nil))
+
+	handler := http.DefaultServeMux
+	handler.HandleFunc("/", handle)
+
+	server := &http.Server{
+		Addr:		":8080",
+		Handler:	handler,
+	}
+
+	log.Fatal(server.ListenAndServe())
 }
 
 func copy(body io.ReadCloser) (stream io.ReadCloser, text *string) {
@@ -55,6 +65,7 @@ func handle(res http.ResponseWriter, req *http.Request) {
 		Method:        req.Method,
 //		URL:           "http://www.api.ing.carrier.com" + req.URL,
 		URL:           req.URL,
+//                Host:          req.Host,
 		Header:        req.Header,
 		Body:          req.Body,
 		ContentLength: req.ContentLength,
