@@ -39,7 +39,7 @@ services:
 #        - traefik.udp.services.pihole-udp.passhostheader=true
 
   pihole-exporter:
-    image: ekofr/pihole-exporter:v0.0.11
+    image: ekofr/pihole-exporter:v0.1.0
     environment:
       - PIHOLE_HOSTNAME=pihole
       - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
