@@ -4,6 +4,10 @@ services:
 
   pihole:
     image: pihole/pihole:2021.12
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8090:80
     environment:
       - TZ=America/New_York
       - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
@@ -19,8 +23,12 @@ services:
     #cap_add:
     #  - NET_ADMIN
     deploy:
+      placement:
+        constraints:
+          # run pihole on manager until/unless figure out how to put it behind proxy
+          - node.role == manager
       labels:
-        - traefik.enable=true
+#        - traefik.enable=true
         - traefik.http.routers.pihole.rule=Host(`pihole.lab.omglolwtfbbq.com`)
         - traefik.http.routers.pihole.entrypoints=web-secure
         - traefik.http.routers.pihole.tls.certResolver=primary
