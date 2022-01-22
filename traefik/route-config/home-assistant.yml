@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    home-assistant:
+      entryPoints:
+        - web-secure
+      rule: Host(`home-assistant.lab.omglolwtfbbq.com`)
+      service: home-assistant
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    home-assistant:
+      loadBalancer:
+        servers:
+          - url: https://192.168.42.16:8123/
+        serversTransport: home-assistant-transport
+
+  serversTransports:
+    home-assistant-transport:
+      insecureSkipVerify: true
