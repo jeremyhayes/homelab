@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  infinitude:
+    image: nebulous/infinitude:latest@sha256:551e3f5f78dac8f20102289b71d8276a32b1dd02e296e52fc8cee49dea9df7c1
+    # run c_rehash to calculate certificate checksums
+    # something with ssl and libseccomp in the host OS
+    entrypoint: "/bin/sh -c 'c_rehash && /infinitude/entrypoint.sh' "
+    ports:
+      - 3000:3000
+    environment:
+      - APP_SECRET=powerful
+      - PASS_REQS=5
+      - MODE=Development
+    volumes:
+      - infinitude-data:/infinitude/state
+
+volumes:
+  infinitude-data:
+    driver: local
+    driver_opts:
+      type: nfs4
+      o: addr=192.168.42.11,rw
+      device: ":/mnt/hdd/share/apps/infinitude"
