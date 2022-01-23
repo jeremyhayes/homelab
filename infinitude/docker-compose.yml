@@ -10,8 +10,11 @@ services:
     ports:
       - 3000:3000
     environment:
-      - APP_SECRET=powerful
-      - PASS_REQS=5
+      # cookie signature for perl web framework (mojolicious)
+      - APP_SECRET=subjectivizes
+      # forward requests every n seconds (default 17 minutes)
+      - PASS_REQS=300
+      # more logging
       - MODE=Development
     volumes:
       - infinitude-data:/infinitude/state
