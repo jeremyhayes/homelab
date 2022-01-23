@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    infinitude:
+      entryPoints:
+        - web-secure
+      rule: Host(`infinitude.lab.omglolwtfbbq.com`)
+      service: infinitude
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    infinitude:
+      loadBalancer:
+        servers:
+          - url: http://192.168.42.11:3000/
+        serversTransport: infinitude-transport
+
+  serversTransports:
+    infinitude-transport:
+      insecureSkipVerify: true
