@@ -10,9 +10,9 @@ services:
       - 18181:8181
 
   infinitude:
-#    image: nebulous/infinitude:latest
+    image: nebulous/infinitude:latest
 #    image: nebulous/infinitude@sha256:fc53959f3df5a2f2eed9b67a94176d0ffb21c06de6901ad3d86b8571a44862dc
-    image: fc53959f3df5
+#    image: fc53959f3df5
     environment:
       - APP_SECRET=powerful
       - PASS_REQS=5
