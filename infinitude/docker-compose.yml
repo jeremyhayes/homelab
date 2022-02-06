@@ -19,6 +19,15 @@ services:
     volumes:
       - infinitude-data:/infinitude/state
 
+  infinitude-prometheus:
+    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.0.1
+    environment:
+      - INFINITUDE_BASE_URL=http://infinitude:3000
+    deploy:
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=8080
+
 volumes:
   infinitude-data:
     driver: local
