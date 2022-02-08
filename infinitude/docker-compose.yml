@@ -20,7 +20,7 @@ services:
       - infinitude-data:/infinitude/state
 
   infinitude-prometheus:
-    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.0.1
+    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.0.2
     environment:
       - INFINITUDE_BASE_URL=http://infinitude:3000
     deploy:
