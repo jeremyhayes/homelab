@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   pihole:
-    image: pihole/pihole:2022.01
+    image: pihole/pihole:2022.02
     ports:
       - 53:53/tcp
       - 53:53/udp
