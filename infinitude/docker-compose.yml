@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   infinitude:
-    image: nebulous/infinitude:latest@sha256:ed57669501601ac35819cdf7734c6f3c373ae957f880829802aca48e44a1a5b6
+    image: nebulous/infinitude:latest@sha256:34e3e4cc3725a80b0cf1640458965cd0a664ccefa8bee67eb57487b458feae18
     # run c_rehash to calculate certificate checksums
     # something with ssl and libseccomp in the host OS
     entrypoint: "/bin/sh -c 'c_rehash && /infinitude/entrypoint.sh' "
