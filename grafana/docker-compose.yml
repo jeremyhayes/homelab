@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   grafana:
-    image: grafana/grafana:8.4.7
+    image: grafana/grafana:8.5.0
     volumes:
       - grafana-data:/var/lib/grafana
     configs:
