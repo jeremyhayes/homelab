@@ -24,9 +24,9 @@ services:
       # - RATE_LIMIT=0/0
     secrets:
       - pihole-web-password
-#    volumes:
-#      - pihole-data:/etc/pihole
-#      - pihole-dnsmasq:/etc/dnsmasq.d
+    volumes:
+      - pihole-data:/etc/pihole
+      - pihole-dnsmasq:/etc/dnsmasq.d
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     #cap_add:
@@ -71,14 +71,14 @@ secrets:
   pihole-web-password:
     file: ./.secret.pihole-web-password
 
-#volumes:
-#  pihole-data:
+volumes:
+  pihole-data:
 #    driver: local
 #    driver_opts:
 #      type: nfs4
 #      o: addr=192.168.42.11,rw
 #      device: ":/mnt/hdd/share/apps/pihole/pihole"
-#  pihole-dnsmasq:
+  pihole-dnsmasq:
 #    driver: local
 #    driver_opts:
 #      type: nfs4
