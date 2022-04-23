@@ -5,9 +5,18 @@ services:
   pihole:
     image: pihole/pihole:2022.02
     ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 8090:80
+      - target: 53
+        published: 53
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 53
+        protocol: udp
+        mode: host
+      - target: 80
+        published: 8090
+        protocol: tcp
+        mode: host
     environment:
       - TZ=America/New_York
       - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
@@ -15,18 +24,20 @@ services:
       # - RATE_LIMIT=0/0
     secrets:
       - pihole-web-password
-    volumes:
-      - pihole-data:/etc/pihole
-      - pihole-dnsmasq:/etc/dnsmasq.d
+#    volumes:
+#      - pihole-data:/etc/pihole
+#      - pihole-dnsmasq:/etc/dnsmasq.d
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     #cap_add:
     #  - NET_ADMIN
     deploy:
-      placement:
-        constraints:
-          # run pihole on manager until/unless figure out how to put it behind proxy
-          - node.role == manager
+#      placement:
+#        constraints:
+#          # run pihole on manager until/unless figure out how to put it behind proxy
+#          - node.role == manager
+      mode: replicated
+      replicas: 2
       labels:
 #        - traefik.enable=true
         - traefik.http.routers.pihole.rule=Host(`pihole.lab.omglolwtfbbq.com`)
@@ -60,16 +71,16 @@ secrets:
   pihole-web-password:
     file: ./.secret.pihole-web-password
 
-volumes:
-  pihole-data:
-    driver: local
-    driver_opts:
-      type: nfs4
-      o: addr=192.168.42.11,rw
-      device: ":/mnt/hdd/share/apps/pihole/pihole"
-  pihole-dnsmasq:
-    driver: local
-    driver_opts:
-      type: nfs4
-      o: addr=192.168.42.11,rw
-      device: ":/mnt/hdd/share/apps/pihole/dnsmasq"
+#volumes:
+#  pihole-data:
+#    driver: local
+#    driver_opts:
+#      type: nfs4
+#      o: addr=192.168.42.11,rw
+#      device: ":/mnt/hdd/share/apps/pihole/pihole"
+#  pihole-dnsmasq:
+#    driver: local
+#    driver_opts:
+#      type: nfs4
+#      o: addr=192.168.42.11,rw
+#      device: ":/mnt/hdd/share/apps/pihole/dnsmasq"
