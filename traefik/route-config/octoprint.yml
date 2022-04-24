@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    octoprint:
+      entryPoints:
+        - web-secure
+      rule: Host(`octoprint.lab.omglolwtfbbq.com`)
+      service: octoprint
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    octoprint:
+      loadBalancer:
+        servers:
+          - url: https://192.168.42.22/
+        serversTransport: octoprint-transport
+
+  serversTransports:
+    octoprint-transport:
+      insecureSkipVerify: true
