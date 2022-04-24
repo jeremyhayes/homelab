@@ -30,8 +30,8 @@ services:
 
 volumes:
   infinitude-data:
-    driver: local
-    driver_opts:
-      type: nfs4
-      o: addr=192.168.42.11,rw
-      device: ":/mnt/hdd/share/apps/infinitude"
+#    driver: local
+#    driver_opts:
+#      type: nfs4
+#      o: addr=192.168.42.11,rw
+#      device: ":/mnt/hdd/share/apps/infinitude"
