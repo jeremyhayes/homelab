@@ -15,7 +15,7 @@ http:
     infinitude:
       loadBalancer:
         servers:
-          - url: http://192.168.42.11:3000/
+          - url: http://192.168.42.21:3000/
         serversTransport: infinitude-transport
 
   serversTransports:
