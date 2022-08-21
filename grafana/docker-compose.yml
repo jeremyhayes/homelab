@@ -10,6 +10,9 @@ services:
       - source: grafana-ini
         target: /etc/grafana/grafana.ini
     deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=3000

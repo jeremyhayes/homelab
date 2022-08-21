@@ -13,6 +13,9 @@ services:
       - modem-username
       - modem-password
     deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
       labels:
         # don't allow prometheus to scrape this; takes too long for global config
         - prometheus.swarm.enable=false
@@ -29,6 +32,9 @@ services:
       - modem-username
       - modem-password
     deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
       restart_policy:
         condition: none
       replicas: 0 # none by default; created when cron hits

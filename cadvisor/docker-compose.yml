@@ -13,6 +13,11 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     deploy:
       mode: global
+      placement:
+        constraints:
+          - node.labels.arch == armv7l
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080
+
+# TODO add cadvisor for x86 hosts

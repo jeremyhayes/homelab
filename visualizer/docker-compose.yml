@@ -17,3 +17,5 @@ services:
         - traefik.http.routers.visualizer.tls.certResolver=primary
         - traefik.http.routers.visualizer.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.visualizer.loadbalancer.server.port=8080
+
+# TODO figure out visualizer for x86 host

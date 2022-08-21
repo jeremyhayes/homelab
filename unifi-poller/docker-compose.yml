@@ -13,6 +13,9 @@ services:
     secrets:
       - unifi-password
     deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9130

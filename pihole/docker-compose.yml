@@ -32,12 +32,9 @@ services:
     #cap_add:
     #  - NET_ADMIN
     deploy:
-#      placement:
-#        constraints:
-#          # run pihole on manager until/unless figure out how to put it behind proxy
-#          - node.role == manager
-      mode: replicated
-      replicas: 2
+      placement:
+        constraints:
+          - node.labels.arch == armv7l
       labels:
 #        - traefik.enable=true
         - traefik.http.routers.pihole.rule=Host(`pihole.lab.omglolwtfbbq.com`)
