@@ -3,13 +3,14 @@ version: '3.8'
 services:
 
   visualizer:
-    image: alexellis2/visualizer-arm:0.4
+    image: dockersamples/visualizer@sha256:530c863672e7830d7560483df66beb4cbbcd375a9f3ec174ff5376616686a619
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
       placement:
         constraints:
           - node.role == manager
+          - node.labels.arch == x86_64
       labels:
         - traefik.enable=true
         - traefik.http.routers.visualizer.rule=Host(`visualizer.lab.omglolwtfbbq.com`)
@@ -18,4 +19,3 @@ services:
         - traefik.http.routers.visualizer.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.visualizer.loadbalancer.server.port=8080
 
-# TODO figure out visualizer for x86 host
