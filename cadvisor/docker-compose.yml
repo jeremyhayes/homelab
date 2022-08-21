@@ -15,7 +15,7 @@ services:
       mode: global
       placement:
         constraints:
-          - node.labels.arch == armv7l
+          - node.labels.arch == aarch64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080
