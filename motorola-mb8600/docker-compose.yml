@@ -19,6 +19,7 @@ services:
       labels:
         # don't allow prometheus to scrape this; takes too long for global config
         - prometheus.swarm.enable=false
+        - prometheus.swarm.port=3000
 
   mb8600-restart:
     image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.2.7
