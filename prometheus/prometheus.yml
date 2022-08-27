@@ -37,9 +37,15 @@ scrape_configs:
           - __meta_dockerswarm_service_label_prometheus_swarm_enable
         regex: true
         action: keep
+      # capture ip of container on swarm network; use ip rather than dns for replicated tasks
+      - source_labels:
+          - __address__
+        target_label: __tmp_container_ip
+        regex: (.+):.+
+        replacement: $1
       # update address to account for port differences
       - source_labels:
-          - __meta_dockerswarm_service_name
+          - __tmp_container_ip
           - __meta_dockerswarm_service_label_prometheus_swarm_port
         target_label: __address__
         regex: (.+);(.+)
