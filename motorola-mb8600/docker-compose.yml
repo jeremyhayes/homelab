@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   mb8600-exporter:
-    image: ghcr.io/jeremyhayes/motorola-mb8600-prometheus-exporter:v0.4.11
+    image: ghcr.io/jeremyhayes/motorola-mb8600-prometheus-exporter:v0.4.12
     environment:
       - MODEM_BASE_URL=https://192.168.100.1
       - MODEM_IGNORE_SSL=true
