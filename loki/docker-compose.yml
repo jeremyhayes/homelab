@@ -14,6 +14,9 @@ services:
       placement:
         constraints:
           - node.labels.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=3100
 
   promtail:
     image: grafana/promtail:2.6.1
@@ -27,6 +30,9 @@ services:
       placement:
         constraints:
           - node.labels.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9080
 
 configs:
   loki-yml:
