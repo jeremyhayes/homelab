@@ -22,14 +22,12 @@ services:
     image: grafana/promtail:2.6.1
     command: "-config.file=/etc/promtail/config.yml"
     volumes:
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     configs:
       - source: promtail-yml
         target: /etc/promtail/config.yml
     deploy:
-      placement:
-        constraints:
-          - node.labels.arch == x86_64
+      mode: global
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9080
