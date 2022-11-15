@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   infinitude:
-    image: nebulous/infinitude:latest@sha256:12e5e90f6d2363f6d657ef11ce26ad5aee6d9b08dc621a33d0a485892ba459d9
+    image: nebulous/infinitude:latest@sha256:2e56927b9fa81d847d41d614a22ea746985fbb975f2e21394ef6631e5069449a
     ports:
       - 3000:3000
     environment:
