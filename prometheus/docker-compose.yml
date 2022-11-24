@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   prometheus:
-    image: prom/prometheus:v2.40.2
+    image: prom/prometheus:v2.40.3
     volumes:
       - prometheus-data:/prometheus
     configs:
