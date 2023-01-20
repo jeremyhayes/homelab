@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+
+  airgradient:
+    image: ghcr.io/jeremyhayes/airgradient-local:v0.1.0
+    deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=5000
+        - traefik.enable=true
+        - traefik.http.routers.airgradient.rule=Host(`airgradient.lab.omglolwtfbbq.com`)
+        # airgradient sketch doesn't support tls (yet?)
+        - traefik.http.routers.airgradient.entrypoints=web
+        - traefik.http.services.airgradient.loadbalancer.server.port=5000
