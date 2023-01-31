@@ -22,7 +22,7 @@ services:
         - prometheus.swarm.port=3000
 
   mb8600-restart:
-    image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.3.0
+    image: ghcr.io/jeremyhayes/motorola-mb8600-reboot:v0.3.2
     environment:
       - MODEM_BASE_URL=https://192.168.100.1
       - MODEM_IGNORE_SSL=true
