@@ -55,7 +55,7 @@ services:
 #        - traefik.udp.services.pihole-udp.passhostheader=true
 
   pihole-exporter:
-    image: ekofr/pihole-exporter:v0.3.0
+    image: ekofr/pihole-exporter:v0.4.0
     environment:
       - PIHOLE_HOSTNAME=192.168.42.11
       - PIHOLE_PORT=8090
