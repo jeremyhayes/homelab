@@ -11,7 +11,7 @@ Homelab services running on a Raspberry Pi.
       - hostname
       - timezone
       - culture
-    
+
     b. Static IP
       - `/etc/dhcpcd.conf`
 
@@ -102,6 +102,13 @@ $ docker swarm init
 $ git clone git@github.com:jeremyhayes/pi-cluster.git --recurse-submodules
 ```
 
+2. Create any needed `.secret.xxx` files:
+```sh
+$ find ./docker-compose.yml | xargs grep "\.secret\."
+# for each ...
+nano .secret.xxx
+```
+
 2. Copy and update any `env.template` files as needed:
 ```
 $ find . -name .env.template
@@ -114,8 +121,7 @@ $ nano .env
 3. Deploy each service to a shared stack:
 Each service lives in a folder with a `docker-compose.yml` and any supporting configuration.
 ```
-$ cd <service-dir>
-$ docker stack deploy -c docker-compose.yml <stack-name>
+$ ./deploy.sh <service-dir>
 ```
 > NOTE: The first deploy will create an overlay network `<stack-name>_default`.
 
