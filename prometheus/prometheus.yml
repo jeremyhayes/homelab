@@ -105,3 +105,10 @@ scrape_configs:
           - __meta_dockerswarm_node_hostname
         target_label: node
         replacement: $1
+
+  # https://github.com/tg44/OctoPrint-Prometheus-Exporter
+  - job_name: octoprint
+    scheme: https
+    metrics_path: '/plugin/prometheus_exporter/metrics'
+    static_configs:
+      - targets: ['octoprint.lab.omglolwtfbbq.com']
