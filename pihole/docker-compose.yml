@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   pihole:
-    image: pihole/pihole:2023.01
+    image: pihole/pihole:2023.05.2
     ports:
       - target: 53
         published: 53
