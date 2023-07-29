@@ -31,7 +31,7 @@ Homelab services running on a Raspberry Pi.
       ```
       {
         "hosts": [
-          "tcp://0.0.0.0:2375"
+          "tcp://0.0.0.0:2375",
           "unix:///var/run/docker.sock"
         ],
         "metrics-addr": "0.0.0.0:9323",
