@@ -32,6 +32,8 @@ services:
     #cap_add:
     #  - NET_ADMIN
     deploy:
+      mode: replicated
+      replicas: 3
       placement:
         constraints:
           - node.labels.arch == aarch64
@@ -57,7 +59,7 @@ services:
   pihole-exporter:
     image: ekofr/pihole-exporter:v0.4.0
     environment:
-      - PIHOLE_HOSTNAME=192.168.42.11
+      - PIHOLE_HOSTNAME=192.168.42.11,192.168.42.12,192.168.42.13
       - PIHOLE_PORT=8090
       # pihole-exporter doesn't support docker secrets
       # https://github.com/eko/pihole-exporter/issues/91

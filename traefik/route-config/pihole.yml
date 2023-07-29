@@ -21,6 +21,16 @@ http:
         domains:
           - main: '*.lab.omglolwtfbbq.com'
 
+    pihole3-dashboard:
+      entryPoints:
+        - web-secure
+      rule: Host(`pihole3.lab.omglolwtfbbq.com`)
+      service: pihole3-dashboard
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
   services:
     pihole1-dashboard:
       loadBalancer:
@@ -31,6 +41,11 @@ http:
       loadBalancer:
         servers:
           - url: http://192.168.42.12:8090/
+        serversTransport: pihole-dashboard-transport
+    pihole3-dashboard:
+      loadBalancer:
+        servers:
+          - url: http://192.168.42.13:8090/
         serversTransport: pihole-dashboard-transport
 
   serversTransports:
