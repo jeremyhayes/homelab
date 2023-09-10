@@ -10,7 +10,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-          - node.labels.arch == x86_64
+          - node.labels.arch == x86_64 # only because manager node req
       labels:
         - traefik.enable=true
         - traefik.http.routers.visualizer.rule=Host(`visualizer.lab.omglolwtfbbq.com`)
@@ -18,4 +18,3 @@ services:
         - traefik.http.routers.visualizer.tls.certResolver=primary
         - traefik.http.routers.visualizer.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.visualizer.loadbalancer.server.port=8080
-

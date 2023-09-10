@@ -30,7 +30,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == x86_64
+          - node.labels.arch == aarch64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9130
