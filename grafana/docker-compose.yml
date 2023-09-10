@@ -33,4 +33,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/docker-data/apps/grafana"
+      device: "/opt/apps/grafana"
