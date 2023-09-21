@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    ports:
+      - target: 1920  # service discovery and dlna
+        published: 1920
+        protocol: udp
+        mode: host
+      - target: 7359  # client discovery
+        published: 7359
+        protocol: udp
+        mode: host
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - jellyfin-media:/media
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.lab.omglolwtfbbq.com
+    deploy:
+      placement:
+        constraints:
+          - node.labels.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=false
+        - prometheus.swarm.port=8096
+        - traefik.enable=true
+        - traefik.http.routers.foo.rule=Host(`jellyfin.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.foo.entrypoints=web-secure
+        - traefik.http.routers.foo.tls.certResolver=primary
+        - traefik.http.routers.foo.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.foo.loadbalancer.server.port=8096
+
+volumes:
+  jellyfin-config:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/apps/jellyfin/config'
+  jellyfin-cache:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/apps/jellyfin/cache'
+  jellyfin-media:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/apps/jellyfin/media'
