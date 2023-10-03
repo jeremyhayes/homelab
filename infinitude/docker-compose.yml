@@ -21,7 +21,7 @@ services:
           - node.labels.arch == aarch64
 
   infinitude-prometheus:
-    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.20
+    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.21
     environment:
       - INFINITUDE_BASE_URL=http://infinitude:3000
     deploy:
