@@ -24,7 +24,8 @@ services:
         constraints:
           - node.labels.arch == x86_64
       labels:
-        - prometheus.swarm.enable=false
+        # set EnableMetrics in Jellyfin's config/system.xml
+        - prometheus.swarm.enable=true
         - prometheus.swarm.port=8096
         - traefik.enable=true
         - traefik.http.routers.foo.rule=Host(`jellyfin.lab.omglolwtfbbq.com`)
