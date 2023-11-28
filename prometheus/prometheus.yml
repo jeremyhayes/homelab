@@ -32,6 +32,11 @@ scrape_configs:
           - __meta_dockerswarm_task_desired_state
         regex: running
         action: keep
+      # don't scrape the ingress network
+      - source_labels:
+          - __meta_dockerswarm_network_ingress
+        regex: true
+        action: drop
       # only scrape enabled services (opt-in)
       - source_labels:
           - __meta_dockerswarm_service_label_prometheus_swarm_enable
