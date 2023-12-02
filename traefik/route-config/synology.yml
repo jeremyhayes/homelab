@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    synology:
+      entryPoints:
+        - web-secure
+      rule: Host(`synology.lab.omglolwtfbbq.com`)
+      service: synology
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    synology:
+      loadBalancer:
+        servers:
+          - url: http://192.168.42.8:5000/
+        serversTransport: synology-transport
+
+  serversTransports:
+    synology-transport:
+      insecureSkipVerify: true
