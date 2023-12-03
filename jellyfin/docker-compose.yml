@@ -28,11 +28,11 @@ services:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8096
         - traefik.enable=true
-        - traefik.http.routers.foo.rule=Host(`jellyfin.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.foo.entrypoints=web-secure
-        - traefik.http.routers.foo.tls.certResolver=primary
-        - traefik.http.routers.foo.tls.domains[0].main=*.lab.omglolwtfbbq.com
-        - traefik.http.services.foo.loadbalancer.server.port=8096
+        - traefik.http.routers.jellyfin.rule=Host(`jellyfin.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.jellyfin.entrypoints=web-secure
+        - traefik.http.routers.jellyfin.tls.certResolver=primary
+        - traefik.http.routers.jellyfin.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.jellyfin.loadbalancer.server.port=8096
 
 volumes:
   jellyfin-config:
