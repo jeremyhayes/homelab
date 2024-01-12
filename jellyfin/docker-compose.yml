@@ -19,6 +19,7 @@ services:
       - jellyfin-media:/media
     environment:
       - JELLYFIN_PublishedServerUrl=https://jellyfin.lab.omglolwtfbbq.com
+      - TZ=America/New_York
     deploy:
       placement:
         constraints:
