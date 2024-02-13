@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   airgradient:
-    image: ghcr.io/jeremyhayes/airgradient-local:v0.1.27
+    image: ghcr.io/jeremyhayes/airgradient-local:v0.1.28
     deploy:
       placement:
         constraints:
