@@ -72,6 +72,28 @@ services:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9617
 
+  orbital-sync:
+    image: mattwebbio/orbital-sync:1.5.7
+    environment:
+      - PRIMARY_HOST_BASE_URL=https://pihole1.lab.omglolwtfbbq.com
+      - PRIMARY_HOST_PASSWORD=${PIHOLE_PASSWORD}
+      - SECONDARY_HOST_1_BASE_URL=https://pihole2.lab.omglolwtfbbq.com
+      - SECONDARY_HOST_1_PASSWORD=${PIHOLE_PASSWORD}
+      - SECONDARY_HOST_2_BASE_URL=https://pihole3.lab.omglolwtfbbq.com
+      - SECONDARY_HOST_2_PASSWORD=${PIHOLE_PASSWORD}
+      - TZ=America/New_York
+      - RUN_ONCE=true
+    deploy:
+      placement:
+        constraints:
+          - node.labels.arch == aarch64
+      restart_policy:
+        condition: none
+      replicas: 0 # none by default; created when cron hits
+      labels:
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=15 5 * * mon
+
 secrets:
   pihole-web-password:
     file: ./.secret.pihole-web-password
