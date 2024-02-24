@@ -13,7 +13,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-          - node.labels.arch == x86_64
+          - node.platform.arch == x86_64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9090

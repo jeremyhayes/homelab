@@ -18,7 +18,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == aarch64
+          - node.platform.arch == aarch64
 
   infinitude-prometheus:
     image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.26
@@ -27,7 +27,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == aarch64
+          - node.platform.arch == aarch64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080

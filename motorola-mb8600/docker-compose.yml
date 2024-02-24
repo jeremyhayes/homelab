@@ -15,7 +15,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == aarch64
+          - node.platform.arch == aarch64
       labels:
         # don't allow prometheus to scrape this; takes too long for global config
         - prometheus.swarm.enable=false
@@ -35,7 +35,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == aarch64
+          - node.platform.arch == aarch64
       restart_policy:
         condition: none
       replicas: 0 # none by default; created when cron hits

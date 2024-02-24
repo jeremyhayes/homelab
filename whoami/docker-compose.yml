@@ -7,8 +7,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == aarch64
-    deploy:
+          - node.platform.arch == aarch64
       labels:
         - traefik.enable=true
         - traefik.http.routers.whoami.rule=Host(`whoami.lab.omglolwtfbbq.com`)

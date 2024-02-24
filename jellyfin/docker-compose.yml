@@ -23,7 +23,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.arch == x86_64
+          - node.platform.arch == x86_64
       labels:
         # set EnableMetrics in Jellyfin's config/system.xml
         - prometheus.swarm.enable=true

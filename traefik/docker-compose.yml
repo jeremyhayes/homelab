@@ -25,7 +25,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-          - node.labels.arch == x86_64 # only because manager node req
+          - node.platform.arch == x86_64 # only because manager node req
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080

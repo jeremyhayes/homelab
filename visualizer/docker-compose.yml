@@ -10,7 +10,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-          - node.labels.arch == x86_64 # only because manager node req
+          - node.platform.arch == x86_64 # only because manager node req
       labels:
         - traefik.enable=true
         - traefik.http.routers.visualizer.rule=Host(`visualizer.lab.omglolwtfbbq.com`)
