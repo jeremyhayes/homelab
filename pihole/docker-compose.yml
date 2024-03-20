@@ -73,7 +73,7 @@ services:
         - prometheus.swarm.port=9617
 
   orbital-sync:
-    image: mattwebbio/orbital-sync:1.5.7
+    image: mattwebbio/orbital-sync:1.6.0
     environment:
       - PRIMARY_HOST_BASE_URL=https://pihole1.lab.omglolwtfbbq.com
       - PRIMARY_HOST_PASSWORD=${PIHOLE_PASSWORD}
