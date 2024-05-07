@@ -5,9 +5,8 @@ api:
   insecure: true
 
 providers:
-  docker:
-    swarmMode: true
-    exposedByDefault: false
+  swarm:
+    endpoint: "tcp://127.0.0.1:2377"
   file:
     directory: /etc/traefik/config
     watch: true
