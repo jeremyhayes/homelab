@@ -6,7 +6,7 @@ api:
 
 providers:
   swarm:
-    endpoint: "tcp://127.0.0.1:2377"
+    endpoint: "unix:///var/run/docker.sock"
   file:
     directory: /etc/traefik/config
     watch: true
