@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:10.9.1
     ports:
       - target: 1920  # service discovery and dlna
         published: 1920
