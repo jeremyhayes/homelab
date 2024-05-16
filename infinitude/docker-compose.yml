@@ -4,8 +4,6 @@ services:
 
   infinitude:
     image: nebulous/infinitude:latest@sha256:cf4b6d43cc90232511cb8cdbd76722c3d48f034959aa2cc233b0a381d0a18e66
-    ports:
-      - 3000:3000
     environment:
       # cookie signature for perl web framework (mojolicious)
       - APP_SECRET=subjectivizes
@@ -19,6 +17,13 @@ services:
       placement:
         constraints:
           - node.platform.arch == aarch64
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.infinitude.rule=Host(`infinitude.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.infinitude.entrypoints=web-secure
+        - traefik.http.routers.infinitude.tls.certResolver=primary
+        - traefik.http.routers.infinitude.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.infinitude.loadbalancer.server.port=3000
 
   infinitude-prometheus:
     image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.29
