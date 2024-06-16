@@ -4,6 +4,10 @@ services:
 
   infinitude:
     image: nebulous/infinitude:latest@sha256:cf4b6d43cc90232511cb8cdbd76722c3d48f034959aa2cc233b0a381d0a18e66
+    ports:
+      # The thermostat has trouble connecting through the proxy, on both 80 and 443.
+      # Exposing this port so it can be routed directly.
+      - 3000:3000
     environment:
       # cookie signature for perl web framework (mojolicious)
       - APP_SECRET=subjectivizes
