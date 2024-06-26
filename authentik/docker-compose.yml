@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+
+  authentik-db-init:
+    image: ghcr.io/jeremyhayes/postgres-init:v0.0.3
+    secrets:
+      - lab_postgres-su-password
+      - authentik-postgres-password
+    environment:
+      - PG_HOST=postgres
+      - PG_PASSWORD_FILE=/run/secrets/lab_postgres-su-password
+      - DB_USERNAME=authentik
+      - DB_PASSWORD_FILE=/run/secrets/authentik-postgres-password
+    deploy:
+      restart_policy:
+        condition: none
+
+  authentik-server:
+    image: ghcr.io/goauthentik/server:2024.4.2
+    command: server
+    secrets:
+      - authentik-secret-key
+      - authentik-postgres-password
+    environment:
+      - AUTHENTIK_SECRET_KEY=file:///run/secrets/authentik-secret-key
+      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_REDIS__DB=1
+      - AUTHENTIK_POSTGRESQL__HOST=postgres
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/authentik-postgres-password
+    volumes:
+      - authentik-media:/media
+#      - ./custom-templates:/templates
+#    ports:
+#      - "${COMPOSE_PORT_HTTP:-9000}:9000"
+#      - "${COMPOSE_PORT_HTTPS:-9443}:9443"
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.authentik.rule=Host(`auth.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.authentik.entrypoints=web-secure
+        - traefik.http.routers.authentik.tls.certResolver=primary
+        - traefik.http.routers.authentik.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.authentik.loadbalancer.server.port=9000
+
+  authentik-worker:
+    image: ghcr.io/goauthentik/server:2024.4.2
+    command: worker
+    secrets:
+      - authentik-secret-key
+      - authentik-postgres-password
+    environment:
+      - AUTHENTIK_SECRET_KEY=file:///run/secrets/authentik-secret-key
+      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_REDIS__DB=1
+      - AUTHENTIK_POSTGRESQL__HOST=postgres
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/authentik-postgres-password
+    volumes:
+      - authentik-media:/media
+#      - ./certs:/certs
+#      - ./custom-templates:/templates
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+
+secrets:
+  lab_postgres-su-password:
+    external: true
+  authentik-secret-key:
+    file: ./.secret.authentik-secret-key
+  authentik-postgres-password:
+    file: ./.secret.authentik-postgres-password
+
+volumes:
+  authentik-media:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/opt/apps/authentik/media"
