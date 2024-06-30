@@ -2,22 +2,22 @@ version: '3.8'
 
 services:
 
-  redis:
-    image: redis:7.2.5-alpine
-    command: --save 60 1 --loglevel warning
+  valkey:
+    image: valkey/valkey:7.2.5-alpine
+    command: valkey-server --save 60 1 --loglevel warning
     volumes:
-      - redis-data:/data
+      - valkey-data:/data
     healthcheck:
-      test: redis-cli ping || exit 1
+      test: valkey-cli ping || exit 1
     deploy:
       placement:
         constraints:
-          - node.platform.arch == x86_64
+          - node.role == manager # for mapped data volume
 
 volumes:
-  redis-data:
+  valkey-data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/opt/apps/redis"
+      device: "/opt/apps/valkey/data"

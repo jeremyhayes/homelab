@@ -24,7 +24,7 @@ services:
       - authentik-postgres-password
     environment:
       - AUTHENTIK_SECRET_KEY=file:///run/secrets/authentik-secret-key
-      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_REDIS__HOST=valkey
       - AUTHENTIK_REDIS__DB=1
       - AUTHENTIK_POSTGRESQL__HOST=postgres
       - AUTHENTIK_POSTGRESQL__USER=authentik
@@ -56,7 +56,7 @@ services:
       - authentik-postgres-password
     environment:
       - AUTHENTIK_SECRET_KEY=file:///run/secrets/authentik-secret-key
-      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_REDIS__HOST=valkey
       - AUTHENTIK_REDIS__DB=1
       - AUTHENTIK_POSTGRESQL__HOST=postgres
       - AUTHENTIK_POSTGRESQL__USER=authentik
