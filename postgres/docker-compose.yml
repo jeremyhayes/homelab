@@ -39,4 +39,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/opt/apps/postgres"
+      device: "/opt/apps/postgres/data"
