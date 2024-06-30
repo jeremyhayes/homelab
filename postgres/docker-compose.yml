@@ -24,10 +24,25 @@ services:
           - node.role == manager # for mapped data volume
           - node.platform.arch == x86_64
       labels:
-        - prometheus.swarm.enable=false
         - traefik.enable=false
 
-  # TODO phpMyAdmin / adminer
+  # TODO pgAdmin
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    secrets:
+      - postgres-su-password
+    environment:
+      - DATA_SOURCE_URI=postgres?sslmode=disable
+      - DATA_SOURCE_USER=postgres
+      - DATA_SOURCE_PASS_FILE=/run/secrets/postgres-su-password
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == aarch64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9187
 
   postgres-backup:
     image: postgres:16.3-alpine
