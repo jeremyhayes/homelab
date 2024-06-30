@@ -29,6 +29,35 @@ services:
 
   # TODO phpMyAdmin / adminer
 
+  postgres-backup:
+    image: postgres:16.3-alpine
+    entrypoint: "sh -c"
+    command: |
+      '
+      TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
+      OUTFILE="/opt/backups/pgdumpall_$$TIMESTAMP.sql.gz"
+      export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
+      pg_dumpall -h postgres -U $$POSTGRES_USER | gzip > "$$OUTFILE"
+      '
+    volumes:
+      - postgres-backups:/opt/backups
+    secrets:
+      - postgres-su-password
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-su-password
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - node.platform.arch == x86_64
+      restart_policy:
+        condition: none
+      replicas: 0 # managed by cron
+      labels:
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 5 * * mon
+
 secrets:
   postgres-su-password:
     file: ./.secret.postgres-su-password
@@ -40,3 +69,9 @@ volumes:
       type: none
       o: bind
       device: "/opt/apps/postgres/data"
+  postgres-backups:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/opt/apps/postgres/backups"
