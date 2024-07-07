@@ -5,3 +5,6 @@
 *-data/
 traefik/acme.json
 
+**/.terraform/*
+*.tfstate
+*.tfvars
