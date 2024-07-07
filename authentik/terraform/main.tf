@@ -30,3 +30,14 @@ resource "authentik_application" "forward_auth_app" {
   name              = local.forward_auth_apps[each.key].name
   protocol_provider = each.value.id
 }
+
+# associate application proxies with embedded outpost
+import {
+  to = authentik_outpost.embedded
+  id = "cd8308c7-955b-4ae6-bbc5-ab712ce70479"
+}
+
+resource "authentik_outpost" "embedded" {
+  name               = "authentik Embedded Outpost"
+  protocol_providers = [for k, v in authentik_provider_proxy.forward_auth_app_proxy : v.id]
+}
