@@ -5,6 +5,10 @@ data "authentik_flow" "implicit_consent" {
 # define forward auth proxy applications
 locals {
   forward_auth_apps = tomap({
+    visualizer = tomap({
+      slug  = "visualizer"
+      name  = "Swarm Visualizer"
+    })
     whoami  = tomap({
       slug  = "whoami"
       name  = "WhoAmI"
