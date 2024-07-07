@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "/opt/apps/terraform/terraform.tfstate"
+  }
+}
+
 data "authentik_flow" "implicit_consent" {
   slug = "default-provider-authorization-implicit-consent"
 }
