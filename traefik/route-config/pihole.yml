@@ -4,6 +4,8 @@ http:
     pihole1-dashboard:
       entryPoints:
         - web-secure
+      middlewares:
+        - proxy-auth@swarm
       rule: Host(`pihole1.lab.omglolwtfbbq.com`)
       service: pihole1-dashboard
       tls:
@@ -14,6 +16,8 @@ http:
     pihole2-dashboard:
       entryPoints:
         - web-secure
+      middlewares:
+        - proxy-auth@swarm
       rule: Host(`pihole2.lab.omglolwtfbbq.com`)
       service: pihole2-dashboard
       tls:
@@ -24,6 +28,8 @@ http:
     pihole3-dashboard:
       entryPoints:
         - web-secure
+      middlewares:
+        - proxy-auth@swarm
       rule: Host(`pihole3.lab.omglolwtfbbq.com`)
       service: pihole3-dashboard
       tls:

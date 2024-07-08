@@ -11,11 +11,23 @@ data "authentik_flow" "implicit_consent" {
 # define forward auth proxy applications
 locals {
   forward_auth_apps = tomap({
+    pihole1    = tomap({
+      slug  = "pihole1"
+      name  = "Pi-Hole 1"
+    })
+    pihole2    = tomap({
+      slug  = "pihole2"
+      name  = "Pi-Hole 2"
+    })
+    pihole3    = tomap({
+      slug  = "pihole3"
+      name  = "Pi-Hole 3"
+    })
     visualizer = tomap({
       slug  = "visualizer"
       name  = "Swarm Visualizer"
     })
-    whoami  = tomap({
+    whoami     = tomap({
       slug  = "whoami"
       name  = "WhoAmI"
     })
