@@ -3,7 +3,7 @@
 *.log
 
 *-data/
-traefik/acme.json
+apps/traefik/acme.json
 
 **/.terraform/*
 *.tfstate
