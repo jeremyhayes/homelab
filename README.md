@@ -1,8 +1,29 @@
-# pi-cluster
+# homelab
 
-Homelab services running on a Raspberry Pi.
+Orchestration for homelab services.
 
-## Prerequisites
+## Usage
+
+### Applications
+
+Deploy any group of services as an application
+```sh
+cd ./apps
+./deploy.sh <service_dir>
+```
+
+### Terraform
+
+Plan and apply application configuration
+```sh
+cd ./terraform
+./tofu.sh plan
+./tofu.sh apply
+```
+
+## Configuration
+
+### Prerequisites
 
 0. Setup Raspberry Pi
 
@@ -75,7 +96,7 @@ $ ssh-keygen -t ed25519 -C "your_email@example.com"
 > NOTE: Copy generated public key to github config
 
 
-## Docker Swarm
+### Docker Swarm
 
 1. Initialize swarm from manager node
 ```
@@ -95,7 +116,7 @@ $ docker swarm init
   ```
 
 
-## Services
+### Services
 
 1. Clone the repository, including submodules:
 ```
@@ -132,6 +153,6 @@ $ ./deploy.sh <service-dir>
 > ```
 
 
-## DNS
+### DNS
 
 Create a wildcard A record DNS entry (e.g. `*.lab.example.com`). Services should be configured with Traefik labels to expose on a specific domain matching that wildcard (e.g. `foo.lab.example.com`).
