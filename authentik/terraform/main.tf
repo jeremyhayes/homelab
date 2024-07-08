@@ -14,22 +14,27 @@ locals {
     pihole1    = tomap({
       slug  = "pihole1"
       name  = "Pi-Hole 1"
+      icon  = "pihole.png"
     })
     pihole2    = tomap({
       slug  = "pihole2"
       name  = "Pi-Hole 2"
+      icon  = "pihole.png"
     })
     pihole3    = tomap({
       slug  = "pihole3"
       name  = "Pi-Hole 3"
+      icon  = "pihole.png"
     })
     visualizer = tomap({
       slug  = "visualizer"
       name  = "Swarm Visualizer"
+      icon  = "docker-swarm.png"
     })
     whoami     = tomap({
       slug  = "whoami"
       name  = "WhoAmI"
+      icon  = null
     })
   })
 }
@@ -51,6 +56,12 @@ resource "authentik_application" "forward_auth_app" {
   slug              = each.key
   name              = local.forward_auth_apps[each.key].name
   protocol_provider = each.value.id
+
+  meta_icon         = local.forward_auth_apps[each.key].icon != null ? (
+      format("application-icons/%s", local.forward_auth_apps[each.key].icon)
+    ) : (
+      null
+    )
 }
 
 # associate application proxies with embedded outpost
