@@ -105,6 +105,15 @@ locals {
       icon          = "grafana.svg"
       launch_url    = "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
     }
+    synology = {
+      name          = "Synology"
+      client_id     = "JyTaYfuAVj0F8kM8FwlrcrUSeiVQ2KwLy9Ehzc7D"
+      redirect_uris = [
+        "https://synology.lab.omglolwtfbbq.com/#/signin"
+      ]
+      icon          = "synology-dsm.png"
+      launch_url    = null
+    }
   }
 }
 
