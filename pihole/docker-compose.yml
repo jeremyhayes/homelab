@@ -19,11 +19,9 @@ services:
         mode: host
     environment:
       - TZ=America/New_York
-      - WEBPASSWORD_FILE=/run/secrets/pihole-web-password
+      - WEBPASSWORD="" # unset password, handled by SSO
       # This must be set in /etc/pihole/pihole-FTL.conf once created.
       # - RATE_LIMIT=0/0
-    secrets:
-      - pihole-web-password
     volumes:
       - pihole-data:/etc/pihole
       - pihole-dnsmasq:/etc/dnsmasq.d
@@ -61,9 +59,6 @@ services:
     environment:
       - PIHOLE_HOSTNAME=192.168.42.11,192.168.42.12,192.168.42.13
       - PIHOLE_PORT=8090
-      # pihole-exporter doesn't support docker secrets
-      # https://github.com/eko/pihole-exporter/issues/91
-      - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
     deploy:
       placement:
         constraints:
@@ -75,16 +70,14 @@ services:
   orbital-sync:
     image: ghcr.io/mattwebbio/orbital-sync:1.8.1-distroless
     environment:
-      - PRIMARY_HOST_BASE_URL=https://pihole1.lab.omglolwtfbbq.com
-      - PRIMARY_HOST_PASSWORD_FILE=/run/secrets/pihole-web-password
-      - SECONDARY_HOSTS_1_BASE_URL=https://pihole2.lab.omglolwtfbbq.com
-      - SECONDARY_HOSTS_1_PASSWORD_FILE=/run/secrets/pihole-web-password
-      - SECONDARY_HOSTS_2_BASE_URL=https://pihole3.lab.omglolwtfbbq.com
-      - SECONDARY_HOSTS_2_PASSWORD_FILE=/run/secrets/pihole-web-password
+      - PRIMARY_HOST_BASE_URL=http://192.168.42.11:8090
+      - PRIMARY_HOST_PASSWORD=""
+      - SECONDARY_HOSTS_1_BASE_URL=http://192.168.42.12:8090
+      - SECONDARY_HOSTS_1_PASSWORD=""
+      - SECONDARY_HOSTS_2_BASE_URL=http://192.168.42.13:8090
+      - SECONDARY_HOSTS_2_PASSWORD=""
       - TZ=America/New_York
       - RUN_ONCE=true
-    secrets:
-      - pihole-web-password
     deploy:
       placement:
         constraints:
@@ -95,10 +88,6 @@ services:
       labels:
         - swarm.cronjob.enable=true
         - swarm.cronjob.schedule=15 5 * * mon
-
-secrets:
-  pihole-web-password:
-    file: ./.secret.pihole-web-password
 
 volumes:
   pihole-data:
