@@ -1,10 +1,16 @@
 http:
 
+  middlewares:
+    pihole-admin-prefix:
+      addPrefix:
+        prefix: "/admin"
+
   routers:
     pihole1-dashboard:
       entryPoints:
         - web-secure
       middlewares:
+        - pihole-admin-prefix@file
         - proxy-auth@swarm
       rule: Host(`pihole1.lab.omglolwtfbbq.com`)
       service: pihole1-dashboard
@@ -17,6 +23,7 @@ http:
       entryPoints:
         - web-secure
       middlewares:
+        - pihole-admin-prefix@file
         - proxy-auth@swarm
       rule: Host(`pihole2.lab.omglolwtfbbq.com`)
       service: pihole2-dashboard
@@ -29,6 +36,7 @@ http:
       entryPoints:
         - web-secure
       middlewares:
+        - pihole-admin-prefix@file
         - proxy-auth@swarm
       rule: Host(`pihole3.lab.omglolwtfbbq.com`)
       service: pihole3-dashboard
