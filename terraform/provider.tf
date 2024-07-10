@@ -6,7 +6,12 @@ terraform {
   }
 }
 
+variable "authentik_token" {
+  description = "API token for Authentik"
+  type        = string
+}
+
 provider "authentik" {
   url   = "https://auth.lab.omglolwtfbbq.com"
-  # token is supplied as env in wrapper script
+  token = var.authentik_token
 }
