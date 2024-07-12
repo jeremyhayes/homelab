@@ -149,3 +149,25 @@ resource "authentik_application" "oauth2_app" {
     )
   meta_launch_url   = local.oauth2_apps[each.key].launch_url
 }
+
+resource "grafana_sso_settings" "authentik_oauth2" {
+  provider_name = "generic_oauth"
+  oauth2_settings {
+    name              = "Authentik"
+    auth_url          = "https://auth.lab.omglolwtfbbq.com/application/o/authorize/"
+    token_url         = "https://auth.lab.omglolwtfbbq.com/application/o/token/"
+    api_url           = "https://auth.lab.omglolwtfbbq.com/application/o/userinfo/"
+    client_id         = authentik_provider_oauth2.oauth2_app_provider["grafana"].client_id
+    client_secret     = authentik_provider_oauth2.oauth2_app_provider["grafana"].client_secret
+    allow_sign_up     = true
+    auto_login        = false
+    scopes            = "openid profile email"
+    use_pkce          = true
+    use_refresh_token = true
+
+    # OIDC claims mapping
+    login_attribute_path = "preferred_username"
+    name_attribute_path  = "given_name"
+    email_attribute_path = "sub" # we don't store emails, populate with oidc sub claim (username)
+  }
+}
