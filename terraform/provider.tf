@@ -1,4 +1,8 @@
 terraform {
+  backend "local" {
+    path = "/opt/apps/terraform/terraform.tfstate"
+  }
+
   required_providers {
     authentik = {
       source = "goauthentik/authentik"
@@ -9,19 +13,9 @@ terraform {
   }
 }
 
-variable "authentik_token" {
-  description = "API token for Authentik"
-  type        = string
-}
-
 provider "authentik" {
   url   = "https://auth.lab.omglolwtfbbq.com"
   token = var.authentik_token
-}
-
-variable "grafana_token" {
-  description = "Service account token for Grafana"
-  type        = string
 }
 
 provider "grafana" {

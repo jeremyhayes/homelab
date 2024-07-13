@@ -1,15 +1,5 @@
-terraform {
-  backend "local" {
-    path = "/opt/apps/terraform/terraform.tfstate"
-  }
-}
-
-data "authentik_flow" "implicit_consent" {
-  slug = "default-provider-authorization-implicit-consent"
-}
-
-# define forward auth proxy applications
 locals {
+  # define forward auth proxy applications
   forward_auth_apps = tomap({
     pihole1    = tomap({
       slug  = "pihole1"
@@ -37,6 +27,32 @@ locals {
       icon  = null
     })
   })
+
+  # define oauth2 applications
+  oauth2_apps = {
+    grafana = {
+      name          = "Grafana"
+      client_id     = "Ix5MhtsNuENrzpqqPGBlIunfQpzcFdSGR1eyHB1r"
+      redirect_uris = [
+        "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
+      ]
+      icon          = "grafana.svg"
+      launch_url    = "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
+    }
+    synology = {
+      name          = "Synology"
+      client_id     = "JyTaYfuAVj0F8kM8FwlrcrUSeiVQ2KwLy9Ehzc7D"
+      redirect_uris = [
+        "https://synology.lab.omglolwtfbbq.com/#/signin"
+      ]
+      icon          = "synology-dsm.png"
+      launch_url    = null
+    }
+  }
+}
+
+data "authentik_flow" "implicit_consent" {
+  slug = "default-provider-authorization-implicit-consent"
 }
 
 # create an application with associated provider
@@ -78,7 +94,7 @@ resource "authentik_outpost" "embedded" {
 }
 
 data "authentik_certificate_key_pair" "self_signed" {
-  name              = "authentik Self-signed Certificate"
+  name = "authentik Self-signed Certificate"
 }
 
 data "authentik_scope_mapping" "oauth2_scope_email" {
@@ -91,30 +107,6 @@ data "authentik_scope_mapping" "oauth2_scope_openid" {
 
 data "authentik_scope_mapping" "oauth2_scope_profile" {
   managed = "goauthentik.io/providers/oauth2/scope-profile"
-}
-
-# define oauth2 applications
-locals {
-  oauth2_apps = {
-    grafana = {
-      name          = "Grafana"
-      client_id     = "Ix5MhtsNuENrzpqqPGBlIunfQpzcFdSGR1eyHB1r"
-      redirect_uris = [
-        "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
-      ]
-      icon          = "grafana.svg"
-      launch_url    = "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
-    }
-    synology = {
-      name          = "Synology"
-      client_id     = "JyTaYfuAVj0F8kM8FwlrcrUSeiVQ2KwLy9Ehzc7D"
-      redirect_uris = [
-        "https://synology.lab.omglolwtfbbq.com/#/signin"
-      ]
-      icon          = "synology-dsm.png"
-      launch_url    = null
-    }
-  }
 }
 
 # create oauth2 applications with associated provider
@@ -168,28 +160,6 @@ resource "grafana_sso_settings" "authentik_oauth2" {
     # OIDC claims mapping
     login_attribute_path = "preferred_username"
     name_attribute_path  = "given_name"
-    email_attribute_path = "sub" # we don't store emails, populate with oidc sub claim (username)
+    email_attribute_path = "sub" # lab doesn't use emails, populate with oidc sub claim (username)
   }
-}
-
-resource "grafana_data_source" "prometheus" {
-  name       = "Prometheus"
-  type       = "prometheus"
-  url        = "http://prometheus:9090"
-  is_default = true
-
-  json_data_encoded = jsonencode({
-    manageAlerts = true
-  })
-}
-
-resource "grafana_data_source" "loki" {
-  name       = "Loki"
-  type       = "loki"
-  url        = "http://loki:3100"
-  is_default = false
-
-  json_data_encoded = jsonencode({
-    manageAlerts = true
-  })
 }
