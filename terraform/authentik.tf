@@ -158,8 +158,6 @@ resource "grafana_sso_settings" "authentik_oauth2" {
     use_refresh_token = true
 
     # OIDC claims mapping
-    login_attribute_path = "preferred_username"
-    name_attribute_path  = "given_name"
-    email_attribute_path = "sub" # lab doesn't use emails, populate with oidc sub claim (username)
+    login_attribute_path = "sub"
   }
 }
