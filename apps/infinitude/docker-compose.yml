@@ -30,7 +30,7 @@ services:
         - traefik.http.services.infinitude.loadbalancer.server.port=3000
 
   infinitude-prometheus:
-    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.34
+    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.35
     environment:
       - INFINITUDE_BASE_URL=http://infinitude:3000
     deploy:
