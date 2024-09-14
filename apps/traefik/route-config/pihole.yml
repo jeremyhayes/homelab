@@ -10,8 +10,8 @@ http:
       entryPoints:
         - web-secure
       middlewares:
-        - pihole-admin-prefix@file
         - proxy-auth@swarm
+        - pihole-admin-prefix@file
       rule: Host(`pihole1.lab.omglolwtfbbq.com`)
       service: pihole1-dashboard
       tls:
@@ -23,8 +23,8 @@ http:
       entryPoints:
         - web-secure
       middlewares:
-        - pihole-admin-prefix@file
         - proxy-auth@swarm
+        - pihole-admin-prefix@file
       rule: Host(`pihole2.lab.omglolwtfbbq.com`)
       service: pihole2-dashboard
       tls:
@@ -36,8 +36,8 @@ http:
       entryPoints:
         - web-secure
       middlewares:
-        - pihole-admin-prefix@file
         - proxy-auth@swarm
+        - pihole-admin-prefix@file
       rule: Host(`pihole3.lab.omglolwtfbbq.com`)
       service: pihole3-dashboard
       tls:
