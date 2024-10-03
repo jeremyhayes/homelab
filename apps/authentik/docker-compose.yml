@@ -41,6 +41,8 @@ services:
         constraints:
           - node.platform.arch == x86_64
       labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9300
         - traefik.enable=true
         - traefik.http.routers.authentik.rule=Host(`auth.lab.omglolwtfbbq.com`)
         - traefik.http.routers.authentik.entrypoints=web-secure
@@ -77,6 +79,9 @@ services:
       placement:
         constraints:
           - node.platform.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9300
 
 secrets:
   lab_postgres-su-password:
