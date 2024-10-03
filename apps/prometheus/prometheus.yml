@@ -73,3 +73,16 @@ scrape_configs:
     metrics_path: '/plugin/prometheus_exporter/metrics'
     static_configs:
       - targets: ['octoprint.lab.omglolwtfbbq.com']
+
+  - job_name: nut
+    static_configs:
+      # nut-upsd server
+      - targets: ["nut-upsd:3493"]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        # nut exporter
+        replacement: 192.168.40.111:3000
