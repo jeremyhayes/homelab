@@ -41,7 +41,7 @@ services:
         - traefik.http.services.jellyfin-refresh.loadbalancer.server.port=8096
 
   jellyfin-backup:
-    image: alpinelinux/docker-cli@sha256:904765aefc655b9618fcdb49f2b8df2e36c87dfeb04217de80ca1307e8e6f732
+    image: alpinelinux/docker-cli@sha256:8da0c19f49885597c65c58feaff6ff0986fde20992463657fac6af6cececbb97
     entrypoint: "sh -c"
     command: |
       '
