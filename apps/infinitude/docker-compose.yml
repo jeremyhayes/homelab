@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   infinitude:
-    image: nebulous/infinitude:latest@sha256:69878e62a603419adefa34723a26e6da50ef4ed767b2122c5f16aac78db54e55
+    image: nebulous/infinitude:latest@sha256:45d5b07518333678b79acadc7de1a2a675f6e6a47a0e0f5d72a8b90b6fd9640e
     ports:
       # The thermostat has trouble connecting through the proxy, on both 80 and 443.
       # Exposing this port so it can be routed directly.
