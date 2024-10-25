@@ -17,6 +17,7 @@ services:
       - jellyfin-config:/config
       - jellyfin-cache:/cache
       - jellyfin-media:/media
+      - jellyfin-media2:/media2
     environment:
       - JELLYFIN_PublishedServerUrl=https://jellyfin.lab.omglolwtfbbq.com
       - TZ=America/New_York
@@ -104,3 +105,9 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/mnt/nas/media'
+  jellyfin-media2:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/mnt/nas2/media'
