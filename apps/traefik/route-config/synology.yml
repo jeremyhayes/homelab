@@ -15,7 +15,7 @@ http:
     synology:
       loadBalancer:
         servers:
-          - url: http://192.168.42.8:5000/
+          - url: http://192.168.40.90:5000/
         serversTransport: synology-transport
 
   serversTransports:
