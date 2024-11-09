@@ -55,6 +55,10 @@ data "authentik_flow" "implicit_consent" {
   slug = "default-provider-authorization-implicit-consent"
 }
 
+data "authentik_flow" "default_invalidation_flow" {
+  slug = "default-provider-invalidation-flow"
+}
+
 # create an application with associated provider
 resource "authentik_provider_proxy" "forward_auth_app_proxy" {
   for_each = local.forward_auth_apps
@@ -64,6 +68,7 @@ resource "authentik_provider_proxy" "forward_auth_app_proxy" {
   mode                  = "forward_single"
   access_token_validity = "hours=24"
   authorization_flow    = data.authentik_flow.implicit_consent.id
+  invalidation_flow     = data.authentik_flow.default_invalidation_flow.id
 }
 
 resource "authentik_application" "forward_auth_app" {
@@ -115,6 +120,7 @@ resource "authentik_provider_oauth2" "oauth2_app_provider" {
 
   name                  = format("Provider for %s", each.value.name)
   authorization_flow    = data.authentik_flow.implicit_consent.id
+  invalidation_flow     = data.authentik_flow.default_invalidation_flow.id
   client_id             = each.value.client_id
   redirect_uris         = each.value.redirect_uris
   sub_mode              = "user_username"
