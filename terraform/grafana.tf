@@ -19,3 +19,14 @@ resource "grafana_data_source" "loki" {
     manageAlerts = true
   })
 }
+
+resource "grafana_data_source" "influxdb" {
+  name     = "InfluxDB"
+  type     = "influxdb"
+  url      = "http://influxdb:8086/"
+  username = "grafana"
+
+  json_data_encoded = jsonencode({
+     dbName = "default"
+  })
+}
