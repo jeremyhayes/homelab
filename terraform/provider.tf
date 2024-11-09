@@ -10,7 +10,7 @@ terraform {
     }
     grafana = {
       source  = "grafana/grafana"
-      version = "3.3.0"
+      version = "3.13.1"
     }
   }
 }
