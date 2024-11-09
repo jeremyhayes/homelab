@@ -97,15 +97,15 @@ data "authentik_certificate_key_pair" "self_signed" {
   name = "authentik Self-signed Certificate"
 }
 
-data "authentik_scope_mapping" "oauth2_scope_email" {
+data "authentik_property_mapping_provider_scope" "oauth2_scope_email" {
   managed = "goauthentik.io/providers/oauth2/scope-email"
 }
 
-data "authentik_scope_mapping" "oauth2_scope_openid" {
+data "authentik_property_mapping_provider_scope" "oauth2_scope_openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
 }
 
-data "authentik_scope_mapping" "oauth2_scope_profile" {
+data "authentik_property_mapping_provider_scope" "oauth2_scope_profile" {
   managed = "goauthentik.io/providers/oauth2/scope-profile"
 }
 
@@ -121,9 +121,9 @@ resource "authentik_provider_oauth2" "oauth2_app_provider" {
   signing_key           = data.authentik_certificate_key_pair.self_signed.id
   access_token_validity = "minutes=5"
   property_mappings     = [
-    data.authentik_scope_mapping.oauth2_scope_openid.id,
-    data.authentik_scope_mapping.oauth2_scope_email.id,
-    data.authentik_scope_mapping.oauth2_scope_profile.id,
+    data.authentik_property_mapping_provider_scope.oauth2_scope_openid.id,
+    data.authentik_property_mapping_provider_scope.oauth2_scope_email.id,
+    data.authentik_property_mapping_provider_scope.oauth2_scope_profile.id,
   ]
 }
 
