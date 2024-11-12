@@ -49,17 +49,17 @@ http:
     pihole1-dashboard:
       loadBalancer:
         servers:
-          - url: http://192.168.42.11:8090/
+          - url: http://192.168.1.51:8090/
         serversTransport: pihole-dashboard-transport
     pihole2-dashboard:
       loadBalancer:
         servers:
-          - url: http://192.168.42.12:8090/
+          - url: http://192.168.1.52:8090/
         serversTransport: pihole-dashboard-transport
     pihole3-dashboard:
       loadBalancer:
         servers:
-          - url: http://192.168.42.13:8090/
+          - url: http://192.168.1.53:8090/
         serversTransport: pihole-dashboard-transport
 
   serversTransports:

@@ -15,7 +15,7 @@ http:
     home-assistant:
       loadBalancer:
         servers:
-          - url: http://192.168.42.16:8123/
+          - url: http://192.168.50.100:8123/
         serversTransport: home-assistant-transport
 
   serversTransports:
