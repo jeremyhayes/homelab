@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    proxmox:
+      entryPoints:
+        - web-secure
+      rule: Host(`proxmox.lab.omglolwtfbbq.com`)
+      service: proxmox
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    proxmox:
+      loadBalancer:
+        servers:
+          - url: https://192.168.40.100:8006/
+        serversTransport: proxmox-transport
+
+  serversTransports:
+    proxmox-transport:
+      insecureSkipVerify: true
