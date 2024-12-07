@@ -1,0 +1,23 @@
+http:
+
+  routers:
+    ripper:
+      entryPoints:
+        - web-secure
+      rule: Host(`ripper.lab.omglolwtfbbq.com`)
+      service: ripper
+      tls:
+        certResolver: primary
+        domains:
+          - main: '*.lab.omglolwtfbbq.com'
+
+  services:
+    ripper:
+      loadBalancer:
+        servers:
+          - url: http://192.168.40.123:8888/
+        serversTransport: ripper-transport
+
+  serversTransports:
+    ripper-transport:
+      insecureSkipVerify: true
