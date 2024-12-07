@@ -122,7 +122,12 @@ resource "authentik_provider_oauth2" "oauth2_app_provider" {
   authorization_flow    = data.authentik_flow.implicit_consent.id
   invalidation_flow     = data.authentik_flow.default_invalidation_flow.id
   client_id             = each.value.client_id
-  redirect_uris         = each.value.redirect_uris
+  allowed_redirect_uris = [
+    for uri in each.value.redirect_uris : {
+      matching_mode = "strict"
+      url           = uri
+    }
+  ]
   sub_mode              = "user_username"
   signing_key           = data.authentik_certificate_key_pair.self_signed.id
   access_token_validity = "minutes=5"
