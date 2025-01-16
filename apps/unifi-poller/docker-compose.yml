@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   unifi-poller:
-    image: ghcr.io/unpoller/unpoller:v2.11.2
+    image: ghcr.io/unpoller/unpoller:v2.14.1
     environment:
       - UP_UNIFI_DEFAULT_URL=https://192.168.1.1:443
       - UP_UNIFI_DEFAULT_USER=unifi-poller
