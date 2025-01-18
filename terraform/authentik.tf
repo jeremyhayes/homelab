@@ -39,6 +39,15 @@ locals {
       icon          = "grafana.svg"
       launch_url    = "https://grafana.lab.omglolwtfbbq.com/login/generic_oauth"
     }
+    paperless = {
+      name          = "Paperless"
+      client_id     = "5wOSg36P4TaTWP6lt0NO2s9Ww3v3LBf9kxEf51c9"
+      redirect_uris = [
+        "https://paperless.lab.omglolwtfbbq.com/accounts/oidc/authentik/login/callback/"
+      ]
+      icon          = "paperless.png"
+      launch_url    = null
+    }
     synology = {
       name          = "Synology"
       client_id     = "JyTaYfuAVj0F8kM8FwlrcrUSeiVQ2KwLy9Ehzc7D"
