@@ -14,7 +14,7 @@ services:
       restart_policy:
         condition: none
 
-  paperless-webserver:
+  paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:2.14.2
     secrets:
       - paperless-postgres-password
