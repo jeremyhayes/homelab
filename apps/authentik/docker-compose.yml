@@ -17,7 +17,7 @@ services:
         condition: none
 
   authentik-server:
-    image: ghcr.io/goauthentik/server:2024.12.2
+    image: ghcr.io/goauthentik/server:2024.12.3
     command: server
     secrets:
       - authentik-secret-key
@@ -58,7 +58,7 @@ services:
         - traefik.http.middlewares.proxy-auth.forwardauth.authResponseHeaders=X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
 
   authentik-worker:
-    image: ghcr.io/goauthentik/server:2024.12.2
+    image: ghcr.io/goauthentik/server:2024.12.3
     command: worker
     secrets:
       - authentik-secret-key
