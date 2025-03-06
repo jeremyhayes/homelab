@@ -67,7 +67,7 @@ services:
     image: docker.io/apache/tika:3.1.0.0
 
   paperless-gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.17.0
+    image: docker.io/gotenberg/gotenberg:8.17.3
     command:
       - "gotenberg"
       - "--chromium-disable-javascript=true"
