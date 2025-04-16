@@ -2,8 +2,11 @@ http:
 
   middlewares:
     pihole-admin-prefix:
-      addPrefix:
-        prefix: "/admin"
+      # Redirect naked root to /admin for dashboard
+      # Only for naked root; /api is a root path
+      replacePathRegex:
+        regex: "^/$"
+        replacement: "/admin"
 
   routers:
     pihole1-dashboard:
