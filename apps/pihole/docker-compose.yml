@@ -67,17 +67,14 @@ services:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9617
 
-  orbital-sync:
-    image: ghcr.io/mattwebbio/orbital-sync:1.8.4-distroless
+  nebula-sync:
+    image: ghcr.io/lovelaze/nebula-sync:v0.9.0
     environment:
-      - PRIMARY_HOST_BASE_URL=http://192.168.1.51:8090
-      - PRIMARY_HOST_PASSWORD=""
-      - SECONDARY_HOSTS_1_BASE_URL=http://192.168.1.52:8090
-      - SECONDARY_HOSTS_1_PASSWORD=""
-      - SECONDARY_HOSTS_2_BASE_URL=http://192.168.1.53:8090
-      - SECONDARY_HOSTS_2_PASSWORD=""
-      - TZ=America/New_York
-      - RUN_ONCE=true
+    - PRIMARY=http://192.168.1.51:8090|
+    - REPLICAS=http://192.168.1.52:8090|,http://192.168.1.53:8090|
+    - FULL_SYNC=true
+    - RUN_GRAVITY=true
+#    - CRON=0 * * * *
     deploy:
       placement:
         constraints:
