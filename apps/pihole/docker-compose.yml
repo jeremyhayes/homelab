@@ -19,7 +19,7 @@ services:
         mode: host
     environment:
       - TZ=America/New_York
-      - WEBPASSWORD= # unset password, handled by SSO
+      - FTLCONF_webserver_api_password=
       # This must be set in /etc/pihole/pihole-FTL.conf once created.
       # - RATE_LIMIT=0/0
     volumes:
