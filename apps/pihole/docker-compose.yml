@@ -68,7 +68,7 @@ services:
         - prometheus.swarm.port=9617
 
   nebula-sync:
-    image: ghcr.io/lovelaze/nebula-sync:v0.9.0
+    image: ghcr.io/lovelaze/nebula-sync:v0.11.0
     environment:
     - PRIMARY=http://192.168.1.51:8090|
     - REPLICAS=http://192.168.1.52:8090|,http://192.168.1.53:8090|
