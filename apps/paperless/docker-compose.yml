@@ -15,7 +15,7 @@ services:
         condition: none
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.2
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.17.1
     secrets:
       - paperless-postgres-password
       - paperless-secret-key
