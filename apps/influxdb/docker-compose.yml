@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   influxdb:
-    image: influxdb:2.7.11-alpine
+    image: influxdb:2.7.12-alpine
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME_FILE: /run/secrets/influxdb-admin-username
