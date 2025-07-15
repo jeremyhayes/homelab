@@ -56,7 +56,7 @@ services:
       tar -cpzf "$$OUTFILE" -C /opt/config .
 
       echo "Deleting backups older than 30 days..."
-      find /opt/backups -name "config_*.tar.gz" -type -f -mtime +30 -print -delete
+      find /opt/backups -name "config_*.tar.gz" -type f -mtime +30 -print -delete
 
       echo "Starting jellyfin service..."
       docker service scale $$SERVICE_NAME=1 > /dev/null
