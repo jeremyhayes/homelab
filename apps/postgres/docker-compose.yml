@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   postgres:
-    image: postgres:16.9-alpine
+    image: postgres:17.6-alpine
     volumes:
       - postgres-data:/var/lib/postgresql/data
     secrets:
@@ -45,7 +45,7 @@ services:
         - prometheus.swarm.port=9187
 
   postgres-backup:
-    image: postgres:16.9-alpine
+    image: postgres:17.6-alpine
     entrypoint: "sh -c"
     command: |
       '
