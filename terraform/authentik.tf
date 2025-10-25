@@ -88,7 +88,7 @@ resource "authentik_application" "forward_auth_app" {
   protocol_provider = each.value.id
 
   meta_icon         = local.forward_auth_apps[each.key].icon != null ? (
-      format("application-icons/%s", local.forward_auth_apps[each.key].icon)
+      format("/media/public/application-icons/%s", local.forward_auth_apps[each.key].icon)
     ) : (
       null
     )
@@ -155,7 +155,7 @@ resource "authentik_application" "oauth2_app" {
   protocol_provider = each.value.id
 
   meta_icon         = local.oauth2_apps[each.key].icon != null ? (
-      format("application-icons/%s", local.oauth2_apps[each.key].icon)
+      format("/media/public/application-icons/%s", local.oauth2_apps[each.key].icon)
     ) : (
       null
     )
