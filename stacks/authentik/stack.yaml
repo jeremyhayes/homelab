@@ -11,6 +11,10 @@ secrets:
     file: ./.secret.secret-key
   postgres-password:
     file: ./.secret.postgres-password
+  grafana-client-id:
+    file: ./.secret.grafana-client-id
+  grafana-client-secret:
+    file: ./.secret.grafana-client-secret
 
 volumes:
 #  media:
@@ -99,6 +103,8 @@ services:
     secrets:
       - secret-key
       - postgres-password
+      - grafana-client-id
+      - grafana-client-secret
     environment:
       - AUTHENTIK_SECRET_KEY=file:///run/secrets/secret-key
       - AUTHENTIK_POSTGRESQL__HOST=postgres

@@ -6,6 +6,12 @@ networks:
   web-proxy:
     external: true
 
+secrets:
+  authentik_grafana-client-id:
+    external: true
+  authentik_grafana-client-secret:
+    external: true
+
 volumes:
   grafana-data:
     driver: local
@@ -21,6 +27,9 @@ services:
     networks:
       - grafana
       - web-proxy
+    secrets:
+      - authentik_grafana-client-id
+      - authentik_grafana-client-secret
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
       - grafana-data:/var/lib/grafana
