@@ -1,8 +1,8 @@
 version: '3.8'
 
 networks:
-  lab_default:
-    external: true
+  jellyfin:
+    driver: overlay
   web-proxy:
     external: true
 
@@ -11,17 +11,19 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:10.11.2
     networks:
-      - lab_default
+      - jellyfin
       - web-proxy
     ports:
-      - target: 1920  # service discovery and dlna
-        published: 1920
-        protocol: udp
-        mode: host
-      - target: 7359  # client discovery
-        published: 7359
-        protocol: udp
-        mode: host
+#      - target: 1920  # service discovery and dlna
+#        published: 1920
+#        protocol: udp
+#        mode: host
+#      - target: 7359  # client discovery
+#        published: 7359
+#        protocol: udp
+#        mode: host
+      - '1920:1920/udp' # service discovery and dlna
+      - '7359:7359/udp' # client discovery
     volumes:
       - jellyfin-config:/config
       - jellyfin-cache:/cache
@@ -71,14 +73,14 @@ services:
       docker service scale $$SERVICE_NAME=1 > /dev/null
       '
     networks:
-      - lab_default
+      - jellyfin
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - jellyfin-config:/opt/config
       - jellyfin-backups:/opt/backups
     environment:
       # assumes this is deployed to a stack named "lab"
-      - SERVICE_NAME=lab_jellyfin
+      - SERVICE_NAME=jellyfin_jellyfin
     deploy:
       placement:
         constraints:
@@ -97,19 +99,19 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/opt/apps/jellyfin/config'
+      device: '/opt/stacks/jellyfin/jellyfin/config'
   jellyfin-cache:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/opt/apps/jellyfin/cache'
+      device: '/opt/stacks/jellyfin/jellyfin/cache'
   jellyfin-backups:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/opt/apps/jellyfin/backups'
+      device: '/opt/stacks/jellyfin/backups'
   jellyfin-media:
     driver: local
     driver_opts:
