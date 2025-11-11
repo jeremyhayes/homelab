@@ -1,8 +1,6 @@
 version: '3.8'
 
 networks:
-  lab_default:
-    external: true
   web-proxy:
     external: true
 
@@ -11,7 +9,6 @@ services:
   airgradient:
     image: ghcr.io/jeremyhayes/airgradient-local:v0.2.5
     networks:
-      - lab_default
       - web-proxy
     deploy:
       placement:
