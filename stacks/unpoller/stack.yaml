@@ -1,9 +1,19 @@
 version: '3.8'
 
+networks:
+  web-proxy:
+    external: true
+
+secrets:
+  unifi-password:
+    file: ./.secret.unifi-password
+
 services:
 
-  unifi-poller:
+  unifi-exporter:
     image: ghcr.io/unpoller/unpoller:v2.15.4
+    networks:
+      - web-proxy
     environment:
       - UP_UNIFI_DEFAULT_URL=https://192.168.1.1:443
       - UP_UNIFI_DEFAULT_USER=unifi-poller
@@ -34,7 +44,3 @@ services:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9130
-
-secrets:
-  unifi-password:
-    file: ./.secret.unifi-password
