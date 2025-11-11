@@ -1,5 +1,16 @@
 version: '3.8'
 
+networks:
+  web-proxy:
+    driver: overlay
+    external: true
+
+secrets:
+  namecheap-api-key:
+    file: ./.secret.namecheap-api-key
+  namecheap-api-user:
+    file: ./.secret.namecheap-api-user
+
 services:
 
   traefik:
@@ -10,6 +21,8 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+    networks:
+      - web-proxy
     environment:
       - NAMECHEAP_API_KEY_FILE=/run/secrets/namecheap-api-key
       - NAMECHEAP_API_USER_FILE=/run/secrets/namecheap-api-user
@@ -17,7 +30,7 @@ services:
       - namecheap-api-key
       - namecheap-api-user
     volumes:
-      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
       - ./route-config:/etc/traefik/config
       - ./acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -29,9 +42,3 @@ services:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=8080
-
-secrets:
-  namecheap-api-key:
-    file: ./.secret.namecheap-api-key
-  namecheap-api-user:
-    file: ./.secret.namecheap-api-user
