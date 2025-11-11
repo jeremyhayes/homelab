@@ -1,0 +1,70 @@
+version: 1
+
+metadata:
+  name: App - Pi-hole
+
+entries:
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: pihole1
+    identifiers:
+      name: Provider for Pi-hole (1)
+    attrs:
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://pihole1.lab.omglolwtfbbq.com
+      mode: forward_single
+      access_token_validity: "minutes=5"
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: pihole2
+    identifiers:
+      name: Provider for Pi-hole (2)
+    attrs:
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://pihole2.lab.omglolwtfbbq.com
+      mode: forward_single
+      access_token_validity: "minutes=5"
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: pihole3
+    identifiers:
+      name: Provider for Pi-hole (3)
+    attrs:
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://pihole3.lab.omglolwtfbbq.com
+      mode: forward_single
+      access_token_validity: "minutes=5"
+
+  - model: authentik_core.application
+    identifiers:
+      slug: pihole1
+    attrs:
+      name: Pi-hole (1)
+      provider: !KeyOf pihole1
+
+  - model: authentik_core.application
+    identifiers:
+      slug: pihole2
+    attrs:
+      name: Pi-hole (2)
+      provider: !KeyOf pihole2
+
+  - model: authentik_core.application
+    identifiers:
+      slug: pihole3
+    attrs:
+      name: Pi-hole (3)
+      provider: !KeyOf pihole3
+
+  - model: authentik_outposts.outpost
+    state: present
+    identifiers:
+      name: "authentik Embedded Outpost"
+    attrs:
+      providers:
+        - !KeyOf pihole1
+        - !KeyOf pihole2
+        - !KeyOf pihole3

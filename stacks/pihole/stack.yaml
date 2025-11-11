@@ -1,8 +1,8 @@
 version: '3.8'
 
 networks:
-  lab_default:
-    external: true
+  pihole:
+    driver: overlay
   web-proxy:
     external: true
 
@@ -11,24 +11,29 @@ services:
   pihole:
     image: pihole/pihole:2025.11.0
     networks:
-      - lab_default
+      - pihole
       - web-proxy
     ports:
-      - target: 53
-        published: 53
-        protocol: tcp
-        mode: host
-      - target: 53
-        published: 53
-        protocol: udp
-        mode: host
-      - target: 80
-        published: 8090
-        protocol: tcp
-        mode: host
+#      - target: 53
+#        published: 53
+#        protocol: tcp
+#        mode: host
+#      - target: 53
+#        published: 53
+#        protocol: udp
+#        mode: host
+#      - target: 80
+#        published: 8090
+#        protocol: tcp
+#        mode: host
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '8090:80/tcp'
     environment:
       - TZ=America/New_York
+      # Auth is covered by authentik proxy
       - FTLCONF_webserver_api_password=
+      - FTLCONF_dns_upstreams=1.1.1.1;1.0.0.1
       # This must be set in /etc/pihole/pihole-FTL.conf once created.
       # - RATE_LIMIT=0/0
     volumes:
@@ -66,7 +71,7 @@ services:
   pihole-exporter:
     image: ekofr/pihole-exporter:v1.2.0
     networks:
-      - lab_default
+      - pihole
     environment:
       - PIHOLE_HOSTNAME=192.168.1.51,192.168.1.52,192.168.1.53
       - PIHOLE_PORT=8090
@@ -81,7 +86,7 @@ services:
   nebula-sync:
     image: ghcr.io/lovelaze/nebula-sync:v0.11.1
     networks:
-      - lab_default
+      - pihole
     environment:
     - PRIMARY=http://192.168.1.51:8090|
     - REPLICAS=http://192.168.1.52:8090|,http://192.168.1.53:8090|
