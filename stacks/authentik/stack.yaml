@@ -105,10 +105,10 @@ services:
       - AUTHENTIK_POSTGRESQL__NAME=authentik
       - AUTHENTIK_POSTGRESQL__USER=authentik
       - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/postgres-password
-#    volumes:
+    volumes:
 #      - /var/run/docker.sock:/var/run/docker.sock
 #      - media:/media
-#      - ./blueprints:/blueprints/custom
+      - ./blueprints:/blueprints/custom
     deploy:
       placement:
         constraints:
