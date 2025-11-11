@@ -1,9 +1,15 @@
 version: '3.8'
 
+networks:
+  lab_default:
+    external: true
+
 services:
 
   postgres:
     image: postgres:16.10-alpine
+    networks:
+      - lab_default
     volumes:
       - postgres-data:/var/lib/postgresql/data
     secrets:
@@ -30,6 +36,8 @@ services:
 
   postgres-exporter:
     image: quay.io/prometheuscommunity/postgres-exporter
+    networks:
+      - lab_default
     secrets:
       - postgres-su-password
     environment:
@@ -54,6 +62,8 @@ services:
       export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
       pg_dumpall -h postgres -U $$POSTGRES_USER | gzip > "$$OUTFILE"
       '
+    networks:
+      - lab_default
     volumes:
       - postgres-backups:/opt/backups
     secrets:

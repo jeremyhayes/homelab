@@ -1,9 +1,18 @@
 version: '3.8'
 
+networks:
+  lab_default:
+    external: true
+  web-proxy:
+    external: true
+
 services:
 
   infinitude:
     image: nebulous/infinitude:latest@sha256:313d0cdd46a404861cfe9e880b5b5c2610eb39207f6fb299fc9ee9a112e49403
+    networks:
+      - lab_default
+      - web-proxy
     ports:
       # The thermostat has trouble connecting through the proxy, on both 80 and 443.
       # Exposing this port so it can be routed directly.
@@ -31,6 +40,8 @@ services:
 
   infinitude-prometheus:
     image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.48
+    networks:
+      - lab_default
     environment:
       - INFINITUDE_BASE_URL=http://infinitude:3000
     deploy:

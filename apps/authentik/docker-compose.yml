@@ -1,9 +1,17 @@
 version: '3.8'
 
+networks:
+  lab_default:
+    external: true
+  web-proxy:
+    external: true
+
 services:
 
   authentik-db-init:
     image: ghcr.io/jeremyhayes/postgres-init:v0.0.3
+    networks:
+      - lab_default
     secrets:
       - lab_postgres-su-password
       - authentik-postgres-password
@@ -19,6 +27,9 @@ services:
   authentik-server:
     image: ghcr.io/goauthentik/server:2025.10.1
     command: server
+    networks:
+      - lab_default
+      - web-proxy
     secrets:
       - authentik-secret-key
       - authentik-postgres-password
@@ -60,6 +71,8 @@ services:
   authentik-worker:
     image: ghcr.io/goauthentik/server:2025.10.1
     command: worker
+    networks:
+      - lab_default
     secrets:
       - authentik-secret-key
       - authentik-postgres-password

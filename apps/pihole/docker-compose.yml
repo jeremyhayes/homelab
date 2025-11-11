@@ -1,9 +1,18 @@
 version: '3.8'
 
+networks:
+  lab_default:
+    external: true
+  web-proxy:
+    external: true
+
 services:
 
   pihole:
     image: pihole/pihole:2025.11.0
+    networks:
+      - lab_default
+      - web-proxy
     ports:
       - target: 53
         published: 53
@@ -56,6 +65,8 @@ services:
 
   pihole-exporter:
     image: ekofr/pihole-exporter:v1.2.0
+    networks:
+      - lab_default
     environment:
       - PIHOLE_HOSTNAME=192.168.1.51,192.168.1.52,192.168.1.53
       - PIHOLE_PORT=8090
@@ -69,6 +80,8 @@ services:
 
   nebula-sync:
     image: ghcr.io/lovelaze/nebula-sync:v0.11.1
+    networks:
+      - lab_default
     environment:
     - PRIMARY=http://192.168.1.51:8090|
     - REPLICAS=http://192.168.1.52:8090|,http://192.168.1.53:8090|

@@ -1,9 +1,15 @@
 version: '3.8'
 
+networks:
+  web-proxy:
+    external: true
+
 services:
 
   foo-service:
     image: foo
+    networks:
+      - web-proxy
     labels:
       - prometheus.swarm.enable=true
       - prometheus.swarm.port=8089

@@ -1,9 +1,15 @@
 version: '3.8'
 
+networks:
+  web-proxy:
+    external: true
+
 services:
 
   visualizer:
     image: dockersamples/visualizer@sha256:530c863672e7830d7560483df66beb4cbbcd375a9f3ec174ff5376616686a619
+    networks:
+      - web-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
