@@ -14,21 +14,18 @@ services:
       - pihole
       - web-proxy
     ports:
-#      - target: 53
-#        published: 53
-#        protocol: tcp
-#        mode: host
-#      - target: 53
-#        published: 53
-#        protocol: udp
-#        mode: host
-#      - target: 80
-#        published: 8090
-#        protocol: tcp
-#        mode: host
-      - '53:53/tcp'
-      - '53:53/udp'
-      - '8090:80/tcp'
+      - target: 53
+        published: 53
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 53
+        protocol: udp
+        mode: host
+      - target: 80
+        published: 8090
+        protocol: tcp
+        mode: host
     environment:
       - TZ=America/New_York
       # Auth is covered by authentik proxy
