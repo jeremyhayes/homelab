@@ -16,6 +16,10 @@ secrets:
   slack-webhook:
     file: ./.secret.slack-webhook
 
+configs:
+  alloy-config:
+    file: ./alloy/config.alloy
+
 volumes:
   grafana-data:
     driver: local
@@ -65,7 +69,36 @@ services:
         - traefik.http.routers.grafana.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.grafana.loadbalancer.server.port=3000
 
-#  alloy:
+  alloy:
+    image: grafana/alloy:v1.10.2
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
+    networks:
+      - grafana
+      - web-proxy
+    configs:
+      - source: alloy-config
+        target: /etc/alloy/config.alloy
+    volumes:
+#      - ./alloy/config.alloy:/etc/alloy/config.alloy
+      - /:/host:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    cap_add:
+      - SYS_TIME
+    deploy:
+      mode: global
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.alloy.rule=Host(`alloy.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.alloy.entrypoints=web-secure
+        - traefik.http.routers.alloy.tls.certResolver=primary
+        - traefik.http.routers.alloy.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.alloy.loadbalancer.server.port=12345
 
   loki:
     image: grafana/loki:3.5.3

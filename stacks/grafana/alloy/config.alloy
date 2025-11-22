@@ -1,0 +1,169 @@
+//
+//  Discovery Sources
+//
+discovery.dockerswarm "nodes" {
+  host = "unix:///var/run/docker.sock"
+  role = "nodes"
+}
+
+discovery.dockerswarm "tasks" {
+  host = "unix:///var/run/docker.sock"
+  role = "tasks"
+}
+
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+
+//
+//  Logs Pipeline - Loki
+//
+discovery.relabel "container_logs" {
+  targets = discovery.docker.containers.targets
+
+  // TODO capture swarm node hostname
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_stack_namespace"]
+    target_label  = "namespace"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_swarm_service_name"]
+    target_label  = "service"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_swarm_task_name"]
+    target_label  = "task"
+  }
+}
+
+loki.source.docker "container_logs" {
+  host          = "unix:///var/run/docker.sock"
+  targets       = discovery.relabel.container_logs.output
+  forward_to    = [loki.write.loki.receiver]
+}
+
+loki.write "loki" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+//
+//  Metrics Pipeline - Mimir/Prometheus
+//
+discovery.relabel "node_metrics" {
+  targets = discovery.dockerswarm.nodes.targets
+
+  rule {
+    source_labels = ["__meta_dockerswarm_node_hostname"]
+    target_label  = "node"
+  }
+
+  // scrape docker metrics on 9323
+  rule {
+    source_labels = ["__meta_dockerswarm_node_address"]
+    target_label  = "__address__"
+    replacement   = "$1:9323"
+  }
+}
+
+discovery.relabel "task_metrics" {
+  targets = discovery.dockerswarm.tasks.targets
+
+  rule {
+    source_labels = ["__meta_dockerswarm_node_hostname"]
+    target_label  = "node"
+  }
+
+  rule {
+    source_labels = ["__meta_dockerswarm_service_label_com_docker_stack_namespace"]
+    target_label  = "namespace"
+  }
+
+  rule {
+    source_labels = ["__meta_dockerswarm_service_name"]
+    target_label  = "service"
+  }
+
+  // only keep containers that should be running
+  rule {
+    source_labels = ["__meta_dockerswarm_task_desired_state"]
+    regex         = "running"
+    action        = "keep"
+  }
+
+  // don't scrape the ingress network
+  rule {
+    source_labels = ["__meta_dockerswarm_network_ingress"]
+    regex         = "true"
+    action        = "drop"
+  }
+
+  // capture the service itself as the "job" (override this single 'tasks' job)
+  // rule {
+  //   source_labels = ["__meta_dockerswarm_service_name"]
+  //   regex         = ".+_(.+)"
+  //   target_label  = "job"
+  // }
+
+  // only scrape enabled services (opt-in)
+  rule {
+    source_labels = ["__meta_dockerswarm_service_label_prometheus_swarm_enable"]
+    regex         = "true"
+    action        = "keep"
+  }
+
+  // capture ip of container on swarm network; use ip rather than dns for replicated tasks
+  rule {
+    source_labels = ["__address__"]
+    regex         = "(.+):.+"
+    target_label  = "__tmp_container_ip"
+  }
+      
+  // update address to account for port differences
+  rule {
+    source_labels = ["__tmp_container_ip", "__meta_dockerswarm_service_label_prometheus_swarm_port"]
+    regex         = "(.+);(.+)"
+    target_label  = "__address__"
+    replacement   = "$1:$2"
+  }
+
+  rule {
+    source_labels = ["__meta_dockerswarm_service_label_prometheus_swarm_path"]
+    regex         = "(.+)"
+    target_label  = "__metrics_path__"
+  }
+}
+
+prometheus.exporter.unix "node_exporter" {
+  rootfs_path = "/host"
+  procfs_path = "/host/proc"
+  sysfs_path  = "/host/sys"
+}
+
+prometheus.exporter.cadvisor "cadvisor" {
+  docker_host = "unix:///var/run/docker.sock"
+  docker_only = true
+}
+
+prometheus.exporter.self "alloy" {}
+
+prometheus.scrape "metrics" {
+  targets     = array.concat(
+    discovery.relabel.node_metrics.output,
+    discovery.relabel.task_metrics.output,
+    prometheus.exporter.unix.node_exporter.targets,
+    prometheus.exporter.cadvisor.cadvisor.targets,
+    prometheus.exporter.self.alloy.targets,
+  )
+  forward_to  = [prometheus.remote_write.mimir.receiver]
+}
+
+prometheus.remote_write "mimir" {
+  endpoint {
+    url = "http://mimir:9009/api/v1/push"
+  }
+}
