@@ -1,0 +1,49 @@
+# Run all components in a single process; "monolithic mode"
+target: all
+
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  log_level: warn
+
+ui:
+  enabled: true
+
+common:
+  # Single instance; no replication
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+  storage:
+    s3:
+      endpoint: seaweed:8333
+      insecure: true
+      s3forcepathstyle: true
+      bucketnames: loki-chunks
+      # Credentials read from AWS_SHARED_CREDENTIALS_FILE secret
+  path_prefix: /tmp/loki
+
+# Ruler supports a "local" readonly backend
+# Cannot be managed via API; useful for deploy provisioning
+ruler_storage:
+  backend: local
+  local:
+    directory: /etc/loki/ruler
+
+schema_config:
+  configs:
+  - from: 2020-01-01
+    store: tsdb
+    object_store: s3
+    schema: v13
+    index:
+      period: 24h
+
+compactor:
+  retention_enabled: true
+  delete_request_store: s3
+
+limits_config:
+  retention_period: 30d
