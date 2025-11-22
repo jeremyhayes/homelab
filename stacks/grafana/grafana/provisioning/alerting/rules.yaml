@@ -1,0 +1,113 @@
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: Default Group
+    folder: Alerts
+    interval: 1m
+    rules:
+
+      - uid: bf4g9vmo1m7eoe
+        title: Pi Down
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: cpnCDbRRz
+            model:
+              editorMode: code
+              exemplar: false
+              expr: sum(up{job="node-exporter", node=~"lab-pi-01|lab-pi-02|lab-pi-03"})
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 3
+                    type: lt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        isPaused: false
+        notification_settings:
+          receiver: Slack
+
+      - uid: bf4gah7d90d8gc
+        title: Mount Down
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: cpnCDbRRz
+            model:
+              editorMode: code
+              expr: sum(node_filesystem_mount_info{node="docker-swarm", mountpoint=~"/mnt/nas/documents|/mnt/nas/media|/mnt/nas2/media"})
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 3
+                    type: lt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations:
+          description: An NFS mount has gone missing, please investigate.
+          summary: NFS Mount Missing - {{ $labels.mountpoint }}
+        labels: {}
+        isPaused: false
+        notification_settings:
+          receiver: Slack
