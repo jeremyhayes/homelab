@@ -11,6 +11,8 @@ secrets:
     external: true
   authentik_grafana-client-secret:
     external: true
+  seaweed-credentials:
+    file: ./.secret.seaweed-credentials
   slack-webhook:
     file: ./.secret.slack-webhook
 
@@ -21,6 +23,12 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/grafana/grafana/data
+  seaweed-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/grafana/seaweed/data
 
 services:
 
@@ -54,5 +62,53 @@ services:
 #  alloy:
 #  loki:
 #  mimir:
-#  seaweed:
-#  seaweed-buckets:
+
+  seaweed:
+    image: chrislusf/seaweedfs:3.99
+    command: server -s3
+    networks:
+      - grafana
+    volumes:
+      - seaweed-data:/data
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+
+  seaweed-buckets:
+    image: amazon/aws-cli:2.32.3
+    entrypoint: /bin/sh -c
+    command: |
+      '
+      while true; do
+        if curl -s --connect-timeout 1 $$AWS_ENDPOINT_URL >/dev/null 2>&1; then
+          echo "seaweed is ready"
+          break
+        fi
+        echo "seaweed not ready...waiting"
+        sleep 2
+      done
+
+      aws s3api create-bucket --bucket mimir-blocks
+      aws s3api create-bucket --bucket loki-chunks
+      exit 0
+      '
+    networks:
+      - grafana
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+      AWS_ENDPOINT_URL: http://seaweed:8333/
+      AWS_DEFAULT_OUTPUT: text
+    deploy:
+      placement:
+        constraints:
+          # Because the image is not compatible with RPi ARM processor
+          - node.platform.arch == x86_64
+      restart_policy:
+        condition: none
