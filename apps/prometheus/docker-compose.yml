@@ -5,6 +5,8 @@ networks:
     external: true
   web-proxy:
     external: true
+  grafana_grafana:
+    external: true
 
 services:
 
@@ -13,6 +15,7 @@ services:
     networks:
       - lab_default
       - web-proxy
+      - grafana_grafana
     volumes:
       - prometheus-data:/prometheus
     configs:
