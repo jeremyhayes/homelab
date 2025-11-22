@@ -46,6 +46,7 @@ services:
       placement:
         constraints:
           - node.platform.arch == aarch64
+        max_replicas_per_node: 1
       labels:
 #        - traefik.enable=true
         - traefik.http.routers.pihole.rule=Host(`pihole.lab.omglolwtfbbq.com`)
