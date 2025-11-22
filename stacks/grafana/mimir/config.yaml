@@ -1,0 +1,45 @@
+# Run all components in a single process; "monolithic mode"
+target: all
+
+multitenancy_enabled: false
+
+server:
+  http_listen_port: 9009
+  log_level: warn
+
+common:
+  storage:
+    backend: s3
+    s3:
+      endpoint: seaweed:8333
+      insecure: true
+      # Credentials read from AWS_SHARED_CREDENTIALS_FILE secret
+
+blocks_storage:
+  s3:
+    bucket_name: mimir-blocks
+  tsdb:
+    # TSDB ingest and WAL storage before moving to blocks
+    dir: /etc/mimir/data/tsdb
+
+# Alertmanager supports a "local" readonly backend
+# Cannot be managed via API; useful for deploy provisioning
+alertmanager_storage:
+  backend: local
+  local:
+    path: /etc/mimir/alertmanager
+
+# Ruler supports a "local" readonly backend
+# Cannot be managed via API; useful for deploy provisioning
+ruler_storage:
+  backend: local
+  local:
+    directory: /etc/mimir/ruler
+
+ingester:
+  ring:
+    # Single instance; no replication
+    replication_factor: 1
+
+limits:
+  compactor_blocks_retention_period: 30d

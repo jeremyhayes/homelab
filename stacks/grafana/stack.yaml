@@ -23,6 +23,12 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/grafana/grafana/data
+  mimir-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/grafana/mimir/data
   seaweed-data:
     driver: local
     driver_opts:
@@ -61,7 +67,35 @@ services:
 
 #  alloy:
 #  loki:
-#  mimir:
+
+  mimir:
+    image: grafana/mimir:2.17.0
+    command:
+      - -config.file=/etc/mimir/config.yaml
+    networks:
+      - grafana
+      - web-proxy
+    volumes:
+      - ./mimir/config.yaml:/etc/mimir/config.yaml
+      - mimir-data:/etc/mimir/data
+      # These are currently unused, but necessary for provisioning
+      - ./mimir/alertmanager:/etc/mimir/alertmanager
+      - ./mimir/ruler:/etc/mimir/ruler
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.mimir.rule=Host(`mimir.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.mimir.entrypoints=web-secure
+        - traefik.http.routers.mimir.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.routers.mimir.tls.certResolver=primary
+        - traefik.http.services.mimir.loadbalancer.server.port=9009
 
   seaweed:
     image: chrislusf/seaweedfs:3.99
