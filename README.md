@@ -6,20 +6,14 @@ Orchestration for homelab services.
 
 ### Applications
 
-Deploy any group of services as an application
+Deploy any group of services as an application stack
 ```sh
-cd ./apps
-./deploy.sh <service_dir>
+cd ./stacks
+./deploy.sh <stack-dir>
 ```
 
-### Terraform
-
-Plan and apply application configuration
-```sh
-cd ./terraform
-./tofu.sh plan
-./tofu.sh apply
-```
+> [!NOTE]
+> The first run will create the `web-proxy` overlay network. This is needed for traefik to see all services for routing.
 
 ## Configuration
 
@@ -120,12 +114,12 @@ $ docker swarm init
 
 1. Clone the repository, including submodules:
 ```
-$ git clone git@github.com:jeremyhayes/pi-cluster.git --recurse-submodules
+$ git clone git@github.com:jeremyhayes/homelab.git
 ```
 
 2. Create any needed `.secret.xxx` files:
 ```sh
-$ find ./docker-compose.yml | xargs grep "\.secret\."
+$ find ./stack.yaml | xargs grep "\.secret\."
 # for each ...
 nano .secret.xxx
 ```
@@ -134,22 +128,22 @@ nano .secret.xxx
 ```
 $ find . -name .env.template
 # for each... 
-$ cd <service-dir>
+$ cd <stack-dir>
 $ cp .env.template .env
 $ nano .env
 ```
 
 3. Deploy each service to a shared stack:
-Each service lives in a folder with a `docker-compose.yml` and any supporting configuration.
+Each service lives in a folder with a `stack.yaml` and any supporting configuration.
 ```
-$ ./deploy.sh <service-dir>
+$ ./deploy.sh <stack-dir>
 ```
 > NOTE: The first deploy will create an overlay network `<stack-name>_default`.
 
 > IMPORTANT
 > For services with externalized configuration (like credentials), `docker stack` does not resolve template placeholders from `.env` files. Instead, pipe the file through `docker-compose` as a preprocessor:
 > ```
-> docker stack deploy -c <(docker-compose config) stack-name-here
+> docker stack deploy -c <(docker-compose config) stack-name
 > ```
 
 
