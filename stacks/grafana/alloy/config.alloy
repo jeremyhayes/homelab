@@ -1,3 +1,7 @@
+local.file "hostname" {
+  filename  = "/etc/hostname"
+}
+
 //
 //  Discovery Sources
 //
@@ -21,7 +25,10 @@ discovery.docker "containers" {
 discovery.relabel "container_logs" {
   targets = discovery.docker.containers.targets
 
-  // TODO capture swarm node hostname
+  rule {
+    target_label = "node"
+    replacement  = string.trim_space(local.file.hostname.content)
+  }
 
   rule {
     source_labels = ["__meta_docker_container_label_com_docker_stack_namespace"]
@@ -144,6 +151,20 @@ prometheus.exporter.unix "node_exporter" {
   sysfs_path  = "/host/sys"
 }
 
+discovery.relabel "node_exporter" {
+  targets = prometheus.exporter.unix.node_exporter.targets
+
+  rule {
+    target_label = "node"
+    replacement  = string.trim_space(local.file.hostname.content)
+  }
+
+  rule {
+    target_label = "job"
+    replacement = "integrations/node_exporter"
+  }
+}
+
 prometheus.exporter.cadvisor "cadvisor" {
   docker_host = "unix:///var/run/docker.sock"
   docker_only = true
@@ -155,7 +176,7 @@ prometheus.scrape "metrics" {
   targets     = array.concat(
     discovery.relabel.node_metrics.output,
     discovery.relabel.task_metrics.output,
-    prometheus.exporter.unix.node_exporter.targets,
+    discovery.relabel.node_exporter.output,
     prometheus.exporter.cadvisor.cadvisor.targets,
     prometheus.exporter.self.alloy.targets,
   )
