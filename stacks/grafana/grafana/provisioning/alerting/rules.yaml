@@ -15,11 +15,14 @@ groups:
             relativeTimeRange:
               from: 600
               to: 0
-            datasourceUid: cpnCDbRRz
+            datasourceUid: mimir
             model:
+              datasource:
+                type: prometheus
+                uid: mimir
               editorMode: code
               exemplar: false
-              expr: sum(up{job="node-exporter", node=~"lab-pi-01|lab-pi-02|lab-pi-03"})
+              expr: sum(up{job="integrations/node_exporter", node=~"lab-pi-01|lab-pi-02|lab-pi-03"})
               instant: true
               intervalMs: 1000
               legendFormat: __auto
