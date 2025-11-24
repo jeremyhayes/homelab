@@ -58,13 +58,3 @@ entries:
     attrs:
       name: Pi-hole (3)
       provider: !KeyOf pihole3
-
-  - model: authentik_outposts.outpost
-    state: present
-    identifiers:
-      name: "authentik Embedded Outpost"
-    attrs:
-      providers:
-        - !KeyOf pihole1
-        - !KeyOf pihole2
-        - !KeyOf pihole3

@@ -22,11 +22,3 @@ entries:
     attrs:
       name: whoami
       provider: !KeyOf whoami
-
-  - model: authentik_outposts.outpost
-    state: present
-    identifiers:
-      name: "authentik Embedded Outpost"
-    attrs:
-      providers:
-        - !KeyOf whoami
