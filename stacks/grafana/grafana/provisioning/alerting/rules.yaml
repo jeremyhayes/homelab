@@ -66,10 +66,13 @@ groups:
             relativeTimeRange:
               from: 600
               to: 0
-            datasourceUid: cpnCDbRRz
+            datasourceUid: mimir
             model:
+              datasource:
+                type: prometheus
+                uid: mimir
               editorMode: code
-              expr: sum(node_filesystem_mount_info{node="docker-swarm", mountpoint=~"/mnt/nas/documents|/mnt/nas/media|/mnt/nas2/media"})
+              expr: count(node_filesystem_files{node="docker-swarm", mountpoint=~"/mnt/nas/documents|/mnt/nas/media|/mnt/nas2/media"})
               instant: true
               intervalMs: 1000
               legendFormat: __auto
