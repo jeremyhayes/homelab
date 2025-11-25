@@ -7,6 +7,10 @@ networks:
     external: true
 
 secrets:
+  authentik_paperless-client-id:
+    external: true
+  authentik_paperless-client-secret:
+    external: true
   paperless-secret-key:
     file: ./.secret.paperless-secret-key
   postgres-password:
@@ -58,6 +62,8 @@ services:
       - paperless
       - web-proxy
     secrets:
+      - authentik_paperless-client-id
+      - authentik_paperless-client-secret
       - paperless-secret-key
       - postgres-password
     environment:
@@ -74,8 +80,10 @@ services:
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       # SSO
       PAPERLESS_DISABLE_REGULAR_LOGIN: 'True'
+      PAPERLESS_AUTO_CREATE: 'True'
+      PAPERLESS_LOGOUT_REDIRECT_URL: https://auth.lab.omglolwtfbbq.com/application/o/paperless/end-session/
       PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
-      # This has to be configured manually after app setup. There is no available automation.
+      # This is written by a custom init script for secrets handling
       # PAPERLESS_SOCIALACCOUNT_PROVIDERS:
       # Misc
       PAPERLESS_OCR_LANGUAGE: eng

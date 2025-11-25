@@ -15,6 +15,10 @@ secrets:
     file: ./.secret.grafana-client-id
   grafana-client-secret:
     file: ./.secret.grafana-client-secret
+  paperless-client-id:
+    file: ./.secret.paperless-client-id
+  paperless-client-secret:
+    file: ./.secret.paperless-client-secret
   synology-client-id:
     file: ./.secret.synology-client-id
   synology-client-secret:
@@ -109,6 +113,8 @@ services:
       - postgres-password
       - grafana-client-id
       - grafana-client-secret
+      - paperless-client-id
+      - paperless-client-secret
       - synology-client-id
       - synology-client-secret
     environment:

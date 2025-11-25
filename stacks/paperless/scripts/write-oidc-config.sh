@@ -1,22 +1,24 @@
 #!/command/with-contenv /usr/bin/bash
 
-json=$(cat <<EOF
+JSON=$(cat <<EOF
 {
-    "openid_connect": {
-        "OAUTH_PKCE_ENABLED": True,
-        "APPS": [{
-            "provider_id": "authentik",
-            "name": "Authentik",
-            "client_id": "$(cat /run/secrets/authentik_paperless-client-id)",
-            "secret": "$(cat /run/secrets/authentik_paperless-client-secret)",
-            "settings": {
-                "server_url": "http://auth.lab.omglolwtfbbq.local",
-                "claims": {"username": "email"}
-            },
-        }],
-    }
+  "openid_connect": {
+    "OAUTH_PKCE_ENABLED": true,
+    "APPS": [
+      {
+        "provider_id": "authentik",
+        "name": "Authentik",
+        "client_id": "$(cat /run/secrets/authentik_paperless-client-id)",
+        "secret": "$(cat /run/secrets/authentik_paperless-client-secret)",
+        "settings": {
+          "server_url": "https://auth.lab.omglolwtfbbq.com/application/o/paperless/.well-known/openid-configuration",
+          "claims": {"username": "email"}
+        }
+      }
+    ]
+  }
 }
 EOF
 )
 
-cat "${json}" > "${PAPERLESS_SOCIALACCOUNT_PROVIDERS}"
+echo "$JSON" > /run/s6/container_environment/PAPERLESS_SOCIALACCOUNT_PROVIDERS
