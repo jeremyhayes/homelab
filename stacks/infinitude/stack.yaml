@@ -36,7 +36,7 @@ services:
         - traefik.http.services.infinitude.loadbalancer.server.port=3000
 
   prometheus-exporter:
-    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.48
+    image: ghcr.io/jeremyhayes/infinitude-prometheus:v0.1.49
     networks:
       - web-proxy
     environment:
