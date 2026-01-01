@@ -135,7 +135,7 @@ services:
           - node.role == manager # for mapped data volume
 
   broker:
-    image: valkey/valkey:9.0.0-alpine
+    image: valkey/valkey:9.0.1-alpine
     networks:
       - paperless
     volumes:
