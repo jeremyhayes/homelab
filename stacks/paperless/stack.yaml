@@ -90,6 +90,7 @@ services:
       PAPERLESS_SECRET_KEY_FILE: /run/secrets/paperless-secret-key
       PAPERLESS_TIME_ZONE: America/New_York
       PAPERLESS_URL: https://paperless.lab.omglolwtfbbq.com
+      PAPERLESS_FILENAME_FORMAT: "{{ owner_username }}/{{ created_year }}/{{ correspondent }}/{{ created }}_{{ title }}"
     volumes:
       - paperless-data:/usr/src/paperless/data
       - paperless-media:/usr/src/paperless/media
