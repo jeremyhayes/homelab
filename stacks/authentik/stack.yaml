@@ -41,7 +41,7 @@ volumes:
 services:
 
   postgres:
-    image: postgres:16.10-alpine
+    image: postgres:16.11-alpine
     networks:
       - authentik
     secrets:
