@@ -66,8 +66,8 @@ services:
       echo "Backing up jellyfin config to '$$OUTFILE'..."
       tar -cpzf "$$OUTFILE" -C /opt/config .
 
-      echo "Deleting backups older than 30 days..."
-      find /opt/backups -name "config_*.tar.gz" -type f -mtime +30 -print -delete
+      echo "Deleting backups older than 20 days..."
+      find /opt/backups -name "config_*.tar.gz" -type f -mtime +20 -print -delete
 
       echo "Starting jellyfin service..."
       docker service scale $$SERVICE_NAME=1 > /dev/null
@@ -79,7 +79,6 @@ services:
       - jellyfin-config:/opt/config
       - jellyfin-backups:/opt/backups
     environment:
-      # assumes this is deployed to a stack named "lab"
       - SERVICE_NAME=jellyfin_jellyfin
     deploy:
       placement:
