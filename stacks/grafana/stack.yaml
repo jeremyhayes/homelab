@@ -102,7 +102,7 @@ services:
         - traefik.http.services.alloy.loadbalancer.server.port=12345
 
   loki:
-    image: grafana/loki:3.5.3
+    image: grafana/loki:3.6.3
     command:
       - -config.file=/etc/loki/config.yaml
     networks:
