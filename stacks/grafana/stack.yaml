@@ -161,7 +161,13 @@ services:
 
   seaweed:
     image: chrislusf/seaweedfs:3.99
-    command: server -s3
+    entrypoint: /bin/sh -c
+    command: |
+      "
+      export AWS_ACCESS_KEY_ID=$$(awk -v profile='[default]' '$$0 == profile {getline; print $$3}' \"$$AWS_SHARED_CREDENTIALS_FILE\")
+      export AWS_SECRET_ACCESS_KEY=$$(awk -v profile='[default]' '$$0 == profile {getline; getline; print $$3}' \"$$AWS_SHARED_CREDENTIALS_FILE\")
+      /entrypoint.sh server -s3
+      "
     networks:
       - grafana
     volumes:
