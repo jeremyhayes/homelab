@@ -1,0 +1,10 @@
+apiVersion: 1
+
+contactPoints:
+  - name: Slack
+    receivers:
+      - type: slack
+        uid: a2382012-b538-4e50-8e3f-50dc071162c1
+        settings:
+          url: $__file{/run/secrets/slack-webhook}
+        disableResolveMessage: false

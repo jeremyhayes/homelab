@@ -1,0 +1,24 @@
+version: 1
+
+metadata:
+  name: App - Visualizer
+
+entries:
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: visualizer
+    identifiers:
+      name: Provider for Visualizer
+    attrs:
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://visualizer.lab.omglolwtfbbq.com
+      mode: forward_single
+      access_token_validity: "minutes=5"
+
+  - model: authentik_core.application
+    identifiers:
+      slug: visualizer
+    attrs:
+      name: Visualizer
+      provider: !KeyOf visualizer

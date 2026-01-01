@@ -1,0 +1,48 @@
+version: 1
+
+metadata:
+  name: Apps - Embedded Outpost Providers
+
+entries:
+
+  - model: authentik_blueprints.metaapplyblueprint
+    attrs:
+      identifiers:
+        path: custom/app-pihole.yaml
+
+  - model: authentik_blueprints.metaapplyblueprint
+    attrs:
+      identifiers:
+        path: custom/app-visualizer.yaml
+
+  - model: authentik_blueprints.metaapplyblueprint
+    attrs:
+      identifiers:
+        path: custom/app-whoami.yaml
+
+  - model: authentik_outposts.outpost
+    state: present
+    identifiers:
+      name: "authentik Embedded Outpost"
+    attrs:
+      providers:
+        - !Find [
+            authentik_providers_proxy.proxyprovider,
+            [application, !Find [authentik_core.application, [slug, pihole1]]],
+         ]
+        - !Find [
+            authentik_providers_proxy.proxyprovider,
+            [application, !Find [authentik_core.application, [slug, pihole2]]],
+         ]
+        - !Find [
+            authentik_providers_proxy.proxyprovider,
+            [application, !Find [authentik_core.application, [slug, pihole3]]],
+         ]
+        - !Find [
+            authentik_providers_proxy.proxyprovider,
+            [application, !Find [authentik_core.application, [slug, visualizer]]],
+          ]
+        - !Find [
+            authentik_providers_proxy.proxyprovider,
+            [application, !Find [authentik_core.application, [slug, whoami]]],
+          ]

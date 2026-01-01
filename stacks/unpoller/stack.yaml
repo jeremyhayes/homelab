@@ -1,0 +1,46 @@
+version: '3.8'
+
+networks:
+  web-proxy:
+    external: true
+
+secrets:
+  unifi-password:
+    file: ./.secret.unifi-password
+
+services:
+
+  unifi-exporter:
+    image: ghcr.io/unpoller/unpoller:v2.15.4
+    networks:
+      - web-proxy
+    environment:
+      - UP_UNIFI_DEFAULT_URL=https://192.168.1.1:443
+      - UP_UNIFI_DEFAULT_USER=unifi-poller
+      - UP_UNIFI_DEFAULT_PASS=file:///run/secrets/unifi-password
+
+      # enable logging
+      - UP_UNIFI_DEFAULT_SAVE_IDS=true
+      - UP_UNIFI_DEFAULT_SAVE_EVENTS=true
+      - UP_UNIFI_DEFAULT_SAVE_ALARMS=true
+      - UP_UNIFI_DEFAULT_SAVE_ANOMOLIES=true
+      - UP_UNIFI_DEFAULT_SAVE_DPI=true
+
+      # influxdb - unused
+      - UP_INFLUXDB_DISABLE=true
+
+      # prometheus
+      - UP_PROMETHEUS_DISABLE=false
+
+      # loki
+      - UP_LOKI_DISABLE=false
+      - UP_LOKI_URL=http://loki:3100
+    secrets:
+      - unifi-password
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == aarch64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9130

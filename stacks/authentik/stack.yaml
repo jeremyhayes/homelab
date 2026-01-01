@@ -1,0 +1,137 @@
+version: '3.8'
+
+networks:
+  authentik:
+    driver: overlay
+  web-proxy:
+    external: true
+
+secrets:
+  secret-key:
+    file: ./.secret.secret-key
+  postgres-password:
+    file: ./.secret.postgres-password
+  grafana-client-id:
+    file: ./.secret.grafana-client-id
+  grafana-client-secret:
+    file: ./.secret.grafana-client-secret
+  paperless-client-id:
+    file: ./.secret.paperless-client-id
+  paperless-client-secret:
+    file: ./.secret.paperless-client-secret
+  synology-client-id:
+    file: ./.secret.synology-client-id
+  synology-client-secret:
+    file: ./.secret.synology-client-secret
+
+volumes:
+#  media:
+#    driver: local
+#    driver_opts:
+#      type: none
+#      o: bind
+#      device: /opt/stacks/authentik/authentik/media
+  postgres-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/authentik/postgres/data
+
+services:
+
+  postgres:
+    image: postgres:16.10-alpine
+    networks:
+      - authentik
+    secrets:
+      - postgres-password
+    environment:
+      - POSTGRES_DB=authentik
+      - POSTGRES_USER=authentik
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager # for data volume
+
+  server:
+    image: ghcr.io/goauthentik/server:2025.10.1
+    command: server
+    networks:
+      - authentik
+      - web-proxy
+    secrets:
+      - secret-key
+      - postgres-password
+    environment:
+      - AUTHENTIK_SECRET_KEY=file:///run/secrets/secret-key
+      - AUTHENTIK_POSTGRESQL__HOST=postgres
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/postgres-password
+#    volumes:
+#      - media:/media
+    deploy:
+#      placement:
+#        constraints:
+#          - node.platform.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9300
+        - traefik.enable=true
+        - traefik.http.routers.authentik.rule=Host(`auth.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.authentik.entrypoints=web-secure
+        - traefik.http.routers.authentik.tls.certResolver=primary
+        - traefik.http.routers.authentik.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.authentik.loadbalancer.server.port=9000
+        # authentik-proxy is a separate router for the embedded outpost
+        - traefik.http.routers.authentik-proxy.rule=HostRegexp(`^.+\.lab\.omglolwtfbbq\.com$$`) && PathPrefix(`/outpost.goauthentik.io/`)
+        - traefik.http.routers.authentik-proxy.priority=1
+        - traefik.http.routers.authentik-proxy.entrypoints=web
+        - traefik.http.middlewares.proxy-auth.forwardauth.address=http://server:9000/outpost.goauthentik.io/auth/traefik
+        - traefik.http.middlewares.proxy-auth.forwardauth.trustForwardHeader=true
+        - traefik.http.middlewares.proxy-auth.forwardauth.authResponseHeaders=X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
+
+  worker:
+    image: ghcr.io/goauthentik/server:2025.10.1
+    command: worker
+    networks:
+      - authentik
+    secrets:
+      - secret-key
+      - postgres-password
+      - grafana-client-id
+      - grafana-client-secret
+      - paperless-client-id
+      - paperless-client-secret
+      - synology-client-id
+      - synology-client-secret
+    environment:
+      - AUTHENTIK_SECRET_KEY=file:///run/secrets/secret-key
+      - AUTHENTIK_POSTGRESQL__HOST=postgres
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/postgres-password
+    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - media:/media
+      - ./blueprints:/blueprints/custom
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager # for volumes / bind mounts
+#          - node.platform.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=9300

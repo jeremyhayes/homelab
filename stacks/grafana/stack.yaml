@@ -1,0 +1,216 @@
+version: '3.8'
+
+networks:
+  grafana:
+    driver: overlay
+  web-proxy:
+    external: true
+
+secrets:
+  authentik_grafana-client-id:
+    external: true
+  authentik_grafana-client-secret:
+    external: true
+  seaweed-credentials:
+    file: ./.secret.seaweed-credentials
+  slack-webhook:
+    file: ./.secret.slack-webhook
+
+configs:
+  alloy-config:
+    file: ./alloy/config.alloy
+
+volumes:
+  grafana-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/grafana/grafana/data
+  mimir-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/grafana/mimir/data
+  seaweed-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/grafana/seaweed/data
+
+services:
+
+  grafana:
+    image: grafana/grafana:12.2.1
+    networks:
+      - grafana
+      - web-proxy
+    secrets:
+      - authentik_grafana-client-id
+      - authentik_grafana-client-secret
+      - slack-webhook
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=3000
+        - traefik.enable=true
+        - traefik.http.routers.grafana.rule=Host(`grafana.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.grafana.entrypoints=web-secure
+        - traefik.http.routers.grafana.tls.certResolver=primary
+        - traefik.http.routers.grafana.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+  alloy:
+    image: grafana/alloy:v1.10.2
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
+    networks:
+      - grafana
+      - web-proxy
+    configs:
+      - source: alloy-config
+        target: /etc/alloy/config.alloy
+    volumes:
+#      - ./alloy/config.alloy:/etc/alloy/config.alloy
+      - /:/host:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/hostname:/etc/hostname:ro
+    cap_add:
+      - SYS_TIME
+    deploy:
+      mode: global
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.alloy.rule=Host(`alloy.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.alloy.entrypoints=web-secure
+        - traefik.http.routers.alloy.tls.certResolver=primary
+        - traefik.http.routers.alloy.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.alloy.loadbalancer.server.port=12345
+
+  loki:
+    image: grafana/loki:3.5.3
+    command:
+      - -config.file=/etc/loki/config.yaml
+    networks:
+      - grafana
+      - web-proxy
+    volumes:
+      - ./loki/config.yaml:/etc/loki/config.yaml
+      # These are currently unused, but necessary for provisioning
+      - ./loki/ruler:/etc/loki/ruler
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - prometheus.swarm.enable=true
+        - prometheus.swarm.port=3100
+        - traefik.enable=true
+        - traefik.http.routers.loki.rule=Host(`loki.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.loki.entrypoints=web-secure
+        - traefik.http.routers.loki.tls.certResolver=primary
+        - traefik.http.routers.loki.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.loki.loadbalancer.server.port=3100
+
+  mimir:
+    image: grafana/mimir:2.17.0
+    command:
+      - -config.file=/etc/mimir/config.yaml
+    networks:
+      - grafana
+      - web-proxy
+    volumes:
+      - ./mimir/config.yaml:/etc/mimir/config.yaml
+      - mimir-data:/etc/mimir/data
+      # These are currently unused, but necessary for provisioning
+      - ./mimir/alertmanager:/etc/mimir/alertmanager
+      - ./mimir/ruler:/etc/mimir/ruler
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.mimir.rule=Host(`mimir.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.mimir.entrypoints=web-secure
+        - traefik.http.routers.mimir.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.routers.mimir.tls.certResolver=primary
+        - traefik.http.services.mimir.loadbalancer.server.port=9009
+
+  seaweed:
+    image: chrislusf/seaweedfs:3.99
+    entrypoint: /bin/sh -c
+    command: |
+      "
+      export AWS_ACCESS_KEY_ID=$$(awk -v profile='[default]' '$$0 == profile {getline; print $$3}' \"$$AWS_SHARED_CREDENTIALS_FILE\")
+      export AWS_SECRET_ACCESS_KEY=$$(awk -v profile='[default]' '$$0 == profile {getline; getline; print $$3}' \"$$AWS_SHARED_CREDENTIALS_FILE\")
+      /entrypoint.sh server -s3
+      "
+    networks:
+      - grafana
+    volumes:
+      - seaweed-data:/data
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+    deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+
+  seaweed-buckets:
+    image: amazon/aws-cli:2.32.3
+    entrypoint: /bin/sh -c
+    command: |
+      '
+      while true; do
+        if curl -s --connect-timeout 1 $$AWS_ENDPOINT_URL >/dev/null 2>&1; then
+          echo "seaweed is ready"
+          break
+        fi
+        echo "seaweed not ready...waiting"
+        sleep 2
+      done
+
+      aws s3api create-bucket --bucket mimir-blocks
+      aws s3api create-bucket --bucket loki-chunks
+      exit 0
+      '
+    networks:
+      - grafana
+    secrets:
+      - seaweed-credentials
+    environment:
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/seaweed-credentials
+      AWS_ENDPOINT_URL: http://seaweed:8333/
+      AWS_DEFAULT_OUTPUT: text
+    deploy:
+      placement:
+        constraints:
+          # Because the image is not compatible with RPi ARM processor
+          - node.platform.arch == x86_64
+      restart_policy:
+        condition: none
