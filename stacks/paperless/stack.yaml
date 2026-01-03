@@ -148,8 +148,10 @@ services:
       TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
       OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.sql.gz"
       export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
+      echo "Dumping $${POSTGRES_DB} to $$OUTFILE..."
       pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
-      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -delete
+      echo "Deleting backups older than 30 days..."
+      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -print -delete
       '
     networks:
       - paperless
