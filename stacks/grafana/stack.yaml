@@ -123,12 +123,6 @@ services:
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=3100
-        - traefik.enable=true
-        - traefik.http.routers.loki.rule=Host(`loki.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.loki.entrypoints=web-secure
-        - traefik.http.routers.loki.tls.certResolver=primary
-        - traefik.http.routers.loki.tls.domains[0].main=*.lab.omglolwtfbbq.com
-        - traefik.http.services.loki.loadbalancer.server.port=3100
 
   mimir:
     image: grafana/mimir:3.0.2
