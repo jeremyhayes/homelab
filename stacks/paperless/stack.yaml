@@ -47,6 +47,12 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/paperless/postgres/data
+  postgres-backup:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/nas/docker/paperless/postgres/backup
   broker-data:
     driver: local
     driver_opts:
@@ -133,6 +139,38 @@ services:
       placement:
         constraints:
           - node.role == manager # for mapped data volume
+
+  postgres-backup:
+    image: postgres:18.1-alpine
+    entrypoint: "sh -c"
+    command: |
+      '
+      TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
+      OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.sql.gz"
+      export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
+      pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
+      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -delete
+      '
+    networks:
+      - paperless
+    secrets:
+      - postgres-password
+    environment:
+      - POSTGRES_DB=paperless
+      - POSTGRES_USER=paperless
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password
+    volumes:
+      - postgres-backup:/opt/backups
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # managed by cron
+      labels:
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 5 * * mon
 
   broker:
     image: valkey/valkey:9.0.1-alpine

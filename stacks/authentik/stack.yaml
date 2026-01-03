@@ -37,6 +37,12 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/authentik/postgres/data
+  postgres-backup:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/nas/docker/authentik/postgres/backup
 
 services:
 
@@ -64,6 +70,38 @@ services:
       placement:
         constraints:
           - node.role == manager # for data volume
+
+  postgres-backup:
+    image: postgres:16.10-alpine
+    entrypoint: "sh -c"
+    command: |
+      '
+      TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
+      OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.sql.gz"
+      export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
+      pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
+      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -delete
+      '
+    networks:
+      - authentik
+    secrets:
+      - postgres-password
+    environment:
+      - POSTGRES_DB=authentik
+      - POSTGRES_USER=authentik
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password
+    volumes:
+      - postgres-backup:/opt/backups
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # managed by cron
+      labels:
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 5 * * mon
 
   server:
     image: ghcr.io/goauthentik/server:2025.10.3
