@@ -182,7 +182,7 @@ services:
           - node.platform.arch == x86_64
 
   seaweed-buckets:
-    image: amazon/aws-cli:2.32.26
+    image: amazon/aws-cli:2.32.27
     entrypoint: /bin/sh -c
     command: |
       '
