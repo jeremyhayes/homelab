@@ -72,7 +72,7 @@ services:
           - node.role == manager # for data volume
 
   postgres-backup:
-    image: postgres:16.10-alpine
+    image: postgres:16.11-alpine
     entrypoint: "sh -c"
     command: |
       '
