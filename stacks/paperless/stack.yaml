@@ -126,7 +126,7 @@ services:
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
     healthcheck:
       test:
         - CMD-SHELL
@@ -151,7 +151,7 @@ services:
       echo "Dumping $${POSTGRES_DB} to $$OUTFILE..."
       pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
       echo "Deleting backups older than 30 days..."
-      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -print -delete
+      find "/opt/backups/dump_$${POSTGRES_DB}_*.sql.gz" -type f -mtime +30 -print -delete
       '
     networks:
       - paperless
