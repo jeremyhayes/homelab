@@ -47,7 +47,7 @@ volumes:
 services:
 
   postgres:
-    image: postgres:16.11-alpine
+    image: postgres:18.1-alpine
     networks:
       - authentik
     secrets:
@@ -57,7 +57,7 @@ services:
       - POSTGRES_USER=authentik
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
     healthcheck:
       test:
         - CMD-SHELL
@@ -72,7 +72,7 @@ services:
           - node.role == manager # for data volume
 
   postgres-backup:
-    image: postgres:16.11-alpine
+    image: postgres:18.1-alpine
     entrypoint: "sh -c"
     command: |
       '
@@ -82,7 +82,7 @@ services:
       echo "Dumping $${POSTGRES_DB} to $$OUTFILE..."
       pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
       echo "Deleting backups older than 30 days..."
-      find "/opt/backups/dump_$${POSTGRES_DB}}_*.sql.gz" -type f -mtime +30 -print -delete
+      find "/opt/backups/dump_$${POSTGRES_DB}_*.sql.gz" -type f -mtime +30 -print -delete
       '
     networks:
       - authentik
