@@ -63,7 +63,7 @@ volumes:
 services:
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.4
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.5
     networks:
       - paperless
       - web-proxy
