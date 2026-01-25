@@ -26,6 +26,12 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/immich/postgres/data
+  postgres-backup:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/nas/docker/immich/postgres/backup
 
 secrets:
   authentik_immich-client-id:
@@ -129,6 +135,40 @@ services:
       placement:
         constraints:
           - node.role == manager # for mapped data volume
+
+  postgres-backup:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    entrypoint: "sh -c"
+    command: |
+      '
+      TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
+      OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.sql.gz"
+      export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
+      echo "Dumping $${POSTGRES_DB} to $$OUTFILE..."
+      pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
+      echo "Deleting backups older than 30 days..."
+      find "/opt/backups/dump_$${POSTGRES_DB}_*.sql.gz" -type f -mtime +30 -print -delete
+      '
+    networks:
+      - immich
+    secrets:
+      - postgres-password
+    environment:
+      - POSTGRES_DB=immich
+      - POSTGRES_USER=immich
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password
+    volumes:
+      - postgres-backup:/opt/backups
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: none
+      replicas: 0 # managed by cron
+      labels:
+        - swarm.cronjob.enable=true
+        - swarm.cronjob.schedule=0 5 * * mon
 
   redis:
     image: valkey/valkey:9.0.1-alpine
