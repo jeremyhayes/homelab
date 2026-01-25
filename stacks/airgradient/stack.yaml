@@ -7,7 +7,7 @@ networks:
 services:
 
   airgradient:
-    image: ghcr.io/jeremyhayes/airgradient-local:v0.2.5
+    image: ghcr.io/jeremyhayes/airgradient-local:v0.2.6
     networks:
       - web-proxy
     deploy:
