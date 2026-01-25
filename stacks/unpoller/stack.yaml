@@ -11,7 +11,7 @@ secrets:
 services:
 
   unifi-exporter:
-    image: ghcr.io/unpoller/unpoller:v2.21.0
+    image: ghcr.io/unpoller/unpoller:v2.23.0
     networks:
       - web-proxy
     environment:
