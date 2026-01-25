@@ -111,7 +111,7 @@ services:
           - node.role == manager # for mapped data volume
 
   postgres:
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    image: ghcr.io/immich-app/postgres:18-vectorchord0.5.3
     networks:
       - immich
     secrets:
@@ -122,7 +122,7 @@ services:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
       POSTGRES_INITDB_ARGS: "--data-checksums"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
     healthcheck:
       test:
         - CMD-SHELL
@@ -137,7 +137,7 @@ services:
           - node.role == manager # for mapped data volume
 
   postgres-backup:
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    image: ghcr.io/immich-app/postgres:18-vectorchord0.5.3
     entrypoint: "sh -c"
     command: |
       '
