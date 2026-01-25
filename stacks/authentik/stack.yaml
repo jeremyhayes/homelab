@@ -15,6 +15,10 @@ secrets:
     file: ./.secret.grafana-client-id
   grafana-client-secret:
     file: ./.secret.grafana-client-secret
+  immich-client-id:
+    file: ./.secret.immich-client-id
+  immich-client-secret:
+    file: ./.secret.immich-client-secret
   paperless-client-id:
     file: ./.secret.paperless-client-id
   paperless-client-secret:
@@ -153,6 +157,8 @@ services:
       - postgres-password
       - grafana-client-id
       - grafana-client-secret
+      - immich-client-id
+      - immich-client-secret
       - paperless-client-id
       - paperless-client-secret
       - synology-client-id
