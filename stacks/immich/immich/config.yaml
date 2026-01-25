@@ -5,6 +5,15 @@ logging:
 server:
   externalDomain: https://immich.lab.omglolwtfbbq.com
 
+backup:
+  database:
+    enabled: false # managed externally
+
+storageTemplate:
+  enabled: true
+  hashVerificationEnabled: true
+  template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+
 trash:
   enabled: true
   days: 30
@@ -25,6 +34,3 @@ oauth:
 passwordLogin:
   enabled: false
 
-backup:
-  database:
-    enabled: false # managed externally
