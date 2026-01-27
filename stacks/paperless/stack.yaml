@@ -191,7 +191,7 @@ services:
       - paperless
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.25.1
+    image: docker.io/gotenberg/gotenberg:8.26.0
     # The gotenberg chromium route is used to convert .eml files. We do not
     # want to allow external content like tracking pixels or even javascript.
     command:
