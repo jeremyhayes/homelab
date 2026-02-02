@@ -146,12 +146,20 @@ services:
     command: |
       '
       TIMESTAMP=$$(date +"%Y-%m-%d_%H-%M-%S")
-      OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.sql.gz"
+      OUTFILE="/opt/backups/dump_$${POSTGRES_DB}_$$TIMESTAMP.tar.gz"
       export PGPASSWORD=$$(cat $$POSTGRES_PASSWORD_FILE)
       echo "Dumping $${POSTGRES_DB} to $$OUTFILE..."
-      pg_dump -h postgres -U $$POSTGRES_USER -d $$POSTGRES_DB | gzip > "$$OUTFILE"
+      pg_dump \
+        --host postgres \
+        --username $$POSTGRES_USER \
+        --dbname $$POSTGRES_DB \
+        --clean \
+        --create \
+        --format=tar \
+        --quote-all-identifiers \
+        --verbose | gzip > "$$OUTFILE"
       echo "Deleting backups older than 30 days..."
-      find "/opt/backups/dump_$${POSTGRES_DB}_*.sql.gz" -type f -mtime +30 -print -delete
+      find "/opt/backups/dump_$${POSTGRES_DB}_*.tar.gz" -type f -mtime +30 -print -delete || echo "No old backups found"
       '
     networks:
       - paperless
