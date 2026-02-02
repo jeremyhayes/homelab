@@ -65,6 +65,7 @@ services:
       DB_DATABASE_NAME: immich
       DB_USERNAME: immich
       DB_PASSWORD_FILE: /run/secrets/postgres-password
+      IMMICH_ALLOW_SETUP: 'false'
       IMMICH_CONFIG_FILE: /etc/immich.yaml
       IMMICH_TELEMETRY_INCLUDE: all
       IMMICH_WORKERS_INCLUDE: api
