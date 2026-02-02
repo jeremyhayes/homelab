@@ -110,7 +110,7 @@ services:
         - swarm.cronjob.schedule=0 5 * * mon
 
   server:
-    image: ghcr.io/goauthentik/server:2025.12.2
+    image: ghcr.io/goauthentik/server:2025.12.1
     command: server
     networks:
       - authentik
@@ -148,7 +148,7 @@ services:
         - traefik.http.middlewares.proxy-auth.forwardauth.authResponseHeaders=X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
 
   worker:
-    image: ghcr.io/goauthentik/server:2025.12.2
+    image: ghcr.io/goauthentik/server:2025.12.1
     command: worker
     networks:
       - authentik
