@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+version: 1
+
+metadata:
+  name: Brand - Add Recovery Flow
+
+entries:
+
+  # Make sure the brand is created first; we just want to extend it
+  - model: authentik_blueprints.metaapplyblueprint
+    attrs:
+      identifiers:
+        path: default/default-brand.yaml
+
+  # Add our custom recovery flow
+  - model: authentik_blueprints.metaapplyblueprint
+    attrs:
+      identifiers:
+        path: custom/flow-recovery.yaml
+
+  # ...and add it to the default branch
+  - model: authentik_brands.brand
+    identifiers:
+      domain: authentik-default
+      default: true
+    attrs:
+      flow_recovery: !Find [authentik_flows.flow, [slug, default-recovery-flow]]

@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+
+version: 1
+
+metadata:
+  name: Flow - Recovery
+
+entries:
+
+  - model: authentik_flows.flow
+    id: flow
+    identifiers:
+      slug: default-recovery-flow
+    attrs:
+      name: Default recovery flow
+      title: Reset your password
+      designation: recovery
+      authentication: require_unauthenticated
+
+  - model: authentik_stages_prompt.prompt
+    id: prompt-field-password
+    identifiers:
+      name: default-recovery-field-password
+    attrs:
+      field_key: password
+      label: Password
+      type: password
+      required: true
+      placeholder: Password
+      order: 0
+      placeholder_expression: false
+
+  - model: authentik_stages_prompt.prompt
+    id: prompt-field-password-repeat
+    identifiers:
+      name: default-recovery-field-password-repeat
+    attrs:
+      field_key: password_repeat
+      label: Password (repeat)
+      type: password
+      required: true
+      placeholder: Password (repeat)
+      order: 1
+      placeholder_expression: false
+
+  - model: authentik_stages_user_write.userwritestage
+    id: default-recovery-user-write
+    identifiers:
+      name: default-recovery-user-write
+    attrs:
+      user_creation_mode: never_create
+
+  - model: authentik_stages_identification.identificationstage
+    id: default-recovery-identification
+    identifiers:
+      name: default-recovery-identification
+    attrs:
+      user_fields:
+        - username
+
+  - model: authentik_stages_user_login.userloginstage
+    id: default-recovery-user-login
+    identifiers:
+      name: default-recovery-user-login
+    
+  - model: authentik_stages_prompt.promptstage
+    id: stages-prompt-password
+    identifiers:
+      name: Change your password
+    attrs:
+      fields:
+        - !KeyOf prompt-field-password
+        - !KeyOf prompt-field-password-repeat
+      validation_policies: []
+
+  - model: authentik_flows.flowstagebinding
+    id: flow-binding-identification
+    identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-recovery-identification
+      order: 10
+    attrs:
+      evaluate_on_plan: true
+      re_evaluate_policies: true
+      policy_engine_mode: any
+      invalid_response_action: retry
+
+  - model: authentik_flows.flowstagebinding
+    identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf stages-prompt-password
+      order: 30
+    attrs:
+      evaluate_on_plan: true
+      re_evaluate_policies: false
+      policy_engine_mode: any
+      invalid_response_action: retry
+
+  - model: authentik_flows.flowstagebinding
+    identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-recovery-user-write
+      order: 40
+    attrs:
+      evaluate_on_plan: true
+      re_evaluate_policies: false
+      policy_engine_mode: any
+      invalid_response_action: retry
+
+  - model: authentik_flows.flowstagebinding
+    identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-recovery-user-login
+      order: 100
+    attrs:
+      evaluate_on_plan: true
+      re_evaluate_policies: false
+      policy_engine_mode: any
+      invalid_response_action: retry
