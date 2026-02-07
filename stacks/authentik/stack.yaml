@@ -29,12 +29,18 @@ secrets:
     file: ./.secret.synology-client-secret
 
 volumes:
-#  media:
-#    driver: local
-#    driver_opts:
-#      type: none
-#      o: bind
-#      device: /opt/stacks/authentik/authentik/media
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/authentik/authentik/data
+  media:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/authentik/authentik/media
   postgres-data:
     driver: local
     driver_opts:
@@ -132,12 +138,15 @@ services:
       - AUTHENTIK_POSTGRESQL__NAME=authentik
       - AUTHENTIK_POSTGRESQL__USER=authentik
       - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/postgres-password
-#    volumes:
-#      - media:/media
+    volumes:
+      # Both are required, even though only one is needed
+      # Some bug with a symlink in the image
+      - data:/data
+      - media:/media
     deploy:
-#      placement:
-#        constraints:
-#          - node.platform.arch == x86_64
+      placement:
+        constraints:
+          - node.role == manager
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9300
@@ -178,14 +187,11 @@ services:
       - AUTHENTIK_POSTGRESQL__USER=authentik
       - AUTHENTIK_POSTGRESQL__PASSWORD=file:///run/secrets/postgres-password
     volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - media:/media
       - ./blueprints:/blueprints/custom
     deploy:
       placement:
         constraints:
           - node.role == manager # for volumes / bind mounts
-#          - node.platform.arch == x86_64
       labels:
         - prometheus.swarm.enable=true
         - prometheus.swarm.port=9300
