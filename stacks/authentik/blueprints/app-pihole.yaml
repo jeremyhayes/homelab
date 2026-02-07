@@ -44,6 +44,8 @@ entries:
     attrs:
       name: Pi-hole (1)
       provider: !KeyOf pihole1
+      group: Infrastructure
+      icon: icons/pi-hole.svg
 
   - model: authentik_core.application
     identifiers:
@@ -51,6 +53,8 @@ entries:
     attrs:
       name: Pi-hole (2)
       provider: !KeyOf pihole2
+      group: Infrastructure
+      icon: icons/pi-hole.svg
 
   - model: authentik_core.application
     identifiers:
@@ -58,3 +62,5 @@ entries:
     attrs:
       name: Pi-hole (3)
       provider: !KeyOf pihole3
+      group: Infrastructure
+      icon: icons/pi-hole.svg

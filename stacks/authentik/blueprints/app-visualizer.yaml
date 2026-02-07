@@ -22,3 +22,5 @@ entries:
     attrs:
       name: Visualizer
       provider: !KeyOf visualizer
+      group: Infrastructure
+      icon: icons/docker.png

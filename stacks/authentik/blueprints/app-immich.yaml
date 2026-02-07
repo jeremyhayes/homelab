@@ -35,5 +35,7 @@ entries:
     attrs:
       name: Immich
       provider: !KeyOf immich
-      open_in_new_tab: true
+      group: Applications
+      icon: icons/immich.svg
       meta_launch_url: https://immich.lab.omglolwtfbbq.com/auth/login?autoLaunch=1
+      open_in_new_tab: true

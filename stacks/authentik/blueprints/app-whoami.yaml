@@ -22,3 +22,5 @@ entries:
     attrs:
       name: whoami
       provider: !KeyOf whoami
+      group: Infrastructure
+      icon: icons/traefik.png

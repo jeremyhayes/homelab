@@ -31,4 +31,6 @@ entries:
     attrs:
       name: Synology
       provider: !KeyOf synology
+      group: Infrastructure
+      icon: icons/synology-dsm.svg
       open_in_new_tab: true

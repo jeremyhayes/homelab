@@ -31,5 +31,7 @@ entries:
     attrs:
       name: Paperless
       provider: !KeyOf paperless
-      open_in_new_tab: true
+      group: Applications
+      icon: icons/paperless.svg
       meta_launch_url: https://paperless.lab.omglolwtfbbq.com/
+      open_in_new_tab: true
