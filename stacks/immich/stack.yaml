@@ -44,7 +44,7 @@ secrets:
 services:
 
   server: &immich-server
-    image: ghcr.io/immich-app/immich-server:v2.5.3
+    image: ghcr.io/immich-app/immich-server:v2.5.6
     command: |
       "
       cp /etc/immich.yaml.tpl /etc/immich.yaml
@@ -101,7 +101,7 @@ services:
         - prometheus.swarm.port=8082
 
   machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:v2.5.3
+    image: ghcr.io/immich-app/immich-machine-learning:v2.5.6
     networks:
       - immich
     volumes:
