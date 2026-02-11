@@ -125,7 +125,7 @@ services:
         - prometheus.swarm.port=3100
 
   mimir:
-    image: grafana/mimir:3.0.2
+    image: grafana/mimir:3.0.3
     command:
       - -config.file=/etc/mimir/config.yaml
     networks:
