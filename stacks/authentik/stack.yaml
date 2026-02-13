@@ -57,7 +57,7 @@ volumes:
 services:
 
   postgres:
-    image: postgres:18.1-alpine
+    image: postgres:18.2-alpine
     networks:
       - authentik
     secrets:
@@ -82,7 +82,7 @@ services:
           - node.role == manager # for data volume
 
   postgres-backup:
-    image: postgres:18.1-alpine
+    image: postgres:18.2-alpine
     entrypoint: "sh -c"
     command: |
       '
