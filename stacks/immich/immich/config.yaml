@@ -18,6 +18,11 @@ trash:
   enabled: true
   days: 30
 
+machineLearning:
+  enabled: true
+  urls:
+    - http://machine-learning:3003
+
 oauth:
   enabled: true
   buttonText: Login with Authentik
