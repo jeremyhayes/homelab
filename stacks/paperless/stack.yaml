@@ -92,11 +92,14 @@ services:
       # This is written by a custom init script for secrets handling
       # PAPERLESS_SOCIALACCOUNT_PROVIDERS:
       # Misc
+      PAPERLESS_CONSUMER_POLLING: 600
+      PAPERLESS_CONSUMER_RECURSIVE: 'True'
       PAPERLESS_OCR_LANGUAGE: eng
       PAPERLESS_SECRET_KEY_FILE: /run/secrets/paperless-secret-key
       PAPERLESS_TIME_ZONE: America/New_York
-      PAPERLESS_URL: https://paperless.lab.omglolwtfbbq.com
       PAPERLESS_FILENAME_FORMAT: '{{"{{"}} owner_username }}/{{"{{"}} created_year }}/{{"{{"}} correspondent }}/{{"{{"}} created }}_{{"{{"}} title }}'
+      PAPERLESS_URL: https://paperless.lab.omglolwtfbbq.com
+
     volumes:
       - paperless-data:/usr/src/paperless/data
       - paperless-media:/usr/src/paperless/media
