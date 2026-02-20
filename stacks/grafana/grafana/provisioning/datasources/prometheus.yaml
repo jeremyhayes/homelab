@@ -1,7 +1,12 @@
 apiVersion: 1
 
-datasources:
+#datasources:
+#  - uid: cpnCDbRRz
+#    type: prometheus
+#    name: Prometheus
+#    url: http://prometheus:9090
+
+deleteDatasources:
   - uid: cpnCDbRRz
-    type: prometheus
     name: Prometheus
-    url: http://prometheus:9090
+    orgId: 1
