@@ -49,7 +49,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -120,7 +120,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "(((count(count(node_cpu_seconds_total{node=\"jack-the-ripper\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',node=\"jack-the-ripper\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{node=\"jack-the-ripper\"}) by (cpu))",
@@ -138,7 +138,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -220,7 +220,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum by (mode)(rate(node_cpu_seconds_total{mode!='idle',node=\"jack-the-ripper\"}[$__rate_interval])) * 100",
@@ -235,7 +235,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -289,7 +289,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "avg (node_hwmon_temp_celsius{node=\"jack-the-ripper\"})",
@@ -304,7 +304,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -373,7 +373,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "node_time_seconds{node=\"jack-the-ripper\"} - node_boot_time_seconds{node=\"jack-the-ripper\"}",
@@ -390,7 +390,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -457,7 +457,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "count(count(node_cpu_seconds_total{node=\"jack-the-ripper\"}) by (cpu))",
@@ -475,7 +475,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -543,7 +543,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -562,7 +562,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -626,7 +626,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -642,7 +642,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -659,7 +659,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -676,7 +676,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -694,7 +694,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -766,7 +766,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -786,7 +786,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -846,7 +846,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -866,7 +866,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -955,7 +955,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -975,7 +975,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -1047,7 +1047,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1067,7 +1067,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -1139,7 +1139,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1159,7 +1159,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -1227,7 +1227,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1258,7 +1258,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1343,7 +1343,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -1364,7 +1364,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1449,7 +1449,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -1470,7 +1470,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1555,7 +1555,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -1576,7 +1576,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1661,7 +1661,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -1682,7 +1682,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1733,7 +1733,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "(time() - container_start_time_seconds{container_label_com_docker_compose_service=\"arm-rippers\"})",
@@ -1792,7 +1792,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1877,7 +1877,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -1898,7 +1898,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1983,7 +1983,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -2004,7 +2004,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -2089,7 +2089,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -2110,7 +2110,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -2195,7 +2195,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -2216,7 +2216,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -2267,7 +2267,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "(time() - container_start_time_seconds{container_label_com_docker_swarm_service_name=\"lab_jellyfin\"})",
@@ -2323,7 +2323,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "fieldConfig": {
               "defaults": {
@@ -2402,7 +2402,7 @@
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "cpnCDbRRz"
+                  "uid": "mimir"
                 },
                 "exemplar": true,
                 "expr": "dotnet_total_memory_bytes{job=\"jellyfin\"}",
@@ -2413,7 +2413,7 @@
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "cpnCDbRRz"
+                  "uid": "mimir"
                 },
                 "exemplar": true,
                 "expr": "process_private_memory_bytes{job=\"jellyfin\"}",
@@ -2425,7 +2425,7 @@
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "cpnCDbRRz"
+                  "uid": "mimir"
                 },
                 "exemplar": true,
                 "expr": "process_working_set_bytes{job=\"jellyfin\"}",
@@ -2441,7 +2441,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "fieldConfig": {
               "defaults": {
@@ -2519,7 +2519,7 @@
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "cpnCDbRRz"
+                  "uid": "mimir"
                 },
                 "disableTextWrap": false,
                 "editorMode": "builder",
@@ -2540,7 +2540,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "fieldConfig": {
               "defaults": {
@@ -2618,7 +2618,7 @@
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "cpnCDbRRz"
+                  "uid": "mimir"
                 },
                 "exemplar": true,
                 "expr": "rate(dotnet_exceptions_total{job=\"jellyfin\"}[$__rate_interval])",

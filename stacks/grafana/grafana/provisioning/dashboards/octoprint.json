@@ -36,7 +36,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -95,7 +95,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "expr": "octoprint_temperatures_actual{identifier=\"T0\"}",
@@ -111,7 +111,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -159,7 +159,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -176,7 +176,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -224,7 +224,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -241,7 +241,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -288,7 +288,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -306,7 +306,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -353,7 +353,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -371,7 +371,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -434,7 +434,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -485,7 +485,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -503,7 +503,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -550,7 +550,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -568,7 +568,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -627,7 +627,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "expr": "octoprint_temperatures_actual{identifier=\"B\"}",
@@ -643,7 +643,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -695,7 +695,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -713,7 +713,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -761,7 +761,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -779,7 +779,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -830,7 +830,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -861,7 +861,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -936,7 +936,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "exemplar": false,
@@ -1047,7 +1047,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1124,7 +1124,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1181,7 +1181,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "expr": "octoprint_print_time_est",
@@ -1194,7 +1194,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "builder",
             "expr": "octoprint_extrusion_print",
@@ -1408,7 +1408,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -1485,7 +1485,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {

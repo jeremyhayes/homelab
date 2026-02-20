@@ -60,7 +60,7 @@
     "panels": [
       {
         "columns": [],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "This table represents current (latest) data.\nBytes columns are lifetime totals.",
         "fieldConfig": {
           "defaults": {
@@ -595,7 +595,7 @@
       },
       {
         "columns": [],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "This table represents current (latest) data.\nBytes columns are lifetime totals.",
         "fieldConfig": {
           "defaults": {
@@ -1008,7 +1008,7 @@
           "label": "Others",
           "threshold": 0
         },
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "Visualize wireless channel usage w/ wired client counts.",
         "fieldConfig": {
@@ -1069,7 +1069,7 @@
           "label": "Others",
           "threshold": 0
         },
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "Visualize how many clients are connected to which radios/APs.",
         "fieldConfig": {
@@ -1124,7 +1124,7 @@
           "label": "Others",
           "threshold": "0.01"
         },
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "This shows an OUI breakdown from Unifi's perspective. e = wired, w = wireless",
         "fieldConfig": {
@@ -1188,7 +1188,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Bandwidth usage per wireless devices as reported by the UAPs. Rx is on the negative axis. Does not include amazon devices.",
         "fieldConfig": {
           "defaults": {
@@ -1304,7 +1304,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Wired TX / RX bytes per second (calculated in 30 second buckets). Rx is on the negative axis. Does not include amazon and camera devices. Unaffected by the AP setting.",
         "fieldConfig": {
           "defaults": {
@@ -1420,7 +1420,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Amazon Devices TX / RX bytes per second. Rx is on the negative axis. My home network has a ton of Amazon devices, so I broke them out separately. If you don't have Amazon devices, or they have different names, you can edit the query to use a different name. e = wired, w = wireless",
         "fieldConfig": {
           "defaults": {
@@ -1548,7 +1548,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Cameras TX / RX bytes per second. Rx is on the negative axis. This graph shows any device with the word \"camera\" in its name and has nothing to do with UniFi Protect/video products. e = wired, w = wireless",
         "fieldConfig": {
           "defaults": {
@@ -1678,7 +1678,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -1782,7 +1782,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -1888,7 +1888,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -1992,7 +1992,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Client reported transmit rate.",
         "fieldConfig": {
           "defaults": {
@@ -2093,7 +2093,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2197,7 +2197,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Client reported receive rate.",
         "fieldConfig": {
           "defaults": {
@@ -2301,7 +2301,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2404,7 +2404,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2507,7 +2507,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2611,7 +2611,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2715,7 +2715,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2818,7 +2818,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "fieldConfig": {
           "defaults": {
@@ -2929,7 +2929,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds,source)",
           "hide": 2,
           "includeAll": true,
@@ -2951,7 +2951,7 @@
         {
           "allValue": ".*",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds{source=~\"$Controller\"},site_name)",
           "hide": 0,
           "includeAll": true,
@@ -2973,7 +2973,7 @@
         {
           "allValue": "",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds{site_name=~\"$Site\"},ap_name)",
           "hide": 0,
           "includeAll": true,
@@ -2995,7 +2995,7 @@
         {
           "allValue": "",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds{site_name=~\"$Site\"},sw_name)",
           "hide": 0,
           "includeAll": true,
@@ -3017,7 +3017,7 @@
         {
           "allValue": ".*",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds{site_name=~\"$Site\", ap_name=~\"$AP\", wired=\"false\"},name)",
           "hide": 0,
           "includeAll": true,
@@ -3039,7 +3039,7 @@
         {
           "allValue": ".*",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(unpoller_client_uptime_seconds{site_name=~\"$Site\", sw_name=~\"$Switch\", wired=\"true\"},name)",
           "hide": 0,
           "includeAll": true,

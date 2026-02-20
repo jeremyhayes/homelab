@@ -42,7 +42,7 @@
     "panels": [
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -57,7 +57,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Busy state of all CPU cores together",
         "fieldConfig": {
           "defaults": {
@@ -134,7 +134,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Busy state of all CPU cores together (5 min average)",
         "fieldConfig": {
           "defaults": {
@@ -211,7 +211,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Busy state of all CPU cores together (15 min average)",
         "fieldConfig": {
           "defaults": {
@@ -287,7 +287,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Non available RAM memory",
         "fieldConfig": {
           "defaults": {
@@ -366,7 +366,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Used Swap",
         "fieldConfig": {
           "defaults": {
@@ -441,7 +441,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Used Root FS",
         "fieldConfig": {
           "defaults": {
@@ -524,7 +524,7 @@
           "rgba(237, 129, 40, 0.89)",
           "rgba(50, 172, 45, 0.97)"
         ],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Total number of CPU cores",
         "fieldConfig": {
           "defaults": {
@@ -614,7 +614,7 @@
           "rgba(237, 129, 40, 0.89)",
           "rgba(50, 172, 45, 0.97)"
         ],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 1,
         "description": "System uptime",
         "fieldConfig": {
@@ -706,7 +706,7 @@
           "rgba(237, 129, 40, 0.89)",
           "rgba(245, 54, 54, 0.9)"
         ],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "Total RootFS",
         "fieldConfig": {
@@ -797,7 +797,7 @@
           "rgba(237, 129, 40, 0.89)",
           "rgba(50, 172, 45, 0.97)"
         ],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "Total RAM",
         "fieldConfig": {
@@ -886,7 +886,7 @@
           "rgba(237, 129, 40, 0.89)",
           "rgba(50, 172, 45, 0.97)"
         ],
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 0,
         "description": "Total SWAP",
         "fieldConfig": {
@@ -968,7 +968,7 @@
       },
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1001,7 +1001,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 2,
         "description": "Basic CPU info",
         "fieldConfig": {
@@ -1193,7 +1193,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 2,
         "description": "Basic memory usage",
         "fieldConfig": {
@@ -1377,7 +1377,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "Basic network info per interface",
         "fieldConfig": {
           "defaults": {
@@ -1496,7 +1496,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "decimals": 3,
         "description": "Disk space used of all filesystems mounted",
         "fieldConfig": {
@@ -1600,7 +1600,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1625,7 +1625,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "description": "",
             "fieldConfig": {
@@ -1818,7 +1818,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "description": "",
             "fieldConfig": {
@@ -2007,7 +2007,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -2124,7 +2124,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 3,
             "description": "",
             "fieldConfig": {
@@ -2231,7 +2231,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -2432,7 +2432,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 3,
             "description": "",
             "fieldConfig": {
@@ -2577,7 +2577,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 3,
             "description": "",
             "fieldConfig": {
@@ -2689,7 +2689,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2721,7 +2721,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -2843,7 +2843,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -2974,7 +2974,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3118,7 +3118,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3248,7 +3248,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3403,7 +3403,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3526,7 +3526,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3659,7 +3659,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3774,7 +3774,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -3901,7 +3901,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4025,7 +4025,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4156,7 +4156,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4279,7 +4279,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4413,7 +4413,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4537,7 +4537,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -4635,7 +4635,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -4649,7 +4649,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -4756,7 +4756,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -4881,7 +4881,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -5022,7 +5022,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 2,
             "fill": 2,
             "fillGradient": 0,
@@ -5123,7 +5123,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -5137,7 +5137,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -5257,7 +5257,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -5351,7 +5351,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -5459,7 +5459,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -5563,7 +5563,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -5577,7 +5577,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -5680,7 +5680,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -5776,7 +5776,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -5872,7 +5872,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -5997,7 +5997,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6109,7 +6109,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6220,7 +6220,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6333,7 +6333,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -6347,7 +6347,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6450,7 +6450,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6562,7 +6562,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6666,7 +6666,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6762,7 +6762,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6857,7 +6857,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -6953,7 +6953,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7064,7 +7064,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -7078,7 +7078,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7225,7 +7225,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7337,7 +7337,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7434,7 +7434,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -7448,7 +7448,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7541,7 +7541,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -7692,7 +7692,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -7706,7 +7706,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The number (after merges) of I/O requests completed per second for the device",
             "fieldConfig": {
               "defaults": {
@@ -7925,7 +7925,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The number of bytes read from or written to the device per second",
             "fieldConfig": {
               "defaults": {
@@ -8124,7 +8124,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The average time for requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.",
             "fieldConfig": {
               "defaults": {
@@ -8327,7 +8327,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The average queue length of the requests that were issued to the device",
             "fieldConfig": {
               "defaults": {
@@ -8516,7 +8516,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The number of read and write requests merged per second that were queued to the device",
             "fieldConfig": {
               "defaults": {
@@ -8715,7 +8715,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "Percentage of elapsed time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value is close to 100% for devices serving requests serially.  But for devices  serving requests in parallel, such as RAID arrays and modern SSDs, this number does not reflect their performance limits.",
             "fieldConfig": {
               "defaults": {
@@ -8912,7 +8912,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "The number of outstanding requests at the instant the sample was taken. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.",
             "fieldConfig": {
               "defaults": {
@@ -9101,7 +9101,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -9318,7 +9318,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -9332,7 +9332,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": 3,
             "description": "",
             "fieldConfig": {
@@ -9458,7 +9458,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -9564,7 +9564,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -9674,7 +9674,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -9780,7 +9780,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": null,
             "description": "",
             "fieldConfig": {
@@ -9899,7 +9899,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -9918,7 +9918,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10027,7 +10027,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10138,7 +10138,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10249,7 +10249,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10360,7 +10360,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10463,7 +10463,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10574,7 +10574,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10681,7 +10681,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10779,7 +10779,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10882,7 +10882,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -10992,7 +10992,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11085,7 +11085,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11179,7 +11179,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11273,7 +11273,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11367,7 +11367,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11483,7 +11483,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11584,7 +11584,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fill": 2,
             "fillGradient": 0,
             "gridPos": {
@@ -11691,7 +11691,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -11705,7 +11705,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -11847,7 +11847,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -11970,7 +11970,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -12086,7 +12086,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -12207,7 +12207,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -12314,7 +12314,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -12328,7 +12328,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -12453,7 +12453,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -12563,7 +12563,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": null,
             "fieldConfig": {
               "defaults": {
@@ -12685,7 +12685,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": null,
             "fieldConfig": {
               "defaults": {
@@ -12798,7 +12798,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": null,
             "fieldConfig": {
               "defaults": {
@@ -12924,7 +12924,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -13066,7 +13066,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "decimals": null,
             "fieldConfig": {
               "defaults": {
@@ -13193,7 +13193,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -13340,7 +13340,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -13466,7 +13466,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fieldConfig": {
               "defaults": {
@@ -13601,7 +13601,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "fieldConfig": {
               "defaults": {
                 "custom": {},
@@ -13718,7 +13718,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -13732,7 +13732,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -13829,7 +13829,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "cpnCDbRRz",
+            "datasource": "mimir",
             "description": "",
             "fill": 2,
             "fillGradient": 0,
@@ -13974,7 +13974,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "",
           "error": null,
           "hide": 0,
@@ -13997,7 +13997,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values(node_uname_info{job=\"$job\"}, instance)",
           "error": null,
           "hide": 0,

@@ -36,7 +36,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -92,7 +92,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": true,
             "expr": "sum(unpoller_device_speedtest_download)",
@@ -107,7 +107,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -159,7 +159,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "expr": "avg(moto_downstream_channel_power_dbmv)",
             "interval": "",
@@ -173,7 +173,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -257,7 +257,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -336,7 +336,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -392,7 +392,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": true,
             "expr": "sum(unpoller_device_speedtest_upload)",
@@ -407,7 +407,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -459,7 +459,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "expr": "avg(moto_upstream_channel_power_dbmv)",
             "interval": "",
@@ -473,7 +473,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -525,7 +525,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "expr": "avg(node_hwmon_temp_celsius)",
             "interval": "",
@@ -539,7 +539,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -592,7 +592,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": true,
             "expr": " sum by (category, application) (increase(unpoller_client_dpi_receive_bytes{application!~\"TOTAL\"}[$__range])+increase(unpoller_client_dpi_transmit_bytes{application!~\"TOTAL\"}[$__range]))",
@@ -610,7 +610,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -690,7 +690,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "expr": "scrape_duration_seconds",
             "interval": "",
@@ -704,7 +704,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -747,7 +747,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": true,
             "expr": "sum(unpoller_device_temperature_celsius{temp_type=\"cpu\"})",
@@ -762,7 +762,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "description": "",
         "fieldConfig": {
@@ -814,7 +814,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "max(pihole_domains_being_blocked)",
@@ -827,7 +827,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "sum(pihole_dns_queries_today)",
@@ -840,7 +840,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "sum(pihole_ads_blocked_today)",
@@ -853,7 +853,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "(sum(pihole_ads_blocked_today) / sum(pihole_dns_queries_today)) * 100",
@@ -869,7 +869,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -923,7 +923,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "topk(10, pihole_top_queries)",
@@ -940,7 +940,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -992,7 +992,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "exemplar": false,
             "expr": "topk(10, pihole_top_ads)",

@@ -36,7 +36,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -89,7 +89,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -115,7 +115,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -164,7 +164,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum(pihole_dns_queries_today{hostname=~\"$hostname\"})",
@@ -180,7 +180,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -229,7 +229,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum(pihole_ads_blocked_today{hostname=~\"$hostname\"})",
@@ -245,7 +245,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -296,7 +296,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum(pihole_ads_blocked_today{hostname=~\"$hostname\"}) / sum(pihole_dns_queries_today{hostname=~\"$hostname\"}) * 100",
@@ -312,7 +312,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -362,7 +362,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "avg(pihole_domains_being_blocked{hostname=~\"$hostname\"})",
@@ -378,7 +378,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -486,7 +486,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -501,7 +501,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum(idelta(pihole_queries_forwarded{hostname=~\"$hostname\"}[$__interval]))",
@@ -518,7 +518,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -594,7 +594,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "sum(idelta(pihole_top_sources{hostname=~\"$hostname\"}[$__interval])) by (source) \u003e 0",
@@ -611,7 +611,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -663,7 +663,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -683,7 +683,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -735,7 +735,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -764,7 +764,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -814,7 +814,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -836,7 +836,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -886,7 +886,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -908,7 +908,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -958,7 +958,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -991,7 +991,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cpnCDbRRz"
+            "uid": "mimir"
           },
           "definition": "label_values(pihole_status,hostname)",
           "hide": 0,

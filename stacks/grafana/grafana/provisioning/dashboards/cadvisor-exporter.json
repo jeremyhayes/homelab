@@ -27,7 +27,7 @@
     "panels": [
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -44,7 +44,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -141,7 +141,7 @@
       },
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -158,7 +158,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -258,7 +258,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -355,7 +355,7 @@
       },
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -372,7 +372,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -475,7 +475,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -571,7 +571,7 @@
       },
       {
         "collapsed": false,
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -584,7 +584,7 @@
         "type": "row"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "custom": {
@@ -721,7 +721,7 @@
         {
           "allValue": ".*",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values({__name__=~\"container.*\"},instance)",
           "description": null,
           "error": null,
@@ -748,7 +748,7 @@
         {
           "allValue": ".*",
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "label_values({__name__=~\"container.*\", instance=~\"$host\"},name)",
           "description": null,
           "error": null,

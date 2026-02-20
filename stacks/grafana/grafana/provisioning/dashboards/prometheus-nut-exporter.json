@@ -1054,7 +1054,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "nut_ups_info",
           "description": null,
           "error": null,

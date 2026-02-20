@@ -46,7 +46,7 @@
         "type": "row"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -132,7 +132,7 @@
         "type": "timeseries"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -252,7 +252,7 @@
         "type": "text"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -317,7 +317,7 @@
         "type": "stat"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -387,7 +387,7 @@
         "type": "piechart"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -452,7 +452,7 @@
         "type": "stat"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -515,7 +515,7 @@
         "type": "bargauge"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -601,7 +601,7 @@
         "type": "timeseries"
       },
       {
-        "datasource": "cpnCDbRRz",
+        "datasource": "mimir",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1259,7 +1259,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "authentik_outpost_connection",
           "description": null,
           "error": null,
@@ -1282,7 +1282,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "authentik_outpost_info{outpost_type=\"proxy\"}",
           "description": null,
           "error": null,
@@ -1305,7 +1305,7 @@
         {
           "allValue": null,
           "current": {},
-          "datasource": "cpnCDbRRz",
+          "datasource": "mimir",
           "definition": "authentik_outpost_info{outpost_type=\"ldap\"}",
           "description": null,
           "error": null,

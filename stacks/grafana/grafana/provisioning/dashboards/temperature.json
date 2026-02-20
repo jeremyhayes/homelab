@@ -36,7 +36,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -113,7 +113,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "infinitude_status_rt",
@@ -128,7 +128,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -205,7 +205,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "infinitude_status_oat",
@@ -220,7 +220,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -297,7 +297,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "unifipoller_device_temperature_celsius",
@@ -312,7 +312,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -389,7 +389,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "node_hwmon_temp_celsius{node=\"orthanc\"}",
@@ -404,7 +404,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "cpnCDbRRz"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -481,7 +481,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "cpnCDbRRz"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "node_hwmon_temp_celsius{node=\"lab-pi-01\"}",
