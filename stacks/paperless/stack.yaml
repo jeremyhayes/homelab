@@ -162,7 +162,7 @@ services:
         --quote-all-identifiers \
         --verbose | gzip > "$$OUTFILE"
       echo "Deleting backups older than 30 days..."
-      find "/opt/backups/dump_$${POSTGRES_DB}_*.tar.gz" -type f -mtime +30 -print -delete || echo "No old backups found"
+      find /opt/backups -name "dump_$${POSTGRES_DB}_*.tar.gz" -type f -mtime +30 -print -delete || echo "No old backups found"
       '
     networks:
       - paperless
