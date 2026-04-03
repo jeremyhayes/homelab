@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "apiVersion": "dashboard.grafana.app/v1beta1",
   "kind": "Dashboard",
   "metadata": {
     "name": "2kIlNIv4k"
@@ -31,12 +31,15 @@
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
     "links": [],
-    "liveNow": false,
     "panels": [
       {
         "datasource": {
           "type": "loki",
-          "uid": "J0zk4ENVz"
+          "uid": "loki"
+        },
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
         },
         "gridPos": {
           "h": 20,
@@ -47,61 +50,64 @@
         "id": 2,
         "options": {
           "dedupStrategy": "none",
+          "enableInfiniteScrolling": false,
           "enableLogDetails": true,
           "prettifyLogMessage": false,
           "showCommonLabels": false,
+          "showControls": false,
           "showLabels": false,
           "showTime": false,
           "sortOrder": "Descending",
+          "unwrappedColumns": false,
           "wrapLogMessage": true
         },
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
               "type": "loki",
-              "uid": "J0zk4ENVz"
+              "uid": "loki"
             },
+            "direction": "backward",
             "editorMode": "builder",
-            "expr": "{job=\"$job\"}",
+            "expr": "{service=\"$service\"} |= ``",
             "queryType": "range",
             "refId": "A"
           }
         ],
-        "title": "$job Logs",
+        "title": "$service Logs",
         "type": "logs"
       }
     ],
-    "schemaVersion": 37,
-    "style": "dark",
+    "preload": false,
+    "refresh": "",
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": [
         {
+          "allowCustomValue": false,
           "current": {
-            "selected": true,
-            "text": "prometheus",
-            "value": "prometheus"
+            "text": "airgradient_airgradient",
+            "value": "airgradient_airgradient"
           },
           "datasource": {
             "type": "loki",
-            "uid": "J0zk4ENVz"
+            "uid": "loki"
           },
           "definition": "",
-          "hide": 0,
-          "includeAll": true,
-          "multi": false,
-          "name": "job",
+          "includeAll": false,
+          "name": "service",
           "options": [],
           "query": {
-            "label": "job",
+            "label": "service",
             "refId": "LokiVariableQueryEditor-VariableQuery",
             "stream": "",
             "type": 1
           },
           "refresh": 1,
           "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
+          "regexApplyTo": "value",
           "type": "query"
         }
       ]
@@ -111,7 +117,7 @@
       "to": "now"
     },
     "timepicker": {},
-    "timezone": "",
+    "timezone": "browser",
     "title": "Logs",
     "weekStart": ""
   }
