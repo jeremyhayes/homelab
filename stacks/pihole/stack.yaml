@@ -9,7 +9,7 @@ networks:
 services:
 
   pihole:
-    image: pihole/pihole:2026.04.1
+    image: pihole/pihole:2026.05.0
     networks:
       - pihole
       - web-proxy
