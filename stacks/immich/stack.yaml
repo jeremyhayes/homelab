@@ -180,6 +180,6 @@ services:
         - swarm.cronjob.schedule=0 5 * * mon
 
   redis:
-    image: valkey/valkey:9.0.4-alpine
+    image: valkey/valkey:9.1.0-alpine
     networks:
       - immich
