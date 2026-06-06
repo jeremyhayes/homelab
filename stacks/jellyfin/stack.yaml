@@ -9,7 +9,7 @@ networks:
 services:
 
   jellyfin:
-    image: jellyfin/jellyfin:10.11.10
+    image: jellyfin/jellyfin:10.11.11
     networks:
       - jellyfin
       - web-proxy
