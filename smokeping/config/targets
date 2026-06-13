@@ -1,0 +1,42 @@
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency
+
++ Local
+
+menu = Local
+title = Local Network
+
+++ Localhost
+
+menu = Local Machine
+title = This host
+host = localhost
+
++ Internet
+
+menu = Internet
+title = Internet
+
+++ GitHub
+
+menu = GitHub
+host = www.github.com
+
+++ Google
+
+menu = Google
+host = www.google.com
+
+++ Netflix
+
+menu = Netflix
+host = www.netflix.com
+
+++ Youtube
+
+menu = YouTube
+host = www.youtube.com
