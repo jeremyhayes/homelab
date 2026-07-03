@@ -7,7 +7,7 @@ networks:
 services:
 
   infinitude:
-    image: nebulous/infinitude:latest@sha256:38b563d039a9a5336651d964a6c35499b915a9338cbdfbe20d24978c67ffcc38
+    image: nebulous/infinitude:latest@sha256:10172dfabbdae3336b442ed9072db35c53301abb992730cff4a315fd18f088e2
     networks:
       - web-proxy
     ports:
