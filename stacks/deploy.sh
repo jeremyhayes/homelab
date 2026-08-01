@@ -10,8 +10,14 @@ if [ -z $STACK ]; then
 fi
 
 NETWORK="web-proxy"
-echo "Deploying overlay network $NETWORK..."
-docker network create --driver overlay $NETWORK
+if ! docker network inspect $NETWORK >/dev/null 2>&1 ; then
+  echo "Deploying overlay network $NETWORK..."
+  docker network create --driver overlay $NETWORK
+fi
 
 echo "Deploying stack $STACK..."
-docker stack deploy -c "$SCRIPT_DIR/$STACK/stack.yaml" $STACK
+docker stack deploy \
+  --compose-file "$SCRIPT_DIR/$STACK/stack.yaml" \
+  --detach=false \
+  --prune \
+  $STACK
