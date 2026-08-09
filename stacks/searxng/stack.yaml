@@ -1,0 +1,42 @@
+version: '3.8'
+
+networks:
+  searxng:
+    driver: overlay
+  web-proxy:
+    external: true
+
+volumes:
+  core-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/stacks/searxng/core/data
+
+services:
+
+  core:
+    image: docker.io/searxng/searxng:${SEARXNG_VERSION:-latest}
+    networks:
+      - searxng
+      - web-proxy
+    volumes:
+      - core-data:/var/cache/searxng/
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager # for mapped data volume
+      labels:
+        - prometheus.swarm.enable=true
+        - traefik.enable=true
+        - traefik.http.routers.searxng.rule=Host(`searxng.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.searxng.entrypoints=web-secure
+        - traefik.http.routers.searxng.tls.certResolver=primary
+        - traefik.http.routers.searxng.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.searxng.loadbalancer.server.port=8080
+
+  valkey:
+    image: valkey/valkey:9.1.1-alpine
+    networks:
+      - searxng
