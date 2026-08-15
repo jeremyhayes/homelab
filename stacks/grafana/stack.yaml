@@ -17,8 +17,10 @@ secrets:
     file: ./.secret.slack-webhook
 
 configs:
-  alloy-config:
-    file: ./alloy/config.alloy
+  alloy-swarm-config:
+    file: ./alloy/swarm.alloy
+  alloy-node-config:
+    file: ./alloy/node.alloy
 
 volumes:
   grafana-data:
@@ -69,7 +71,7 @@ services:
         - traefik.http.routers.grafana.tls.domains[0].main=*.lab.omglolwtfbbq.com
         - traefik.http.services.grafana.loadbalancer.server.port=3000
 
-  alloy:
+  alloy-swarm: &alloy
     image: grafana/alloy:v1.18.1
     command:
       - run
@@ -80,10 +82,9 @@ services:
       - grafana
       - web-proxy
     configs:
-      - source: alloy-config
+      - source: alloy-swarm-config
         target: /etc/alloy/config.alloy
     volumes:
-#      - ./alloy/config.alloy:/etc/alloy/config.alloy
       - /:/host:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -92,14 +93,31 @@ services:
     cap_add:
       - SYS_TIME
     deploy:
+      placement:
+        constraints:
+          - node.platform.arch == x86_64
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.alloy-swarm.rule=Host(`alloy-swarm.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.alloy-swarm.entrypoints=web-secure
+        - traefik.http.routers.alloy-swarm.tls.certResolver=primary
+        - traefik.http.routers.alloy-swarm.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.alloy-swarm.loadbalancer.server.port=12345
+
+  alloy-node:
+    <<: *alloy
+    configs:
+      - source: alloy-node-config
+        target: /etc/alloy/config.alloy
+    deploy:
       mode: global
       labels:
         - traefik.enable=true
-        - traefik.http.routers.alloy.rule=Host(`alloy.lab.omglolwtfbbq.com`)
-        - traefik.http.routers.alloy.entrypoints=web-secure
-        - traefik.http.routers.alloy.tls.certResolver=primary
-        - traefik.http.routers.alloy.tls.domains[0].main=*.lab.omglolwtfbbq.com
-        - traefik.http.services.alloy.loadbalancer.server.port=12345
+        - traefik.http.routers.alloy-node.rule=Host(`alloy-node.lab.omglolwtfbbq.com`)
+        - traefik.http.routers.alloy-node.entrypoints=web-secure
+        - traefik.http.routers.alloy-node.tls.certResolver=primary
+        - traefik.http.routers.alloy-node.tls.domains[0].main=*.lab.omglolwtfbbq.com
+        - traefik.http.services.alloy-node.loadbalancer.server.port=12345
 
   loki:
     image: grafana/loki:3.7.6

@@ -1,0 +1,94 @@
+local.file "hostname" {
+  filename  = "/etc/hostname"
+}
+
+//
+//  Discovery Sources
+//
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+
+//
+//  Logs Pipeline - Loki
+//
+discovery.relabel "container_logs" {
+  targets = discovery.docker.containers.targets
+
+  rule {
+    target_label = "node"
+    replacement  = string.trim_space(local.file.hostname.content)
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_stack_namespace"]
+    target_label  = "namespace"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_swarm_service_name"]
+    target_label  = "service"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_swarm_task_name"]
+    target_label  = "task"
+  }
+}
+
+loki.source.docker "container_logs" {
+  host          = "unix:///var/run/docker.sock"
+  targets       = discovery.relabel.container_logs.output
+  forward_to    = [loki.write.loki.receiver]
+}
+
+loki.write "loki" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+//
+//  Metrics Pipeline - Mimir/Prometheus
+//
+prometheus.exporter.unix "node_exporter" {
+  rootfs_path = "/host"
+  procfs_path = "/host/proc"
+  sysfs_path  = "/host/sys"
+}
+
+discovery.relabel "node_exporter" {
+  targets = prometheus.exporter.unix.node_exporter.targets
+
+  rule {
+    target_label = "node"
+    replacement  = string.trim_space(local.file.hostname.content)
+  }
+
+  rule {
+    target_label = "job"
+    replacement = "integrations/node_exporter"
+  }
+}
+
+prometheus.exporter.cadvisor "cadvisor" {
+  docker_host = "unix:///var/run/docker.sock"
+  docker_only = true
+}
+
+prometheus.exporter.self "alloy" {}
+
+prometheus.scrape "metrics" {
+  targets     = array.concat(
+    discovery.relabel.node_exporter.output,
+    prometheus.exporter.cadvisor.cadvisor.targets,
+    prometheus.exporter.self.alloy.targets,
+  )
+  forward_to  = [prometheus.remote_write.mimir.receiver]
+}
+
+prometheus.remote_write "mimir" {
+  endpoint {
+    url = "http://mimir:9009/api/v1/push"
+  }
+}
