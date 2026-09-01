@@ -172,7 +172,7 @@ services:
         - traefik.http.services.mimir.loadbalancer.server.port=9009
 
   seaweed:
-    image: chrislusf/seaweedfs:4.41
+    image: chrislusf/seaweedfs:4.45
     entrypoint: /bin/sh -c
     command: |
       "
