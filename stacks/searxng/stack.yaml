@@ -37,6 +37,6 @@ services:
         - traefik.http.services.searxng.loadbalancer.server.port=8080
 
   valkey:
-    image: valkey/valkey:9.1.1-alpine
+    image: valkey/valkey:9.1.2-alpine
     networks:
       - searxng
