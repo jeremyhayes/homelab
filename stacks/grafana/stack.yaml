@@ -72,7 +72,7 @@ services:
         - traefik.http.services.grafana.loadbalancer.server.port=3000
 
   alloy-swarm: &alloy
-    image: grafana/alloy:v1.18.1
+    image: grafana/alloy:v1.19.2
     command:
       - run
       - --server.http.listen-addr=0.0.0.0:12345
