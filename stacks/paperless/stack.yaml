@@ -92,6 +92,7 @@ services:
       # This is written by a custom init script for secrets handling
       # PAPERLESS_SOCIALACCOUNT_PROVIDERS:
       # Misc
+      PAPERLESS_CONSUMER_DELETE_DUPLICATES: 'True'
       PAPERLESS_CONSUMER_POLLING: 600
       PAPERLESS_CONSUMER_RECURSIVE: 'True'
       PAPERLESS_DATE_ORDER: MDY
