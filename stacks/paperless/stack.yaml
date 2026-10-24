@@ -201,12 +201,12 @@ services:
           - node.role == manager # for mapped data volume
 
   tika:
-    image: docker.io/apache/tika:3.3.3.0
+    image: apache/tika:3.3.3.0
     networks:
       - paperless
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.38.1
+    image: gotenberg/gotenberg:8.38.1
     # The gotenberg chromium route is used to convert .eml files. We do not
     # want to allow external content like tracking pixels or even javascript.
     command:
