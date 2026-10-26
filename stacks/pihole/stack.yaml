@@ -67,7 +67,7 @@ services:
 #        - traefik.udp.services.pihole-udp.passhostheader=true
 
   pihole-exporter:
-    image: ekofr/pihole-exporter:v1.2.0
+    image: ekofr/pihole-exporter:v1.3.0
     networks:
       - pihole
       - web-proxy
