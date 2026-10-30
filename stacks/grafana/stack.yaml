@@ -197,7 +197,7 @@ services:
         - prometheus.swarm.port=1234
 
   seaweed-buckets:
-    image: amazon/aws-cli:2.39.1
+    image: amazon/aws-cli:2.39.3
     entrypoint: /bin/sh -c
     command: |
       '
