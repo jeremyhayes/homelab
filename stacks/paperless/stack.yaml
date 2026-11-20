@@ -122,7 +122,7 @@ services:
         - traefik.http.services.paperless.loadbalancer.server.port=8000
 
   postgres:
-    image: postgres:18.7-alpine
+    image: postgres:19.0-alpine
     networks:
       - paperless
     secrets:
@@ -147,7 +147,7 @@ services:
           - node.role == manager # for mapped data volume
 
   postgres-backup:
-    image: postgres:18.7-alpine
+    image: postgres:19.0-alpine
     entrypoint: "sh -c"
     command: |
       '
