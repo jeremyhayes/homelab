@@ -210,8 +210,20 @@ services:
         sleep 2
       done
 
-      aws s3api create-bucket --bucket mimir-blocks
-      aws s3api create-bucket --bucket loki-chunks
+      ensure_bucket() {
+        local bucket_name=$$1
+
+        if aws s3api head-bucket --bucket "$$bucket_name"; then
+            echo "Bucket already exists: $$bucket_name"
+        else
+            aws s3api create-bucket --bucket "$$bucket_name" \
+            echo "Bucket created: $$bucket_name"
+        fi
+      }
+
+      ensure_bucket mimir-blocks
+      ensure_bucket loki-chunks
+
       exit 0
       '
     networks:
