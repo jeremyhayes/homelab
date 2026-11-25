@@ -67,6 +67,7 @@ services:
       DB_PASSWORD_FILE: /run/secrets/postgres-password
       IMMICH_ALLOW_SETUP: 'false'
       IMMICH_CONFIG_FILE: /etc/immich.yaml
+      IMMICH_LOG_FORMAT: json
       IMMICH_TELEMETRY_INCLUDE: all
       IMMICH_WORKERS_INCLUDE: api
     volumes:
